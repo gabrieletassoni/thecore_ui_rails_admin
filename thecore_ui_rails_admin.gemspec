@@ -25,4 +25,13 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
+  spec.add_dependency "thecore_ui_commons", "~> 2.2"
+  # Rails
+  spec.add_dependency 'rails-i18n', "~> 6.0"
+  spec.add_dependency 'serviceworker-rails',  "~> 0.5"
+  # Rails Admin
+  spec.add_dependency 'rails_admin_rollincode', '~> 1.3'
+  spec.add_dependency 'rails_admin', '~> 2.0'
+  spec.add_dependency 'rails_admin-i18n', "~> 1.12"
+  spec.add_dependency 'rails_admin_toggleable', "~> 0.7"
 end

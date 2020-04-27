@@ -1,9 +1,6 @@
 require "thecore_ui_rails_admin/engine"
 
 require 'thecore_ui_commons'
-# Rails
-require 'rails-i18n'
-require 'serviceworker-rails'
 # Rails Admin
 require 'rails_admin_rollincode'
 require 'rails_admin'

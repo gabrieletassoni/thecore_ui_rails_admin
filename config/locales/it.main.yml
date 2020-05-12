@@ -1,0 +1,27 @@
+it:
+  yes: Si
+  no: Annulla
+  error: Errore
+  question: Domanda
+  root_actions: "Operazioni"
+  admin:
+    js:
+      true: Vero
+      false: Falso
+      is_present: Is present
+      is_blank: Is blank
+      date: Date ...
+      between_and_: Between ... and ...
+      today: Today
+      yesterday: Yesterday
+      this_week: This week
+      last_week: Last week
+      number: Number ...
+      contains: Contains
+      is_exactly: Is exactly
+      starts_with: Starts with
+      ends_with: Ends with
+      too_many_objects: "Too many objects, use search box above"
+      no_objects: "No objects found"
+    loading: "Loading..."
+    toggle_navigation: Toggle navigation

@@ -31,4 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin', '~> 2.0'
   spec.add_dependency 'rails_admin-i18n', "~> 1.12"
   spec.add_dependency 'rails_admin_toggleable', "~> 0.7"
+  # Rails Admin Buildups
+  spec.add_dependency 'jquery-ui-rails', '~> 6.0'
 end

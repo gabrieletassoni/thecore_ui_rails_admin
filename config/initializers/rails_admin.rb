@@ -1,9 +1,5 @@
 require 'rails_admin'
 
-require "thecore_actions"
-
-include TheCoreActions
-
 RailsAdmin.config do |config|
   # config.main_app_name = Proc.new { |controller|
   #  [(Settings.app_name rescue (ENV["APP_NAME"] || "TheCore App")), "#{controller.params[:action].try(:titleize)} (#{Time.zone.now.to_s(:time)})"]

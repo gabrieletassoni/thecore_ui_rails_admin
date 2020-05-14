@@ -17,3 +17,16 @@ gemspec
 gem 'thecore_auth_commons', path: '../thecore_auth_commons'
 gem 'thecore_backend_commons', path: '../thecore_backend_commons'
 gem 'thecore_ui_commons', path: '../thecore_ui_commons'
+# Bootstrap 3: https://github.com/twbs/bootstrap-sass
+gem 'bootstrap-sass'
+gem 'sassc-rails'
+# Rails Admin
+gem 'rails_admin_rollincode'
+gem 'rails_admin'
+gem 'rails_admin-i18n'
+gem 'rails_admin_toggleable'
+# Rails Admin Buildups
+gem 'jquery-ui-rails'
+gem 'coffee-rails'
+
+gem 'sqlite3'

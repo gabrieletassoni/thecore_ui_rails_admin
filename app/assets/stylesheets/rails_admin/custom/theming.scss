@@ -1,20 +1,5 @@
-@import "selectize";
-@import "selectize.bootstrap3";
 @import "togglable-sidebar";
 @import "flashing";
-// Froala
-@import "froala_editor.min";
-@import "froala_style.min";
-// @import "font-awesome-sprockets";
-// @import 'font-awesome';
-// @import 'plugins/char_counter.min.css';
-// @import 'plugins/colors.min.css';
-// @import 'plugins/lists.min.css';
-// @import 'plugins/line_breaker.min.css';
-// @import 'plugins/special_characters.min.css';
-
-// @import 'rails_admin/bootstrap/_variables';
-// @import "rails_admin/bootstrap-datetimepicker-build";
 
 $RAprimary: #1c2c41;
 $RAgreen: #37BC9B;
@@ -23,7 +8,36 @@ $RAred: #E9573F;
 $RAyellow: #F6BB42;
 
 body {
-  background: rgb(59, 78, 89);
+  height: 100vh;
+  // background: linear-gradient(-20deg, #09b7b9 30%, #1c51a4 100%);
+  background-color: rgb(59, 78, 89);
+}
+
+.jumbotron {
+  background-color: rgb(59, 78, 89);
+}
+
+.vertical-center {
+  min-height: 100%;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
+  /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+}
+
+#up-arrow {
+  bottom: -2em;
+  margin-right: auto;
+  margin-left: auto;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  /* For IE8 and earlier */
+}
+
+.fa-pencil:before,
+.icon-pencil:before {
+  content: "\f044";
 }
 
 .page-header.dashboard {

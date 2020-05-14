@@ -84,29 +84,3 @@
 body.rails_admin .sidebar-nav {
   top: 0px;
 }
-// @media(min-width:768px) {
-//   #wrapper {
-//     padding-left: 250px;
-//   }
-//   #wrapper.toggled {
-//     padding-left: 0;
-//   }
-//   #sidebar-wrapper {
-//     width: 250px;
-//     z-index: 10000;
-//   }
-//   #wrapper.toggled #sidebar-wrapper {
-//     width: 0;
-//     z-index: 10000;
-//   }
-//   #page-content-wrapper {
-//     padding: 20px;
-//     position: absolute;
-//     z-index: 20000;
-//   }
-//   #wrapper.toggled #page-content-wrapper {
-//     position: absolute;
-//     margin-right: 0;
-//     z-index: 20000;
-//   }
-// }

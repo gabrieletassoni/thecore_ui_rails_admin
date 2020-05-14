@@ -9,6 +9,9 @@ require 'rails_admin-i18n'
 require 'rails_admin_toggleable'
 # Rails Admin Buildups
 require 'jquery-ui-rails'
+require 'bootstrap-sass'
+
+require 'concerns/thecore_ui_rails_admin_user'
 
 module ThecoreUiRailsAdmin
   # Your code goes here...

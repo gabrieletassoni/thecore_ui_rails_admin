@@ -254,3 +254,4 @@ development_secret.txt
 *.pid
 *.sqlite
 *.sqlite3
+tmp

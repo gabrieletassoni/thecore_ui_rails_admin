@@ -19,5 +19,7 @@
 @import "jquery-ui/dialog";
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import "rails_admin/custom/theming";
+@import 'devise';
 @import 'animate';
 @import 'mixins';

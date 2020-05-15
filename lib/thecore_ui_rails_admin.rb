@@ -10,6 +10,8 @@ require 'jquery-ui-rails'
 require 'bootstrap-sass'
 
 require 'concerns/thecore_ui_rails_admin_user'
+require 'concerns/thecore_rails_admin_export_concern'
+require 'concerns/thecore_rails_admin_bulk_delete_concern'
 
 require "thecore_ui_rails_admin/engine"
 

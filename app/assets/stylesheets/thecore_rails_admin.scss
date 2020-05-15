@@ -19,7 +19,14 @@
 @import "jquery-ui/dialog";
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-@import "rails_admin/custom/theming";
+@import "rails_admin/theming";
 @import 'devise';
 @import 'animate';
 @import 'mixins';
+
+#new_user {
+    background-color: red;
+}
+body {
+    background-color: green;
+}

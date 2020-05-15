@@ -16,19 +16,19 @@ module ThecoreUiRailsAdminUser
                 field :email do
                     required true
                 end
-                #   field :username do
-                #     required true
-                #   end
+                field :username do
+                    required true
+                end
                 field :admin do
                     visible do
                         bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id
                     end
                 end
-                field :locked do
-                    visible do
-                        bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id
-                    end
-                end
+                # field :locked do
+                #     visible do
+                #         bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id
+                #     end
+                # end
                 #   field :roles, :enum do
                 #     visible !ROLES.blank?
                 #     pretty_value do # used in list view columns and show views, defaults to formatted_value for non-association fields

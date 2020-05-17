@@ -1,44 +1,12 @@
 @import "togglable-sidebar";
 @import "flashing";
+@import 'common';
 
 $RAprimary: #1c2c41;
 $RAgreen: #37BC9B;
 $RAblue: #3BAFDA;
 $RAred: #E9573F;
 $RAyellow: #F6BB42;
-
-body {
-  height: 100vh;
-  // background: linear-gradient(-20deg, #09b7b9 30%, #1c51a4 100%);
-  background-color: rgb(59, 78, 89);
-}
-
-.jumbotron {
-  background-color: rgb(59, 78, 89);
-}
-
-.vertical-center {
-  min-height: 100%;
-  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh;
-  /* These two lines are counted as one :-)       */
-  display: flex;
-  align-items: center;
-}
-
-#up-arrow {
-  bottom: -2em;
-  margin-right: auto;
-  margin-left: auto;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-  /* For IE8 and earlier */
-}
-
-.fa-pencil:before,
-.icon-pencil:before {
-  content: "\f044";
-}
 
 .page-header.dashboard {
   border-color: $RAprimary;

@@ -20,8 +20,6 @@ $(document).on('ready pjax:success', function(e) {
     $('.page-header, .content').removeClass('dashboard');
   }
 
-  $('textarea[data-richtext="froala-wysiwyg"').froalaEditor();
-
   // $(document).ready(function () {
   // Hide and show the sidebar
   // Make the sidebar button shine a bit

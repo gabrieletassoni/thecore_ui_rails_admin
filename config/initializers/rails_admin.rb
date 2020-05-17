@@ -5,6 +5,14 @@ RailsAdmin.config do |config|
   #  [(Settings.app_name rescue (ENV["APP_NAME"] || "TheCore App")), "#{controller.params[:action].try(:titleize)} (#{Time.zone.now.to_s(:time)})"]
   # }
   ### Popular gems integration
+  config.model "RoleUser" do
+    visible false
+  end
+
+  config.model "ActionText::RichText" do
+    visible false
+  end
+
   config.model "ActiveStorage::Blob" do
     visible false
   end

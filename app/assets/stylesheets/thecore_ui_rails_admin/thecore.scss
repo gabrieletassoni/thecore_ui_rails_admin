@@ -11,7 +11,7 @@
  * file per style scope.
  *
  *= required _colors
-
+ 
  *= require_tree .
  *= require_self
 */
@@ -19,14 +19,11 @@
 @import "jquery-ui/dialog";
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-@import "rails_admin/theming";
+@import 'common';
 @import 'devise';
 @import 'animate';
 @import 'mixins';
 
-#new_user {
-    background-color: red;
-}
-body {
-    background-color: green;
+#new_user div.actions input.btn.btn-warning {
+    width: 100%;
 }

@@ -1,0 +1,32 @@
+it:
+  settings:
+    namespaces:
+      main: Principale
+    names:
+      app_name: Nome dell'applicazione
+  admin:
+    settings:
+      label: 'Impostazioni'
+      no_ckeditor_detected: CKEditor non trovato &mdash; mostro il campo come semplice testo
+      phone_invalid: Telefono non valido
+      phones_invalid: "Telefono non valido: %{phones}"
+      email_invalid: Email non valida
+      yaml_invalid: YAML non valido
+      color_invalid: Colore non valido
+  mongoid: &mongoid
+    models:
+      rails_admin_settings/setting: Configurazioni
+    attributes:
+      rails_admin_settings/setting:
+        c_at: Creato
+        u_at: Modificato
+        enabled: Abilitato
+        ns: Gruppo
+        name: Nome
+        key: Chiave
+        raw: Valore
+        type: Tipo
+        kind: Tipo
+        label: Etichetta
+  activerecord:
+    <<: *mongoid

@@ -66,16 +66,22 @@ module ThecoreConcern
       |u| u.permit(
         :username,
         :password,
+        :email,
+        :login,
         :password_confirmation,
         :remember_me)
       }
       devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(
         :username,
         :password,
+        :email,
+        :login,
         :password_confirmation)
       }
       devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(
         :username,
+        :email,
+        :login,
         :password,
         :password_confirmation,
         :current_password)

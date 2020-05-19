@@ -15,7 +15,7 @@
             .text-center
               %p= capitalize_first_letter(abstract_model.config.label_plural)
               %strong= @count[abstract_model.model.name].to_s
-              %p= link_to t('admin.rollincode.show'), index_path, class: 'btn btn-black pjax'
+              %p= link_to content_tag("i", "", class: "fa fa-list-ul"), index_path, class: 'btn btn-black pjax'
         - index += 1
 
 - if @auditing_adapter && authorized?(:history_index)

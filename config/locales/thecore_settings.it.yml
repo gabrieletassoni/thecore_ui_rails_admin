@@ -7,7 +7,6 @@ it:
   admin:
     settings:
       label: 'Impostazioni'
-      no_ckeditor_detected: CKEditor non trovato &mdash; mostro il campo come semplice testo
       phone_invalid: Telefono non valido
       phones_invalid: "Telefono non valido: %{phones}"
       email_invalid: Email non valida

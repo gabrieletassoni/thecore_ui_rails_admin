@@ -2,6 +2,6 @@
   -# %ul.sidebar-nav
   %li.dropdown-header=t :current_user
   - if user_link = edit_user_link
-    %li.edit_user_root_link= user_link
+    %li.edit_user_root_link= link_to content_tag('i', "", class: 'fa fa-user', style: 'text-indent: 0') + _current_user.email, show_path(:user, _current_user.id)
   - if logout_path.present?
-    %li=link_to content_tag('span', t('admin.misc.log_out'), class: 'label label-danger'), logout_path, method: logout_method
+    %li=link_to content_tag('i', "", class: 'fa fa-unlink', style: 'text-indent: 0') + t('admin.misc.log_out'), logout_path, method: logout_method

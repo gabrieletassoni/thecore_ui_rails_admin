@@ -9,6 +9,26 @@ RailsAdmin.config do |config|
     visible false
   end
 
+  config.model "Predicate" do
+    visible false
+  end
+
+  config.model "Target" do
+    visible false
+  end
+
+  config.model "Action" do
+    visible false
+  end
+
+  config.model "PermissionRole" do
+    visible false
+  end
+
+  config.model "Permission" do
+    visible false
+  end
+
   config.model "ActionText::RichText" do
     visible false
   end
@@ -32,7 +52,7 @@ RailsAdmin.config do |config|
   
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
-  
+  config.show_gravatar = false
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.label_methods.unshift(:display_name)
   

@@ -19,18 +19,6 @@ $(document).on('ready pjax:success', function(e) {
   } else {
     $('.page-header, .content').removeClass('dashboard');
   }
-
-  // $(document).ready(function () {
-  // Hide and show the sidebar
-  // Make the sidebar button shine a bit
-  // setTimeout(function() {
-  //   $('#sidebar-collapse').addClass("flash");
-  // }, 500);
-  // setTimeout(function() {
-  //   if (!$('#wrapper').hasClass('toggled'))
-  //     $('#wrapper').addClass('toggled');
-  // }, 1200);
-  // });
 });
 
 $(function() {
@@ -86,14 +74,4 @@ $(document).ready(function () {
     $('#wrapper').toggleClass('toggled');
   });
 
-  $('textarea[data-richtext="froala-wysiwyg"').froalaEditor();
-//   // Hide and show the sidebar
-//   // Make the sidebar button shine a bit
-//   setTimeout(function() {
-//     $('#sidebar-collapse').addClass("flash");
-//   }, 500);
-//   setTimeout(function() {
-//     if (!$('#wrapper').hasClass('toggled'))
-//       $('#wrapper').addClass('toggled');
-//   }, 1200);
 });

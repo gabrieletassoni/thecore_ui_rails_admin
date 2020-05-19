@@ -12,7 +12,6 @@ module ThecoreConcern
       redirect_to main_app.root_url, :alert => exception.message
     end
     include HttpAcceptLanguage::AutoLocale
-    Rails.logger.debug "Selected Locale: #{I18n.locale}"
     before_action :store_user_location!, if: :storable_location?
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :reject_locked!, if: :devise_controller?

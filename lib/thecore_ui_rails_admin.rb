@@ -7,6 +7,7 @@ require 'rails_admin-i18n'
 require 'safe_yaml'
 require 'rails_admin_toggleable'
 require 'rails_admin_settings'
+require 'rails_admin_selectize'
 require 'concerns/rails_admin_requirements'
 # Abilities
 require 'abilities/thecore_ui_rails_admin'
@@ -15,6 +16,8 @@ require 'jquery-ui-rails'
 require 'bootstrap-sass'
 
 require 'concerns/thecore_ui_rails_admin_user'
+require 'concerns/thecore_ui_rails_admin_role'
+require 'concerns/thecore_ui_rails_admin_permission'
 require 'concerns/thecore_rails_admin_export_concern'
 require 'concerns/thecore_rails_admin_bulk_delete_concern'
 

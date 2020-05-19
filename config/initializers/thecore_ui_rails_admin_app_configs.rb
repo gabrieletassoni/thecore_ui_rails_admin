@@ -1,4 +1,6 @@
 Rails.application.configure do
+    # config.assets.paths << root.join("app", "assets", "stylesheets", "thecore_ui_rails_admin")
+    # config.assets.paths << root.join("app", "assets", "javascripts", "thecore_ui_rails_admin")
     # Login Page and pages not in RailsAdmin
     config.assets.precompile += %w( thecore_ui_rails_admin/thecore.css thecore_ui_rails_admin/thecore.js )
     # Pages under Rails Admin
@@ -9,5 +11,7 @@ Rails.application.configure do
         RailsAdmin::Config::Actions::BulkDelete.send(:include, BulkDeleteConcern)
         RailsAdminSettings::Setting.send(:include, RailsAdminSettings::RailsAdminExtensionConfig)
         User.send(:include, ThecoreUiRailsAdminUser)
+        Role.send(:include, ThecoreUiRailsAdminRole)
+        Permission.send(:include, ThecoreUiRailsAdminPermission)
     end
 end

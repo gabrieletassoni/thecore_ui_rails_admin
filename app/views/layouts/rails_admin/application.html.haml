@@ -13,12 +13,9 @@
 
     = stylesheet_link_tag "rails_admin/rails_admin.css", media: :all
     = javascript_include_tag "rails_admin/rails_admin.js"
+    -# Getting all the assets needed by thecore_rails_admin from all the gems
+    = get_asset_tags_for("thecore_rails_admin")
 
-    - Rails.application.config.assets.paths.each do |p|
-      -# Getting all the assets needed by thecore from all the gems
-      = stylesheet_link_tag("#{p.to_s.split("/").last}/thecore_rails_admin", media: 'all', 'data-turbolinks-track' => true) if File.exists?("#{p}/thecore_rails_admin.scss")
-      = javascript_include_tag("#{Dir["#{p}/**/thecore_rails_admin.js"].first.split("/")[-2]}/thecore_rails_admin", 'data-turbolinks-track' => true) if Dir["#{p}/**/thecore_rails_admin.js"].any?
-    
     = favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', sizes: "180x180"
     = favicon_link_tag 'favicon-32x32.png', rel: 'icon', sizes: "32x32"
     = favicon_link_tag 'favicon-16x16.png', rel: 'icon', sizes: "16x16"

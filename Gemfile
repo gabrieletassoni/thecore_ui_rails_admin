@@ -14,10 +14,10 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem 'thecore_auth_commons', path: '../thecore_auth_commons'
-gem 'thecore_backend_commons', path: '../thecore_backend_commons'
-gem 'thecore_ui_commons', path: '../thecore_ui_commons'
-gem 'rails_admin_selectize', path: '../rails_admin_selectize'
+# gem 'thecore_auth_commons', path: '../thecore_auth_commons'
+# gem 'thecore_backend_commons', path: '../thecore_backend_commons'
+# gem 'thecore_ui_commons', path: '../thecore_ui_commons'
+# gem 'rails_admin_selectize', path: '../rails_admin_selectize'
 # Bootstrap 3: https://github.com/twbs/bootstrap-sass
 gem 'bootstrap-sass'
 gem 'sassc-rails'

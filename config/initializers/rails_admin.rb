@@ -1,9 +1,9 @@
 require 'rails_admin'
 
 RailsAdmin.config do |config|
-  # config.main_app_name = Proc.new { |controller|
-  #  [(Settings.app_name rescue (ENV["APP_NAME"] || "TheCore App")), "#{controller.params[:action].try(:titleize)} (#{Time.zone.now.to_s(:time)})"]
-  # }
+  # Link for background Job
+  (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV['RAILS_RELATIVE_URL_ROOT']}/app/sidekiq"
+
   ### Popular gems integration
   config.model "RoleUser" do
     visible false

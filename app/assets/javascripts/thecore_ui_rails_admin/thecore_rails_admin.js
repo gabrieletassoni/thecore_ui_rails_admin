@@ -1,4 +1,5 @@
 //= require timer
+//= require thecore_ui_commons/thecore
 //= require_tree .
 
 $(document).on('ready pjax:success', function(e) {

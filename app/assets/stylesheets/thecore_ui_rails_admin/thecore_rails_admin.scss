@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= required _colors
+ *= require thecore_ui_commons/thecore
  
  *= require_self
 */
@@ -132,6 +133,9 @@ a.delete {
   }
   &.bg-danger {
     background-color: $RAred;
+  }
+  &.bg-clear {
+    background-color: rgb(204, 255, 204);
   }
 }
 

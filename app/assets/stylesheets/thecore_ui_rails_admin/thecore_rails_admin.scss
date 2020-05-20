@@ -12,7 +12,8 @@
  *
  *= required _colors
  *= require thecore_ui_commons/thecore
- 
+ *= require rails_admin/rails_admin
+ *= require rails_admin_selectize/index
  *= require_self
 */
 @import 'thecore';

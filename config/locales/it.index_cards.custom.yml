@@ -1,0 +1,20 @@
+it:
+  admin:
+    actions:
+      new:
+        menu: ""
+      index:
+        menu: ""
+      export:
+        menu: ""
+    export:
+      found: ➦
+    misc:
+      order_by: ⇅
+      scopes: ⋔
+      add_filter: ⋔
+      add_new: ⋔
+      refresh: ""
+      bulk_menu_title: ☰✔
+    select:
+      toggle: ☑

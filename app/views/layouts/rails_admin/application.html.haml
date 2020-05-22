@@ -1,0 +1,59 @@
+!!! 5
+%html{lang: I18n.locale}
+  %head
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{content: "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %meta{content: "NONE,NOARCHIVE", name: "robots"}
+    = csrf_meta_tag
+    %style{media: "screen"}
+      div#sidebar-wrapper div.sidebar-nav li.dropdown-header { padding-left: 0px }
+      div.sub-menu-container li.sub-menu a.pjax { padding-left: 0px }
+      div#wrapper div#sidebar-wrapper { overflow: hidden }
+
+    -# Getting all the assets needed by thecore_rails_admin from all the gems
+    = get_asset_tags_for("thecore_rails_admin")
+
+    = favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', sizes: "180x180"
+    = favicon_link_tag 'favicon-32x32.png', rel: 'icon', sizes: "32x32"
+    = favicon_link_tag 'favicon-16x16.png', rel: 'icon', sizes: "16x16"
+    = favicon_link_tag 'safari-pinned-tab.svg', rel: 'mask-icon', color: "#5bbad5"
+  %body.rails_admin
+    #admin-js{:'data-i18n-options' => I18n.t("admin.js").to_json}
+    -# Initialize JS simple i18n
+    :javascript
+      RailsAdmin.I18n.init('#{I18n.locale}', document.getElementById("admin-js").dataset.i18nOptions);
+    #loading.label.label-warning{style: 'display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}= t('admin.loading')
+    -# %nav.navbar.navbar-default.navbar-fixed-top
+    -#   = render "layouts/rails_admin/navigation"
+    #wrapper
+      #sidebar-wrapper
+        .sidebar-nav
+          = render "layouts/rails_admin/secondary_navigation"
+          = render "layouts/rails_admin/sidebar_navigation"
+          = render "layouts/rails_admin/user_navigation"
+      #page-content-wrapper
+        .container-fluid
+          .row
+            .col-lg-12
+              %button#sidebar-collapse{href: "#menu-toggle"}
+                %i.fa.fa-bars.fa-2x
+              -# %a#app-name.pjax{href: dashboard_path}
+              %span#app-name
+                = Settings.app_name rescue "Thecore"
+              .content{:'data-pjax-container' => true}
+                = render template: 'layouts/rails_admin/pjax'
+    = render "rails_admin/main/modal_interaction"
+  -#   -# Initialize JS simple i18n
+  -#   :javascript
+  -#     RailsAdmin.I18n.init('#{I18n.locale}', JSON.parse("#{j I18n.t("admin.js").to_json}"))
+  -# %body.rails_admin
+  -#   #loading.label.label-warning{style: 'display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}= t('admin.loading')
+  -#   %nav.navbar.navbar-default.navbar-fixed-top
+  -#     = render "layouts/rails_admin/navigation"
+  -#   .container-fluid
+  -#     .row
+  -#       .col-sm-3.col-md-2.sidebar-nav
+  -#         = render "layouts/rails_admin/sidebar_navigation"
+  -#       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
+  -#         .content{:'data-pjax-container' => true}= render template: 'layouts/rails_admin/pjax'

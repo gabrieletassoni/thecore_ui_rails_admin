@@ -1,0 +1,53 @@
+<div id="modal-interaction" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modal-interaction-label">&nbsp;</h4>
+      </div>
+      <div class="modal-body" id="modal-interaction-body">
+        &nbsp;
+      </div>
+      <div class="modal-footer" id="modal-interaction-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-interaction-secondary">&nbsp;</button>
+        <button type="button" class="btn btn-primary" id="modal-interaction-primary">&nbsp;</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<script>
+  function openModal(title, message, buttonPrimary, buttonSecondary) {
+    $('#modal-interaction-label').html(title);
+    $('#modal-interaction-body').html(message);
+    if (buttonPrimary != null) {
+      $('#modal-interaction-primary').html(buttonPrimary.lbl);
+      $('#modal-interaction-primary').on('click', buttonPrimary.func);
+      $('#modal-interaction-primary').show();
+    }
+    if (buttonSecondary != null) {
+      $('#modal-interaction-secondary').html(buttonSecondary.lbl);
+      $('#modal-interaction-secondary').on('click', buttonSecondary.func);
+      $('#modal-interaction-secondary').show();
+    }
+    (buttonPrimary != null || buttonSecondary != null) ? $("#modal-interaction-footer").show() : $("#modal-interaction-footer").hide();
+    $('#modal-interaction').modal('show');
+  }
+  function closeModal() {
+    $('#modal-interaction').modal('hide');
+    $('#modal-interaction-label').html("&nbsp;");
+    $('#modal-interaction-body').html("&nbsp;");
+    $('#modal-interaction-primary').html("&nbsp;");
+    $('#modal-interaction-secondary').html("&nbsp;");
+    $('#modal-interaction-primary').hide();
+    $('#modal-interaction-secondary').hide();
+    $("#modal-interaction-footer").hide();
+    $('#modal-interaction-primary').off();
+    $('#modal-interaction-secondary').off();
+  }
+</script>

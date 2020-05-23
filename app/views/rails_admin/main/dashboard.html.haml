@@ -1,14 +1,28 @@
 = breadcrumb
+:css
+  .apexcharts-menu-item {
+    color: black
+  }
+  .apexcharts-tooltip {
+    background: #f3f3f3;
+    color: orange;
+  }
+.row
+  .col-sm-6
+    .box.bg.bg-clear= pie_chart([{name: "Series A", data: 25},{name: "Series B", data: 100},{name: "Series C", data: 200},{name: "Series D", data: 125}], legend: "left")
+  .col-sm-6
+    - candlestick_options = {plot_options: {candlestick: {colors: {upward: '#3C90EB',downward: '#DF7D46'}}}}
+    .box.bg.bg-clear= candlestick_chart(candlestick_data, candlestick_options)
 .row
   .col-sm-4
-    .box.bg.bg-clear= line_chart User.group(:created_at).count
-    .box.bg.bg-clear= bar_chart User.group(:created_at).count
+    - radar_series = [{name: "What it should be",data: { "Code review"=>10, "Issues"=>5, "Pull request"=>25, "Commits"=>60 }},{name: "What it really is",data: { "Code review"=>1, "Issues"=>3, "Pull request"=>7, "Commits"=>89 }}]
+    .box.bg.bg-clear= radar_chart(radar_series,{title: "GitHub Radar", markers: {size: 4}, theme: 'palette4'})
   .col-sm-4
-    .box.bg.bg-clear= column_chart User.group(:created_at).count
-    .box.bg.bg-clear= area_chart User.group(:created_at).count
+    - bubble_series = (1..4).map do |n|{name: "Bubble#{n}",data: 20.times.map{[rand(750),rand(10..60),rand(70)]}}end
+    .box.bg.bg-clear= bubble_chart(bubble_series, data_labels: false, theme: 'palette6')
   .col-sm-4
-    .box.bg.bg-clear= pie_chart User.group(:created_at).count
-    .box.bg.bg-clear= scatter_chart User.group(:created_at).count
+    - range_bar_series = [{name: "Series A",data: {'A' => [1, 5],'B' => [4, 6],'C' => [5, 8],'D' => [3, 11]}}, {name: "Series B",data: {'A' => [2, 6],'B' => [1, 3],'C' => [7, 8],'D' => [5, 9]}}]
+    .box.bg.bg-clear= range_bar_chart(range_bar_series, theme: 'palette3')
 - @list_bg = ['info', 'success', 'danger', 'success', 'info', 'warning', 'danger', 'info', 'success']
 - if @abstract_models
   .row

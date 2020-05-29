@@ -1,14 +1,22 @@
 = breadcrumb
-.row
-  .col-sm-4
-    .box.bg.bg-clear= line_chart User.group(:created_at).count
-    .box.bg.bg-clear= bar_chart User.group(:created_at).count
-  .col-sm-4
-    .box.bg.bg-clear= column_chart User.group(:created_at).count
-    .box.bg.bg-clear= area_chart User.group(:created_at).count
-  .col-sm-4
-    .box.bg.bg-clear= pie_chart User.group(:created_at).count
-    .box.bg.bg-clear= scatter_chart User.group(:created_at).count
+- charts_high = []
+- charts_medium = []
+- self.methods.each do |m|
+  - charts_high << m if m.start_with? "charts_high_"
+  - charts_medium << m if m.start_with? "charts_medium_"
+  
+- charts_high.in_groups_of(2, false).each_with_index do |group, i|
+  .row
+    - group.each do |item|
+      .col-sm-6
+        .box.bg.bg-clear= self.send(item)
+  
+- charts_medium.in_groups_of(3, false).each_with_index do |group, i|
+  .row
+    - group.each do |item|
+      .col-sm-4
+        .box.bg.bg-clear= self.send(item)
+
 - @list_bg = ['info', 'success', 'danger', 'success', 'info', 'warning', 'danger', 'info', 'success']
 - if @abstract_models
   .row

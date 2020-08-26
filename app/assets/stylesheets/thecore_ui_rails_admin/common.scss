@@ -1,11 +1,12 @@
 body {
     height: 100vh;
     // background: linear-gradient(-20deg, #09b7b9 30%, #1c51a4 100%);
-    background-color: rgb(59, 78, 89);
+    background-color: $RAbackground;
 }
 
 .jumbotron {
-    background-color: rgb(59, 78, 89);
+    background-color: $RAbackground;
+    color: $RAtext;
 }
 
 .vertical-center {
@@ -31,6 +32,12 @@ body {
     content: "\f044";
 }
 
-#new_user div.actions input.btn.btn-warning {
+#new_user div.checkbox:hover {
+    color: $RAhighlight
+}
+
+#new_user div.actions input.btn {
     width: 100%;
+    background-color: $RAelements;
+    border-color: $RAborder;
 }

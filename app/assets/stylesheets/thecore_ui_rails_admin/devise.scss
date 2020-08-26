@@ -1,10 +1,3 @@
- $primary: #1c2c41;
- $secondary: #304158;
- $light: #47566c;
- $blue: #0C457D;
- $grey: #706f6f;
- $tertiary: #81C784;
-
 .devise {
   font-family: 'Raleway', sans-serif;
   height: 100vh;
@@ -19,11 +12,11 @@
 }
 
 .bckg-dark {
-  // background: linear-gradient(-20deg, #09b7b9 30%, #1c51a4 100%);
-  background-color: rgb(59,	78,	89);
+  background-color:$RAbackground;
 }
 
 .bckg-login {
+  background-color:$RAbackground;
 }
 
 .logo {
@@ -38,11 +31,11 @@
 }
 
 .bckg-dark-light {
-  background: $secondary;
+  background: $RAtext;
 }
 
 .bckg-blue {
-  background: $blue;
+  background: $RAinfo;
 }
 
 .centered {
@@ -54,7 +47,7 @@
 
 .login-form-user {
   width: 25%;
-  color: #fff;
+  color: $RAlight;
   margin: 0 auto;
   margin-bottom: 25px;
 
@@ -65,7 +58,7 @@
   }
 
   .lost_id {
-    color: #fff;
+    color: $RAlight;
     margin-bottom: 15px;
     display: block;
     font-size: .9em;
@@ -111,16 +104,16 @@
     border: 0;
   }
   input[type="submit"] {
-    background: $grey;
+    background: $RAclear;
     border: 0;
     border-radius: 0;
     cursor: pointer;
     float: right;
-    color: white;
+    color:$RAlight;
     width:100%;
   }
   h2 {
-    background: $grey;
+    background: $RAclear;
     display: block;
     padding: 10px 15px;
     text-align: left;
@@ -129,15 +122,15 @@
 }
 
 .login-form {
-  color: #fff;
+  color:$RAlight;
   width: 30%;
 
   .links-form {
     a {
-      color: $light;
+      color:$RAlight;
       text-decoration: none;
       &:hover {
-        color: $light;
+        color: $RAhighlight;
       }
     }
   }
@@ -174,8 +167,8 @@
 
   input[type="submit"] {
     cursor: pointer;
-    background: $tertiary;
-    color: #fff;
+    background: $RAborder;
+    color:$RAlight;
     border-radius: 3px;
     border: 0;
     display: block;
@@ -184,15 +177,15 @@
     margin-top: 55px;
     width: 100%;
     &:hover {
-      background: darken($tertiary, 5%);
+      background: darken($RAborder, 5%);
     }
   }
 
   input[type="text"], input[type="email"], input[type="password"] {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid $light;
-    color: #fff;
+    border-bottom: 1px solid $RAlight;
+    color:$RAlight;
     margin-top: 15px;
     padding-bottom: 15px;
   }
@@ -200,8 +193,8 @@
   .input-group-addon {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid $light;
-    color: #fff;
+    border-bottom: 1px solid $RAlight;
+    color:$RAlight;
     margin-top: 15px;
     padding-bottom: 15px;
     padding-top: 12px;

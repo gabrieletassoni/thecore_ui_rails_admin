@@ -16,10 +16,13 @@
 - if @abstract_model
   = breadcrumb
   .well.well-sm
-    %ul.nav.nav-pills
+    %ul.nav.nav-pills#action-menu
       = menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
       = content_for :contextual_tabs
   .well.well-sm
     = yield
 - else
   = yield
+
+%script
+  $('.dropdown-toggle').dropdown()

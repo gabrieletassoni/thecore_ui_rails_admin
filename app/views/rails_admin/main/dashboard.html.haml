@@ -9,27 +9,25 @@
   .row
     - group.each do |item|
       .col-sm-6
-        .box.bg.bg-clear= self.send(item)
+        .box= self.send(item)
   
 - charts_medium.in_groups_of(3, false).each_with_index do |group, i|
   .row
     - group.each do |item|
       .col-sm-4
-        .box.bg.bg-clear= self.send(item)
+        .box= self.send(item)
 
 - if @abstract_models
   .row
     - @abstract_models.each do |abstract_model|
       - index_path = index_path(model_name: abstract_model.to_param)
-      - if authorized?(:index, abstract_model) && !index_path.include?("ckeditor")
-        - row_class = "box bg-clear #{"link" if index_path} #{abstract_model.param_key}_links #{abstract_model.config.label_plural}"
+      - if authorized?(:index, abstract_model)
         .col-sm-4
-          .box{class: row_class, :"data-link" => index_path}
+          %a.box.pjax{href: index_path}
             %i{class: "icon-bg #{abstract_model.config.navigation_icon.present? ? abstract_model.config.navigation_icon : 'file' }"}
             .text-center
-              %p= capitalize_first_letter(abstract_model.config.label_plural)
-              %strong= @count[abstract_model.model.name].to_s
-              %p= link_to content_tag("i", "", class: "fa fa-list-ul"), index_path, class: 'btn btn-black pjax'
+              %p.model= capitalize_first_letter(abstract_model.config.label_plural)
+              %strong.count= @count[abstract_model.model.name].to_s
 
 - if @auditing_adapter && authorized?(:history_index)
   #block-tables.block

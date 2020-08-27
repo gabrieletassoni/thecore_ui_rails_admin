@@ -32,13 +32,12 @@
   width: 100%;
   position: absolute;
   padding: 15px;
-  background-color: rgb(59,78,89);
+  background-color: $background;
   min-height: 100vh;
 }
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
   margin-right: -250px;
-  background-color: rgb(59,78,89);
 }
 /* Sidebar Styles */
 

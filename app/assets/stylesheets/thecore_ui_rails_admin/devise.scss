@@ -12,11 +12,11 @@
 }
 
 .bckg-dark {
-  background-color:$RAbackground;
+  background-color:$background;
 }
 
 .bckg-login {
-  background-color:$RAbackground;
+  background-color:$background;
 }
 
 .logo {
@@ -31,11 +31,11 @@
 }
 
 .bckg-dark-light {
-  background: $RAtext;
+  background: $text;
 }
 
 .bckg-blue {
-  background: $RAinfo;
+  background: $info;
 }
 
 .centered {
@@ -47,7 +47,7 @@
 
 .login-form-user {
   width: 25%;
-  color: $RAlight;
+  color: $text-highlight;
   margin: 0 auto;
   margin-bottom: 25px;
 
@@ -58,7 +58,7 @@
   }
 
   .lost_id {
-    color: $RAlight;
+    color: $text-highlight;
     margin-bottom: 15px;
     display: block;
     font-size: .9em;
@@ -104,16 +104,16 @@
     border: 0;
   }
   input[type="submit"] {
-    background: $RAclear;
+    background: $neutral;
     border: 0;
     border-radius: 0;
     cursor: pointer;
     float: right;
-    color:$RAlight;
+    color:$text-highlight;
     width:100%;
   }
   h2 {
-    background: $RAclear;
+    background: $neutral;
     display: block;
     padding: 10px 15px;
     text-align: left;
@@ -122,15 +122,15 @@
 }
 
 .login-form {
-  color:$RAlight;
+  color:$text-highlight;
   width: 30%;
 
   .links-form {
     a {
-      color:$RAlight;
+      color:$text-highlight;
       text-decoration: none;
       &:hover {
-        color: $RAhighlight;
+        color: $text-highlight;
       }
     }
   }
@@ -167,8 +167,8 @@
 
   input[type="submit"] {
     cursor: pointer;
-    background: $RAborder;
-    color:$RAlight;
+    background: $element-border;
+    color:$text-highlight;
     border-radius: 3px;
     border: 0;
     display: block;
@@ -177,15 +177,15 @@
     margin-top: 55px;
     width: 100%;
     &:hover {
-      background: darken($RAborder, 5%);
+      background: darken($element-border, 5%);
     }
   }
 
   input[type="text"], input[type="email"], input[type="password"] {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid $RAlight;
-    color:$RAlight;
+    border-bottom: 1px solid $text-highlight;
+    color:$text-highlight;
     margin-top: 15px;
     padding-bottom: 15px;
   }
@@ -193,8 +193,8 @@
   .input-group-addon {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid $RAlight;
-    color:$RAlight;
+    border-bottom: 1px solid $text-highlight;
+    color:$text-highlight;
     margin-top: 15px;
     padding-bottom: 15px;
     padding-top: 12px;

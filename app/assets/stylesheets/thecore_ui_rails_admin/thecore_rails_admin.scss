@@ -18,10 +18,273 @@
 */
 @import "thecore";
 
-.box, .box p a.btn {
-  color: $RAtext !important;
+.sidebar-nav li a {
+  color: $element-text;
+}
+#sidebar-wrapper .sidebar-nav {
+  background-color: $shadows !important;
+  color: $element-text;
+  &:hover {
+    color: $element-text-highlight !important;
+  }
+  .dropdown-header {
+    color: $element-text;
+  }
+  .sub-menu-container {
+    background-color: darken($shadows, 10%) !important;
+  }
+  .sub-menu-container .sub-menu a:hover {
+    color: $element-text-highlight !important;
+  }
+  .dropdown-header:hover, .dropdown-header.active, .dropdown-header.active .sub-menu-container .submenu:hover, .sub-menu.sub-menu-null a:hover {
+    background-color: $element;
+    color: $element-text-highlight !important;
+  }
 }
 
-.box:hover {
-  color: $RAhighlight;
+#app-name {
+  color: $primary !important;
+}
+
+#sidebar-collapse {
+  color: $shadows !important;
+}
+
+.breadcrumb {
+  background: $element;
+  .false a, .false:before {
+    color: darken($element, 30%) !important;
+  }
+  .active, .active:before {
+    color: $text-highlight;
+  }
+}
+
+#list .form-inline {
+  margin-bottom: 2em;
+}
+
+p.boolean_type a.label-success,
+p.boolean_type a.label-danger {
+  background: none;
+  font-size: 1.5em;
+  &:hover {
+    background: none;
+  }
+}
+
+body.rails_admin .nav.nav-tabs {
+  margin-bottom: 0;
+}
+
+#bulk_form .panel:nth-of-type(1) {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+#scope_selector li, #action-menu li {
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  &.selected {
+    background-color: #fff;
+    color: $text !important;
+    a {
+      color: $text !important;
+    }
+  }
+
+  a:hover {
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    background-color: rgba($element, .5);
+    color: $element-text-highlight !important;
+  }
+}
+
+.well {
+  background-color: darken($background, 2%);
+  border-color: darken($background, 2%);
+}
+
+.content a, a {
+  color: $link;
+  text-decoration: none;
+  &:hover {
+    color: $link-highlight;  }
+}
+
+.page-header.dashboard {
+  border-color: $background;
+}
+
+.table-striped {
+  border-top-color: $info;
+  .links ul li {
+    padding-right: 0;
+    a {
+      border-radius: 50%;
+    }
+  }
+}
+
+.content {
+  margin: 0px 0 15px 0;
+  padding: 8px;
+  background: $background;
+  &.dashboard {
+    background: $background;
+  }
+  .page-header {
+    display: none;
+  }
+}
+
+a.delete {
+  color: $text-highlight;
+}
+
+.box {
+  border-radius: 1em;
+  display: block;
+  padding: 15px;
+  margin-bottom: 30px;
+  border: 1px solid $element-border;
+  position: relative;
+  min-height: 15em;
+  transition: all 0.3s ease;
+  background-color: $element;
+  color: $element-text;
+  overflow: hidden;
+  &:hover, &:focus {
+    border-color: $shadows;
+    .icon-bg {
+      transform: scale(1.5) rotate(20deg);
+    }
+  }
+  p {
+    min-height: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    a.btn {
+      border-radius: 3px;
+      color: rgba($text-highlight,0.7) !important;
+      display: inline-block;
+      margin-bottom: 0;
+      font-weight: normal;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: rgba($shadows, 0.19);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      border-radius: 4px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+  strong.count {
+    font-size: 10em;
+    font-weight: 600;
+  }
+  p.model,
+  strong.count {
+    color: $element-text;
+    &:hover {
+      color: $element-text-highlight;
+    }
+  }
+  .icon-bg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 15em;
+    color: $element-text;
+    opacity: 0.20;
+    filter: alpha(opacity=20);
+    transition: all 1s ease;
+  }
+  &.bg-info {
+    background-color: $info;
+  }
+  &.bg-success {
+    background-color: $success;
+  }
+  &.bg-warning {
+    background-color: $warning;
+  }
+  &.bg-danger {
+    background-color: $danger;
+  }
+  &.bg-clear {
+    background-color: $neutral;
+  }
+}
+
+/* User sign in and sign forms. */
+.border-form-div {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: $text-highlight;
+  border: 1px solid $element-border;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba($shadows,.05);
+     -moz-box-shadow: 0 1px 2px rgba($shadows,.05);
+          box-shadow: 0 1px 2px rgba($shadows,.05);
+}
+.border-form-div .form-signin-heading,
+.border-form-div .checkbox {
+  margin-bottom: 10px;
+}
+.border-form-div input[type="text"],
+.border-form-div input[type="email"],
+.border-form-div input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+
+#sidebar-collapse {
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  color: $neutral;
+}
+#sidebar-collapse:focus {
+  outline: 0;
+}
+#sidebar-collapse:hover {
+  color:$text-highlight;
+}
+
+.exit-button {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 7px;
+}
+
+#app-name {
+  font-size: 2em;
+  color: $neutral;
+  font-family: 'Raleway', sans-serif;
+  word-wrap: normal;
+}
+#app-name:hover {
+  color: $text-highlight;
+  text-decoration: none;
+}
+
+body.rails_admin {
+  padding-top: 0px;
+  background-color: $background;
 }

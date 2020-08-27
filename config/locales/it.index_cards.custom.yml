@@ -14,7 +14,7 @@ it:
       scopes: ⋔
       add_filter: ⋔
       add_new: ⋔
-      refresh: ""
+      refresh: Apply Filters
       bulk_menu_title: ☰✔
     select:
       toggle: ☑

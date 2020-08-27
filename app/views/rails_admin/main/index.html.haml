@@ -24,10 +24,10 @@
     = bulk_menu
   - if filterable_fields.present?
     %li.dropdown{style: 'float:right'}
-      %a.dropdown-toggle{href: '#', :'data-toggle' => "dropdown"}
+      %a.dropdown-toggle#filters-menu{ :'data-toggle' => "dropdown", :'aria-haspopup'=>"true", :'aria-expanded'=>"true"}
         = t('admin.misc.add_filter')
         %b.caret
-      %ul.dropdown-menu#filters{style: 'left:auto; right:0;'}
+      %ul.dropdown-menu#filters{style: 'left:auto; right:0;', :'aria-labelledby'=>"filters-menu"}
         - filterable_fields.each do |field|
           - field_options = case field.type
           - when :enum
@@ -44,27 +44,26 @@
 
 #list
   = form_tag(index_path(params.except(*%w[page f query])), method: :get, class: "pjax-form form-inline") do
-    .well
-      %span#filters_box{data: {options: ordered_filter_options.to_json}}
-      %hr.filters_box{style: "display:#{ordered_filters.empty? ? 'none' : 'block'}"}
-      .input-group
-        %input.form-control.input-small{name: "query", type: "search", value: query, placeholder: t("admin.misc.filter")}
-        %span.input-group-btn
-          %button.btn.btn-primary{type: 'submit', :'data-disable-with' => '<i class="icon-white icon-refresh"></i> '.html_safe + t('admin.misc.refresh')}
-            %i.icon-white.icon-refresh
-            = t('admin.misc.refresh')
-          %button#remove_filter.btn.btn-info{title: "Reset filters"}
-            %i.icon-white.icon-remove
-      - if export_action
-        %span{style: 'float:right'}= link_to wording_for(:link, export_action), export_path(params.except('set').except('page')), class: 'btn btn-info'
+    %span#filters_box{data: {options: ordered_filter_options.to_json}}
+    %hr.filters_box{style: "display:#{ordered_filters.empty? ? 'none' : 'block'}"}
+    .input-group
+      %input.form-control.input-small{name: "query", type: "search", value: query, placeholder: t("admin.misc.filter")}
+      %span.input-group-btn
+        %button.btn.btn-primary{type: 'submit', :'data-disable-with' => '<i class="icon-white icon-refresh"></i> '.html_safe + t('admin.misc.refresh')}
+          %i.icon-white.icon-refresh
+          = t('admin.misc.refresh')
+        %button#remove_filter.btn.btn-info{title: "Reset filters"}
+          %i.icon-white.icon-remove
+    - if export_action
+      %span{style: 'float:right'}= link_to wording_for(:link, export_action), export_path(params.except('set').except('page')), class: 'btn btn-info'
 
   - unless @model_config.list.scopes.empty?
-    %ul.nav.nav-tabs#scope_selector
-      - @model_config.list.scopes.each_with_index do |scope, index|
+    %ul.nav.nav-tabs.nav-justified#scope_selector
+      - @model_config.list.scopes.each do |scope|
         - scope = '_all' if scope.nil?
-        %li{class: "#{'active' if scope.to_s == params[:scope] || (params[:scope].blank? && index == 0)}"}
-          %a{href: index_path(params.merge(scope: scope, page: nil)), class: 'pjax'}= I18n.t("admin.scopes.#{@abstract_model.to_param}.#{scope}", default: I18n.t("admin.scopes.#{scope}", default: scope.to_s.titleize))
-
+        %li{ class: "#{ scope.to_s == params[:scope] || (params[:scope].nil? && scope == "_all") ? "selected" : "inactive"}"}
+          %a.nav-link{href: index_path(params.merge(scope: scope, page: nil)), class: 'pjax'}= I18n.t("admin.scopes.#{@abstract_model.to_param}.#{scope}", default: I18n.t("admin.scopes.#{scope}", default: scope.to_s.titleize))
+    
   = form_tag bulk_action_path(model_name: @abstract_model.to_param), method: :post, id: "bulk_form", class: ["form", frozen_columns ? 'ra-sidescroll' : nil], data: (frozen_columns ? {ra_sidescroll: frozen_columns} : {}) do
     = hidden_field_tag :bulk_action
     - if description.present?

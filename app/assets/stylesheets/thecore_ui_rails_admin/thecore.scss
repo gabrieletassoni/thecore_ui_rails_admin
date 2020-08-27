@@ -16,11 +16,12 @@
  *= require rails_admin_selectize/index
  *= require_self
 */
+@import 'colors_override';
+@import 'colors';
 @import "jquery-ui";
 @import "jquery-ui/dialog";
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-@import 'colors';
 @import 'common';
 @import "flashing";
 @import 'devise';
@@ -30,177 +31,14 @@
 @import 'thecore_ui_commons/thecore';
 @import "togglable-sidebar";
 
-.page-header.dashboard {
-  border-color: $RAbackground;
+.btn {
+  background-color: $element;
+  color: $element-text;
+  border-color: $element-border;
 }
 
-.breadcrumb {
-  background: $RAinfo;
-  .false a, .false:before {
-    color: darken($RAinfo, 30%) !important;
-  }
-  .active, .active:before {
-    color: $RAlight;
-  }
-}
-
-.table-striped {
-  border-top-color: $RAinfo;
-  .links ul li {
-    padding-right: 0;
-    a {
-      border-radius: 50%;
-    }
-  }
-}
-
-.content {
-  margin: 0px 0 15px 0;
-  padding: 8px;
-  background: $RAbackground;
-  &.dashboard {
-    background: $RAbackground;
-  }
-  .page-header {
-    display: none;
-  }
-}
-
-a.delete {
-  color: $RAlight;
-}
-
-.box {
-  padding: 15px;
-  margin-bottom: 30px;
-  border: 1px solid $RAbackground;
-  position: relative;
-  min-height: 170px;
-  transition: all 0.3s ease;
-  color: rgba($RAlight,0.7);
-  overflow: hidden;
-  &:hover, &:focus {
-    border-color: $RAlight;
-    .icon-bg {
-      transform: scale(1.5) rotate(20deg);
-    }
-  }
-  p {
-    min-height: 30px;
-    font-size: 15px;
-    font-weight: 600;
-    a.btn {
-      border-radius: 3px;
-      color: rgba($RAlight,0.7) !important;
-      display: inline-block;
-      margin-bottom: 0;
-      font-weight: normal;
-      text-align: center;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: rgba($RAdark, 0.19);
-      border: 1px solid transparent;
-      white-space: nowrap;
-      padding: 6px 12px;
-      font-size: 14px;
-      line-height: 1.42857143;
-      border-radius: 4px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-  }
-  strong {
-    font-size: 36px;
-    font-weight: 600;
-  }
-  .icon-bg {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 100px;
-    color: $RAdark;
-    opacity: 0.08;
-    filter: alpha(opacity=8);
-    transition: all 1s ease;
-  }
-  &.bg-info {
-    background-color: $RAinfo;
-  }
-  &.bg-success {
-    background-color: $RAsuccess;
-  }
-  &.bg-warning {
-    background-color: $RAwarnig;
-  }
-  &.bg-danger {
-    background-color: $RAdanger;
-  }
-  &.bg-clear {
-    background-color: $RAclear;
-  }
-}
-
-/* User sign in and sign forms. */
-.border-form-div {
-  max-width: 300px;
-  padding: 19px 29px 29px;
-  margin: 0 auto 20px;
-  background-color: $RAlight;
-  border: 1px solid $RAborder;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
-  -webkit-box-shadow: 0 1px 2px rgba($RAdark,.05);
-     -moz-box-shadow: 0 1px 2px rgba($RAdark,.05);
-          box-shadow: 0 1px 2px rgba($RAdark,.05);
-}
-.border-form-div .form-signin-heading,
-.border-form-div .checkbox {
-  margin-bottom: 10px;
-}
-.border-form-div input[type="text"],
-.border-form-div input[type="email"],
-.border-form-div input[type="password"] {
-  font-size: 16px;
-  height: auto;
-  margin-bottom: 15px;
-  padding: 7px 9px;
-}
-
-#sidebar-collapse {
-  background-color: transparent;
-  background-image: none;
-  border: 1px solid transparent;
-  color: $RAclear;
-}
-#sidebar-collapse:focus {
-  outline: 0;
-}
-#sidebar-collapse:hover {
-  color:$RAlight;
-}
-
-.exit-button {
-  padding-top: 9px;
-  padding-bottom: 9px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-right: 7px;
-}
-
-#app-name {
-  font-size: 2em;
-  color: $RAclear;
-  font-family: 'Raleway', sans-serif;
-  word-wrap: normal;
-}
-#app-name:hover {
-  color: $RAlight;
-  text-decoration: none;
-}
-
-body.rails_admin {
-  padding-top: 0px;
+.btn:hover, 
+#new_user div.actions input.btn:hover {
+  color: $element-text-highlight;
+  background-color: $shadows;
 }

@@ -152,7 +152,7 @@ a.delete {
   position: relative;
   min-height: 15em;
   transition: all 0.3s ease;
-  background-color: $element;
+  background-color: lighten($element, 25%);
   color: $element-text;
   overflow: hidden;
   &:hover, &:focus {

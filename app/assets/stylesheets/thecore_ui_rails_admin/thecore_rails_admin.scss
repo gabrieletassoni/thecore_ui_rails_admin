@@ -18,6 +18,14 @@
 */
 @import "thecore";
 
+#filters > li > a:nth-child(1):hover, .dropdown-menu > li > a:nth-child(1):hover {
+  border-radius: 0;
+}
+
+span.label.label-info.form-label {
+  background-color: $primary;
+}
+
 .sidebar-nav li a {
   color: $element-text;
 }

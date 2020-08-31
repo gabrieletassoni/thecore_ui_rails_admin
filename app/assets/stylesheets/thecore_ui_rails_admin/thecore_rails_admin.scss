@@ -64,7 +64,7 @@ span.label.label-info.form-label {
     color: $text !important;
   }
   .active, .active:before {
-    color: $text-highlight;
+    color: $text-highlight !important;
   }
 }
 

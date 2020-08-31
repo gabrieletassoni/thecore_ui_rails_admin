@@ -61,7 +61,7 @@ span.label.label-info.form-label {
 .breadcrumb {
   background: $element;
   .false a, .false:before {
-    color: darken($element, 30%) !important;
+    color: $text !important;
   }
   .active, .active:before {
     color: $text-highlight;

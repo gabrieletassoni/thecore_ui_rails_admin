@@ -5,7 +5,7 @@ $primary: #ed6501 !default;
 $background: lighten($primary, 51%) !default;
 $shadows: darken($primary, 10%) !default;
 
-$text: $primary !default;
+$text: darken($primary, 40%) !default;
 $text-highlight: lighten($text, 35%) !default;
 
 $link: $text !default;

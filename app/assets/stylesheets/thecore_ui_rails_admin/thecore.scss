@@ -16,6 +16,7 @@
  *= require rails_admin_selectize/index
  *= require_self
 */
+@import 'overrides';
 @import 'colors';
 @import "jquery-ui";
 @import "jquery-ui/dialog";

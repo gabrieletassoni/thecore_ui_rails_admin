@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "thecore_ui_commons", "~> 2.1"
   # Bootstrap 3: https://github.com/twbs/bootstrap-sass
-  # spec.add_dependency 'bootstrap-sass', '~> 3.4'
+  spec.add_dependency 'bootstrap-sass', '~> 3.4'
   # spec.add_dependency 'sassc-rails', '~> 2.0'
   # spec.add_dependency 'coffee-rails', '~> 5.0'
   # Rails Admin

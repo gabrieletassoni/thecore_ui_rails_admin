@@ -5,6 +5,15 @@ it:
   question: Domanda
   root_actions: "Operazioni"
   admin:
+    links:
+      label: Collegamenti
+    tools:
+      label: "Strumenti"
+    settings:
+      label: "Impostazioni"
+      advanced: Avanzate
+      registries: Anagrafiche
+      operations: Operatività
     js:
       true: Vero
       false: Falso

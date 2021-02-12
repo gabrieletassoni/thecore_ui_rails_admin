@@ -19,15 +19,15 @@ $(document).on 'rails_admin.dom_ready', (e, content) ->
           $(that).val(hex)
           $(that).css('backgroundColor', '#' + hex)
 
-    # datetime picker
+    # datetime picker datepicker timepicker datetimepicker
     $.fn.datetimepicker.defaults.icons =
-      time: 'fa fa-clock'
+      time: 'fa fa-clock-o'
       date: 'fa fa-calendar'
       up: 'fa fa-chevron-up'
       down: 'fa fa-chevron-down'
-      previous: 'fa fa-angle-double-left'
-      next: 'fa fa-angle-double-right'
-      today: 'fa fa-dot-circle'
+      previous: 'fa fa-chevron-left'
+      next: 'fa fa-chevron-right'
+      today: 'fa fa-calendar-check-o'
       clear: 'fa fa-trash'
       close: 'fa fa-times'
 

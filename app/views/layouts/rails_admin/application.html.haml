@@ -12,6 +12,9 @@
       div.sub-menu-container li.sub-menu a.pjax { padding-left: 0px }
       div#wrapper div#sidebar-wrapper { overflow: hidden }
 
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track' => 'reload'
     / Getting all the assets needed by thecore_ui_rails_admin from all the gems and the application level
     = get_asset_tags_for("thecore_rails_admin")
 

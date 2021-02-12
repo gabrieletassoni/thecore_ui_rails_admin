@@ -304,3 +304,12 @@ body.rails_admin .form-horizontal input, body.rails_admin .form-horizontal texta
   width: fill-available;
   // max-width: max-content;
 }
+
+// Fix for Datepicker DateTimepicker btn color
+a.btn[data-action="incrementHours"], 
+a.btn[data-action="decrementHours"], 
+a.btn[data-action="incrementMinutes"], 
+a.btn[data-action="decrementMinutes"] {
+  background-color: transparent !important;
+  border-style: none !important;
+}

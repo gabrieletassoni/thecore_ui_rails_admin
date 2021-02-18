@@ -45,7 +45,7 @@
 #list
   = form_tag(index_path(params.except(*%w[page f query])), method: :get, class: "pjax-form form-inline") do
     %span#filters_box{data: {options: ordered_filter_options.to_json}}
-    %hr.filters_box{style: "display:#{ordered_filters.empty? ? 'none' : 'block'}"}
+    %hr.filters_box{style: "display:#{ordered_filters.blank? ? 'none' : 'block'}"}
     .input-group
       %input.form-control.input-small{name: "query", type: "search", value: query, placeholder: t("admin.misc.filter")}
       %span.input-group-btn
@@ -57,7 +57,7 @@
     - if export_action
       %span{style: 'float:right'}= link_to wording_for(:link, export_action), export_path(params.except('set').except('page')), class: 'btn btn-info'
 
-  - unless @model_config.list.scopes.empty?
+  - unless @model_config.list.scopes.blank?
     %ul.nav.nav-tabs.nav-justified#scope_selector
       - @model_config.list.scopes.each do |scope|
         - scope = '_all' if scope.nil?

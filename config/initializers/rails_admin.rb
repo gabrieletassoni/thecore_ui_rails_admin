@@ -1,4 +1,5 @@
 require 'rails_admin'
+require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
   # Link for background Job

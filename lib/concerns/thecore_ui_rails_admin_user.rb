@@ -28,7 +28,7 @@ module ThecoreUiRailsAdminUser
                     bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id
                 end
             end
-            field :roles, :selectize
+            field :roles#, :selectize
             # include UserRailsAdminConcern
             
             # Fields only in lists and forms

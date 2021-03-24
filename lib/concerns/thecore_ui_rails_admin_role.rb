@@ -11,7 +11,7 @@ module ThecoreUiRailsAdminRole
             desc I18n.t("activerecord.descriptions.role")
             
             field :name
-            field :permissions, :selectize
+            field :permissions#, :selectize
             list do
                 field :created_at
                 exclude_fields :lock_version

@@ -39,6 +39,10 @@ RailsAdmin.config do |config|
   end
 
   config.model "ActiveStorage::Attachment" do
+    visible false
+  end
+  
+  config.model "ActiveStorage::VariantRecord" do
       visible false
   end
   

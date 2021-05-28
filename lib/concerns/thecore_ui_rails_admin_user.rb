@@ -29,6 +29,16 @@ module ThecoreUiRailsAdminUser
                 end
             end
             field :roles#, :selectize
+            field :access_token do
+                pretty_value do
+                    "#{ENV['FRONTEND_URL']}/api/v2/authenticate?atoken=#{value}"
+                end
+                # export_value do
+                #     # used in exports, where no html/data is allowed
+                #     "#{ENV['FRONTEND_URL']}?atoken=#{value}"
+                # end
+                read_only true
+            end
             # include UserRailsAdminConcern
             
             # Fields only in lists and forms

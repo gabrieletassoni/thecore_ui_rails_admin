@@ -15,6 +15,7 @@ require 'jquery-ui-rails'
 require 'bootstrap-sass'
 
 require 'concerns/thecore_ui_rails_admin_user'
+require 'concerns/thecore_ui_rails_admin_used_token'
 require 'concerns/thecore_ui_rails_admin_role'
 require 'concerns/thecore_ui_rails_admin_permission'
 require 'concerns/thecore_rails_admin_export_concern'

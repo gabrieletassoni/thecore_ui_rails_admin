@@ -11,6 +11,7 @@ Rails.application.configure do
         RailsAdmin::Config::Actions::BulkDelete.send(:include, BulkDeleteConcern)
         RailsAdminSettings::Setting.send(:include, RailsAdminSettings::RailsAdminExtensionConfig)
         User.send(:include, ThecoreUiRailsAdminUser)
+        UsedToken.send(:include, ThecoreUiRailsAdminUsedToken)
         Role.send(:include, ThecoreUiRailsAdminRole)
         Permission.send(:include, ThecoreUiRailsAdminPermission)
     end

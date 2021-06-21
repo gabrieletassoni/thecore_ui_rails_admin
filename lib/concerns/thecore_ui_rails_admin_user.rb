@@ -31,7 +31,7 @@ module ThecoreUiRailsAdminUser
             field :roles#, :selectize
             field :access_token do
                 pretty_value do
-                    "#{ENV['FRONTEND_URL']}/api/v2/authenticate?atoken=#{value}"
+                    "#{ENV['FRONTEND_URL']}?atoken=#{value}"
                 end
                 # export_value do
                 #     # used in exports, where no html/data is allowed

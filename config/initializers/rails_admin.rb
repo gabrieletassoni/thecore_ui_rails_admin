@@ -45,6 +45,11 @@ RailsAdmin.config do |config|
   config.model "ActiveStorage::VariantRecord" do
       visible false
   end
+
+  # action_mailbox~inbound_email
+  config.model "ActionMailbox::InboundEmail" do
+    visible false
+  end
   
   ## == Devise ==
   config.authenticate_with do

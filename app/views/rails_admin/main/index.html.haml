@@ -8,6 +8,7 @@
   params.delete(:sort) if params[:sort] == @model_config.list.sort_by.to_s
   export_action = RailsAdmin::Config::Actions.find(:export, { controller: self.controller, abstract_model: @abstract_model })
   export_action = nil unless export_action && authorized?(export_action.authorization_key, @abstract_model)
+  bulk_delete_action = actions(:bulkable, @abstract_model).select { |action| action.action_name.to_s == "bulk_delete" }.first
   description = RailsAdmin.config(@abstract_model.model_name).description
   properties = @model_config.list.with(controller: self.controller, view: self, object: @abstract_model.model.new).visible_fields
   checkboxes = @model_config.list.checkboxes?
@@ -19,23 +20,55 @@
     other_right = sets[params[:set].to_i + 1].present?
   end
 
+- content_for :action_links do
+  - parent = (@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root)
+  - actions = actions(parent, @abstract_model, @object).select { |a| a.http_methods.include?(:get) && a.show_in_menu && a.action_name.to_s != "export"}
+  - actions.collect do |action|
+    - wording = wording_for(:link, action)
+    %li{title: wording, rel: "tooltip", class: "icon #{action.key}_#{parent}_link #{'active' if current_action?(action)}", style: "float:right"}
+      %a{class: "#{action.pjax? ? 'pjax' : ''}", href: rails_admin.url_for(action: action.action_name, controller: 'rails_admin/main', model_name: @abstract_model.try(:to_param), id: (@object.try(:persisted?) && @object.try(:id) || nil))}
+        %i{class: action.link_icon}
+
+- content_for :search_form do
+  %li.filer-search-form
+    = form_tag(index_path(params.except(*%w[page f query])), method: :get, class: "pjax-form form-inline") do
+      %span#filters_box{data: {options: ordered_filter_options.to_json}}
+      %hr.filters_box{style: "display:#{ordered_filters.blank? ? 'none' : 'block'}"}
+      .input-group#search-for-filter
+        %input.form-control.input-small{name: "query", type: "search", value: query, placeholder: t("admin.misc.filter")}
+        %span.input-group-btn
+          %button.btn.btn-primary{type: 'submit', :'data-disable-with' => '<i class="icon-white icon-refresh"></i> '.html_safe + t('admin.misc.refresh')}
+            %i.icon-white.icon-refresh
+          - if filterable_fields.present?
+            %button.btn.dropdown-toggle#filters-menu{ :'data-toggle' => "dropdown", :'aria-haspopup'=>"true", :'aria-expanded'=>"true"}
+              %i.icon-white.icon-filter
+              %b.caret
+            %ul.dropdown-menu#filters{style: 'left:auto; right:0;', :'aria-labelledby'=>"filters-menu"}
+              - filterable_fields.each do |field|
+                - field_options = case field.type
+                - when :enum
+                  - options_for_select(field.with(object: @abstract_model.model.new).enum)
+                - else
+                  - ''
+                %li
+                  %a{href: '#', :"data-field-label" => field.label, :"data-field-name" => field.name, :"data-field-options" => field_options.html_safe, :"data-field-type" => field.type, :"data-field-value" => "", :"data-field-datetimepicker-format" => (field.try(:parser) && field.parser.to_momentjs)}= capitalize_first_letter(field.label)
+            %button#remove_filter.btn.btn-info{title: "Reset filters"}
+              %i.icon-white.icon-remove
+
 - content_for :contextual_tabs do
-  - if checkboxes
-    = bulk_menu
-  - if filterable_fields.present?
-    %li.dropdown{style: 'float:right'}
-      %a.dropdown-toggle#filters-menu{ :'data-toggle' => "dropdown", :'aria-haspopup'=>"true", :'aria-expanded'=>"true"}
-        = t('admin.misc.add_filter')
+  - if checkboxes && bulk_delete_action
+    %li.icon{style: "float:right", title: t(:delete_selected)}
+      = link_to '<i class="fa fa-trash"></i>'.html_safe, '#', class: 'bulk-link', data: {action: "bulk_delete"}
+  - if export_action
+    %li.dropdown{style: "float:right", title: t(:export)}
+      %a.pjax.dropdown-toggle#exporters-menu{ :'data-toggle' => "dropdown", :'aria-haspopup'=>"true", :'aria-expanded'=>"true", style: "float: right;"}
+        %i.fa.fa-external-link
         %b.caret
-      %ul.dropdown-menu#filters{style: 'left:auto; right:0;', :'aria-labelledby'=>"filters-menu"}
-        - filterable_fields.each do |field|
-          - field_options = case field.type
-          - when :enum
-            - options_for_select(field.with(object: @abstract_model.model.new).enum)
-          - else
-            - ''
-          %li
-            %a{href: '#', :"data-field-label" => field.label, :"data-field-name" => field.name, :"data-field-options" => field_options.html_safe, :"data-field-type" => field.type, :"data-field-value" => "", :"data-field-datetimepicker-format" => (field.try(:parser) && field.parser.to_momentjs)}= capitalize_first_letter(field.label)
+      %ul.dropdown-menu#exporters{style: 'left:auto; right:0;', :'aria-labelledby'=>"exporters-menu"}
+        %li= link_to t(:export_all).html_safe, rails_admin.url_for(action: "export", controller: 'rails_admin/main', model_name: @abstract_model.try(:to_param), id: (@object.try(:persisted?) && @object.try(:id) || nil)), class: "pjax"
+        %li= link_to t(:export_found).html_safe, export_path(params.except('set').except('page')), class: 'pjax'
+        %li= link_to t(:export_selected).html_safe, '#', class: 'bulk-link pjax', data: {action: "bulk_export"}
+
 
 %style
   - properties.select{ |p| p.column_width.present? }.each do |property|
@@ -43,20 +76,6 @@
     = "#list td.#{property.css_class} { max-width: #{property.column_width}px; }"
 
 #list
-  = form_tag(index_path(params.except(*%w[page f query])), method: :get, class: "pjax-form form-inline") do
-    %span#filters_box{data: {options: ordered_filter_options.to_json}}
-    %hr.filters_box{style: "display:#{ordered_filters.blank? ? 'none' : 'block'}"}
-    .input-group
-      %input.form-control.input-small{name: "query", type: "search", value: query, placeholder: t("admin.misc.filter")}
-      %span.input-group-btn
-        %button.btn.btn-primary{type: 'submit', :'data-disable-with' => '<i class="icon-white icon-refresh"></i> '.html_safe + t('admin.misc.refresh')}
-          %i.icon-white.icon-refresh
-          = t('admin.misc.refresh')
-        %button#remove_filter.btn.btn-info{title: "Reset filters"}
-          %i.icon-white.icon-remove
-    - if export_action
-      %span{style: 'float:right'}= link_to wording_for(:link, export_action), export_path(params.except('set').except('page')), class: 'btn btn-info'
-
   - unless @model_config.list.scopes.blank?
     %ul.nav.nav-tabs.nav-justified#scope_selector
       - @model_config.list.scopes.each do |scope|

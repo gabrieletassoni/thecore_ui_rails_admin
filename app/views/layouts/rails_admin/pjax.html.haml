@@ -17,8 +17,10 @@
   = breadcrumb
   .well.well-sm
     %ul.nav.nav-pills#action-menu
-      = menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
+      = content_for :search_form
+      = content_for :action_links
       = content_for :contextual_tabs
+
   .well.well-sm
     = yield
 - else

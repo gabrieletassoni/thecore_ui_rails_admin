@@ -1,10 +1,24 @@
 it:
+  export: Esporta
+  export_all: Esporta Tutti
+  export_found: Esporta i Filtrati
+  export_selected: Esporta i Selezionati
+  delete_selected: Elimina i Selezionati
   yes: Si
   no: Annulla
   error: Errore
   question: Domanda
   root_actions: "Operazioni"
   admin:
+    flash:
+      error: "Impossibile eseguire l'azione %{action} (%{name})"
+      model_not_found: Impossibile trovare il modello '%{model}'
+      noaction: Impossibile eseguire l'azione
+      object_not_found: "Impossibile trovare il modello %{model} con id '%{id}'"
+      successful: "Azione eseguita con successo: %{action} (%{name})"
+    actions:
+      index:
+        link: Mostra tutti gli Elementi
     label: "Impostazioni"
     advanced:
       label: Avanzate

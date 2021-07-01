@@ -32,8 +32,11 @@ module ThecoreConcern
       # GETTING THE FIRST ACTION I CAN MANAGE
       action = root_actions.collect(&:action_name).first
       # REDIRECT TO THAT ACTION
-      if action
-        stored_location_for(resource) || rails_admin.send("#{action}_path").sub("#{ENV['RAILS_RELATIVE_URL_ROOT']}#{ENV['RAILS_RELATIVE_URL_ROOT']}", "#{ENV['RAILS_RELATIVE_URL_ROOT']}")
+
+      if stored_location_for(resource) && can?(resource, :all)
+        stored_location_for(resource)
+      elsif action
+        rails_admin.send("#{action}_path").sub("#{ENV['RAILS_RELATIVE_URL_ROOT']}#{ENV['RAILS_RELATIVE_URL_ROOT']}", "#{ENV['RAILS_RELATIVE_URL_ROOT']}")
       else
         sign_out current_user
         user_session = nil

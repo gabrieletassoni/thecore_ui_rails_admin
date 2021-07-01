@@ -34,16 +34,16 @@ module ThecoreConcern
       # REDIRECT TO THAT ACTION
 
       if stored_location_for(resource) && can?(resource, :all)
-        stored_location_for(resource)
+        return stored_location_for(resource)
       elsif action
-        rails_admin.send("#{action}_path").sub("#{ENV['RAILS_RELATIVE_URL_ROOT']}#{ENV['RAILS_RELATIVE_URL_ROOT']}", "#{ENV['RAILS_RELATIVE_URL_ROOT']}")
+        return rails_admin.send("#{action}_path").sub("#{ENV['RAILS_RELATIVE_URL_ROOT']}#{ENV['RAILS_RELATIVE_URL_ROOT']}", "#{ENV['RAILS_RELATIVE_URL_ROOT']}")
       else
         sign_out current_user
         user_session = nil
         current_user = nil
         flash[:alert] = "Your user is not authorized to access any page."
         flash[:notice] = nil
-        root_url
+        return root_url
       end
     end
   end

@@ -33,17 +33,21 @@ module ThecoreConcern
       action = root_actions.collect(&:action_name).first
       # REDIRECT TO THAT ACTION
 
+      puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path"
       if stored_location_for(resource) && can?(resource, :all)
+        puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the IF"
         return stored_location_for(resource)
       elsif action
+        puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSIF with action name: #{action}"
         return rails_admin.send("#{action}_path").sub("#{ENV['RAILS_RELATIVE_URL_ROOT']}#{ENV['RAILS_RELATIVE_URL_ROOT']}", "#{ENV['RAILS_RELATIVE_URL_ROOT']}")
       else
+        puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSE with root_path: #{root_path}"
         sign_out current_user
         user_session = nil
         current_user = nil
         flash[:alert] = "Your user is not authorized to access any page."
         flash[:notice] = nil
-        return root_url
+        return root_path
       end
     end
   end

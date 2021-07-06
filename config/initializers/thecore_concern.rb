@@ -9,7 +9,7 @@ module ThecoreConcern
     layout 'thecore'
     protect_from_forgery with: :exception, prepend: true
     rescue_from CanCan::AccessDenied do |exception|
-      redirect_to main_app.root_url, :alert => exception.message
+      redirect_to main_app.root_url, alert: exception.message
     end
     include HttpAcceptLanguage::AutoLocale
     before_action :store_user_location!, if: :storable_location?
@@ -33,15 +33,16 @@ module ThecoreConcern
       action = root_actions.collect(&:action_name).first
       # REDIRECT TO THAT ACTION
 
-      puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path"
-      if stored_location_for(resource) && can?(resource, :all)
-        puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the IF"
-        return stored_location_for(resource)
+      Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path"
+      stored_location = stored_location_for(resource)
+      if !stored_location.blank? && can?(resource, :all)
+        Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the IF stored_location_for(resource): #{stored_location}"
+        return stored_location
       elsif action
-        puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSIF with action name: #{action}"
+        Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSIF with action name: #{action}"
         return rails_admin.send("#{action}_path").sub("#{ENV['RAILS_RELATIVE_URL_ROOT']}#{ENV['RAILS_RELATIVE_URL_ROOT']}", "#{ENV['RAILS_RELATIVE_URL_ROOT']}")
       else
-        puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSE with root_path: #{root_path}"
+        Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSE with root_path: #{root_path}"
         sign_out current_user
         user_session = nil
         current_user = nil
@@ -104,7 +105,9 @@ module ThecoreConcern
     
     # Auto-sign out locked users
     def reject_locked!
-      if current_user && current_user.locked?
+      Rails.logger.info "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB reject_locked"
+      if !current_user.blank? && current_user.locked?
+        Rails.logger.info "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB is locked"
         sign_out current_user
         user_session = nil
         current_user = nil
@@ -112,7 +115,9 @@ module ThecoreConcern
         flash[:notice] = nil
         redirect_to root_url
       end
+      Rails.logger.info "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB is not locked = ok"
     end
+
     
     # Only permits admin users
     def require_admin!

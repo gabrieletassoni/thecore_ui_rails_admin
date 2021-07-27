@@ -138,9 +138,9 @@ body.rails_admin .nav.nav-tabs {
 .content {
   margin: 0px 0 15px 0;
   padding: 8px;
-  background: $background;
+  background: transparent;
   &.dashboard {
-    background: $background;
+    background: transparent;
   }
   .page-header {
     display: none;

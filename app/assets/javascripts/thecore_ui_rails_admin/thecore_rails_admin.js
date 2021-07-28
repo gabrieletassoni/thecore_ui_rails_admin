@@ -1,5 +1,4 @@
 //= require thecore_ui_commons/thecore
-//= require rails_admin/rails_admin
 //= require selectize
 
 $(document).on('ready pjax:success', function(e) {

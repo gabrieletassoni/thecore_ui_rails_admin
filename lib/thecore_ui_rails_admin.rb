@@ -11,7 +11,7 @@ require 'concerns/rails_admin_requirements'
 # Abilities
 require 'abilities/thecore_ui_rails_admin'
 # Rails Admin Buildups
-require 'jquery-ui-rails'
+# require 'jquery-ui-rails'
 require 'bootstrap-sass'
 
 require 'concerns/thecore_ui_rails_admin_user'

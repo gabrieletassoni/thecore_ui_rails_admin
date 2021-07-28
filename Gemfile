@@ -29,7 +29,7 @@ gem 'rails_admin'
 gem 'rails_admin-i18n'
 gem 'rails_admin_toggleable'
 # Rails Admin Buildups
-gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
 gem 'coffee-rails'
 
 

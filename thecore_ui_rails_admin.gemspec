@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency 'sassc-rails', '~> 2.0'
   spec.add_dependency 'coffee-rails', '~> 5.0'
   # Rails Admin
-  spec.add_dependency 'rails_admin_rollincode', '~> 1.3'
+  # spec.add_dependency 'rails_admin_rollincode', '~> 1.3'
   spec.add_dependency 'rails_admin', '~> 2.0'
   spec.add_dependency 'rails_admin-i18n', "~> 1.12"
   spec.add_dependency 'rails_admin_toggleable', "~> 0.7"

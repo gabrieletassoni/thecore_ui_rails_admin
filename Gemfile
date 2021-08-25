@@ -24,7 +24,6 @@ gem 'sassc-rails'
 # Rails Admin
 gem 'rails_admin_rollincode'
 gem "safe_yaml", "~> 1.0"
-gem "rails_admin_settings", "~> 1.5"
 gem 'rails_admin'
 gem 'rails_admin-i18n'
 gem 'rails_admin_toggleable'

@@ -2,17 +2,15 @@
 %html{lang: I18n.locale}
   %head
     %title= Settings.app_name rescue "Thecore"
-    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
-    %meta{content: "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
-    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
-    %meta{content: "NONE,NOARCHIVE", name: "robots"}
-    = csrf_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track' => 'reload'
+
+    = render "layouts/rails_admin/head"
 
     = render "layouts/rails_admin/style_common"
     = render "layouts/rails_admin/style_override"
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track' => 'reload'
     / Getting all the assets needed by thecore_ui_rails_admin from all the gems and the application level
     = get_asset_tags_for("thecore_rails_admin")
 

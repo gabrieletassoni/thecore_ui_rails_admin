@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   module RailsAdminExtensionConfig
     def self.included(base)
       # IMPORTANT: To extend rails admin section in model, directly, instead of using concerns, I can

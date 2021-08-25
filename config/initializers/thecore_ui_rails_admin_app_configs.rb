@@ -9,7 +9,7 @@ Rails.application.configure do
     config.after_initialize do
         RailsAdmin::Config::Actions::Export.send(:include, ExportConcern)
         RailsAdmin::Config::Actions::BulkDelete.send(:include, BulkDeleteConcern)
-        RailsAdminSettings::Setting.send(:include, RailsAdminSettings::RailsAdminExtensionConfig)
+        ThecoreSettings::Setting.send(:include, ThecoreSettings::RailsAdminExtensionConfig)
         User.send(:include, ThecoreUiRailsAdminUser)
         UsedToken.send(:include, ThecoreUiRailsAdminUsedToken)
         Role.send(:include, ThecoreUiRailsAdminRole)

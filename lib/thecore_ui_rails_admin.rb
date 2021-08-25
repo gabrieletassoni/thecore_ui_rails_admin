@@ -1,7 +1,7 @@
 require 'thecore_ui_commons'
 # Rails Admin
-ENV['RAILS_ADMIN_THEME'] ||= 'rollincode'
-require 'rails_admin_rollincode'
+# ENV['RAILS_ADMIN_THEME'] ||= 'rollincode'
+# require 'rails_admin_rollincode'
 require 'rails_admin'
 require 'rails_admin-i18n'
 require 'safe_yaml'

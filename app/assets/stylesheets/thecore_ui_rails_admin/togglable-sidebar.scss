@@ -41,14 +41,14 @@
 }
 /* Sidebar Styles */
 
-.sidebar-nav {
-  position: absolute;
-  top: 0;
-  width: 250px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+// .sidebar-nav {
+//   position: absolute;
+//   top: 0;
+//   width: 250px;
+//   margin: 0;
+//   padding: 0;
+//   list-style: none;
+// }
 .sidebar-nav li {
   text-indent: 20px;
   line-height: 40px;
@@ -80,9 +80,9 @@
   background: none;
 }
 
-body.rails_admin .sidebar-nav {
-  top: 0px;
-}
+// body.rails_admin .sidebar-nav {
+//   top: 0px;
+// }
 
 .sub-menu a {
   padding-left: 20px;

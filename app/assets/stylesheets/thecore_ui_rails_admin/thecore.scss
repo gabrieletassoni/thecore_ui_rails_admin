@@ -16,8 +16,9 @@
  *= require rails_admin_selectize/index
  *= require_self
 */
-@import 'overrides';
-@import 'colors';
+@import 'rails_admin/custom/variables';
+@import 'rails_admin/custom/theming';
+@import 'rails_admin/custom/mixins';
 @import "jquery-ui";
 @import "jquery-ui/dialog";
 @import 'bootstrap-sprockets';

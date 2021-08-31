@@ -69,7 +69,9 @@ RailsAdmin.config do |config|
   
   config.actions do
     # show_in_app
-    dashboard # mandatory
+    dashboard do
+      show_in_sidebar true
+    end# mandatory
     index # mandatory
     new
     export

@@ -10,6 +10,8 @@ it:
   question: Domanda
   root_actions: "Operazioni"
   admin:
+    misc:
+      root_navigation: Azioni
     flash:
       error: "Impossibile eseguire l'azione %{action} (%{name})"
       model_not_found: Impossibile trovare il modello '%{model}'

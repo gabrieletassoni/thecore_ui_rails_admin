@@ -10,3 +10,17 @@
 .form-control.selectize-control {
     width: 62%;
 }
+
+#secondary-navigation .navbar-nav li {
+    display: none;
+    &:nth-last-of-type(2), &:last-of-type {
+        display: block !important;
+    }
+}
+
+#list form .well {
+    background-color: transparent;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

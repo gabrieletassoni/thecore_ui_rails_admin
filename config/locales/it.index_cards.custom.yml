@@ -15,6 +15,6 @@ it:
       add_filter: ⋔
       add_new: ⋔
       refresh: Apply Filters
-      bulk_menu_title: ☰✔
+      bulk_menu_title: ☑
     select:
-      toggle: ☑
+      toggle: ☒

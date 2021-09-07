@@ -110,6 +110,17 @@ a {
     }
 }
 
+.open > .btn-info.dropdown-toggle {
+    color: $background;
+    background-color: darken($shadows, 10%);
+    border-color: darken($shadows, 10%);
+}
+
+.btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info.active[disabled], fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
+    background-color: lighten($shadows, 30%);
+    border-color: lighten($shadows, 30%);
+}
+
 li a .label-danger {
     background-color: $primary;
     margin-right: 1em;

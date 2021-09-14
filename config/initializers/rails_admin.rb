@@ -4,7 +4,7 @@ require 'nested_form/builder_mixin'
 RailsAdmin.config do |config|
   config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
   # Link for background Job
-  (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV['RAILS_RELATIVE_URL_ROOT']}/app/sidekiq"
+  (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV['RAILS_RELATIVE_URL_ROOT']}/sidekiq"
 
   ### Popular gems integration
   config.model "RoleUser" do

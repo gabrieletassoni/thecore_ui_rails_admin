@@ -11,7 +11,7 @@ Rails.application.configure do
         RailsAdmin::Config::Actions::BulkDelete.send(:include, BulkDeleteConcern)
         ThecoreSettings::Setting.send(:include, ThecoreSettings::RailsAdminExtensionConfig)
         User.send(:include, ThecoreUiRailsAdminUser)
-        UsedToken.send(:include, ThecoreUiRailsAdminUsedToken)
+        UsedToken.send(:include, ThecoreUiRailsAdminUsedToken) rescue puts "No UsedToken Model it could be normal: maybe model_driven_api is not installed"
         Role.send(:include, ThecoreUiRailsAdminRole)
         Permission.send(:include, ThecoreUiRailsAdminPermission)
     end

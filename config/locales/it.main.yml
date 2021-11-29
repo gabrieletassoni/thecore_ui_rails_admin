@@ -24,6 +24,8 @@ it:
     label: "Impostazioni"
     advanced:
       label: Avanzate
+    logging:
+      label: Logging
     registries:
       label: Anagrafiche
     operations:

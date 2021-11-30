@@ -9,24 +9,25 @@ module ThecoreUiRailsAdminPermission
             field :predicate
             field :action
             field :target
+            field :lock_version
             list do
                 field :created_at
-                exclude_fields :lock_version
+                # exclude_fields :lock_version
             end
             show do
                 exclude_fields :id
-                exclude_fields :lock_version
+                # exclude_fields :lock_version
             end
-            create do
-                field :lock_version, :hidden do
-                    visible true
-                end
-            end
-            edit do
-                field :lock_version, :hidden do
-                    visible true
-                end
-            end
+            # create do
+            #     field :lock_version, :hidden do
+            #         visible true
+            #     end
+            # end
+            # edit do
+            #     field :lock_version, :hidden do
+            #         visible true
+            #     end
+            # end
         end
     end
 end

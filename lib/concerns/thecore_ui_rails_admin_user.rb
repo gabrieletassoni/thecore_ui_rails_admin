@@ -61,9 +61,9 @@ module ThecoreUiRailsAdminUser
                 field :password_confirmation do
                     required true
                 end
-                field :lock_version, :hidden do
-                    visible true
-                end
+                # field :lock_version, :hidden do
+                #     visible true
+                # end
                 # include UserRailsAdminCreateConcern
             end
             edit do
@@ -74,9 +74,9 @@ module ThecoreUiRailsAdminUser
                     required false
                 end
                 
-                field :lock_version, :hidden do
-                    visible true
-                end
+                # field :lock_version, :hidden do
+                #     visible true
+                # end
                 # include UserRailsAdminEditConcern
                 
             end

@@ -24,16 +24,16 @@ module ThecoreConcern
     
     # Redirects on successful sign in
     def after_sign_in_path_for resource
-      # Rails.logger.debug("SUCCESFULL SIGNIN, USER IS ADMIN? #{current_user.admin?}")
-      #if current_user.admin?
-      # GETTING JUST THE ROOT ACTIONS I (CURRENT_USER) CAN MANAGE
-      root_actions = RailsAdmin::Config::Actions.all(:root).select {|action| can? action.action_name, :all }
-      # Rails.logger.debug "ROOT ACTIONS: #{root_actions.inspect}"
-      # GETTING THE FIRST ACTION I CAN MANAGE
-      action = root_actions.collect(&:action_name).first
-      # REDIRECT TO THAT ACTION
+      root_actions = RailsAdmin::Config::Actions.all(:root).select {|action| can? action.action_name, :all }.collect(&:action_name)
 
-      # Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path"
+      # Default root action as landing page: the first to which I have authorization to read
+      action = root_actions.first
+      # Otherwise, if I set a Manual override for landing actions in config, I can test if I'm authorized to see it
+      override_landing_page = Settings.ns(:main).after_sign_in_redirect_to_root_action
+      action = override_landing_page.to_sym if !override_landing_page.blank? && root_actions.include?(override_landing_page.to_sym)
+
+      # If I ask for a specific page, Let's try to go back there if I need to login or re-login
+      # This takes precedence on automatic computed action
       stored_location = stored_location_for(resource)
       if !stored_location.blank? && can?(resource, :all)
         # Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the IF stored_location_for(resource): #{stored_location}"

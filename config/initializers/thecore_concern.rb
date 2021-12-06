@@ -36,13 +36,11 @@ module ThecoreConcern
       # This takes precedence on automatic computed action
       stored_location = stored_location_for(resource)
       if !stored_location.blank? && can?(resource, :all)
-        # Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the IF stored_location_for(resource): #{stored_location}"
+        # Go to the latest navigated page
         return stored_location
       elsif action
-        # Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSIF with action name: #{action}"
         return rails_admin.send("#{action}_path").sub("#{ENV['RAILS_RELATIVE_URL_ROOT']}#{ENV['RAILS_RELATIVE_URL_ROOT']}", "#{ENV['RAILS_RELATIVE_URL_ROOT']}")
       else
-        # Rails.logger.info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: Checking redirect path: I'm in the ELSE with root_path: #{root_path}"
         sign_out current_user
         user_session = nil
         current_user = nil

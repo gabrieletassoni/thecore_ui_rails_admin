@@ -134,12 +134,16 @@ module ThecoreConcern
     # - The request is an Ajax request as this can lead to very unexpected 
     #     behaviour.
     def storable_location?
-      request.get? && is_navigational_format? && !devise_controller? && !request.xhr? 
+      request.get? && is_navigational_format? && !devise_controller? && !request.xhr? && is_storable?
     end
     
     def store_user_location!
       # :user is the scope we are authenticating
       store_location_for(:user, request.fullpath)
+    end
+
+    def is_storable?
+      true
     end
   end
   

@@ -15,23 +15,11 @@ module ThecoreUiRailsAdminRole
 
             list do
                 field :created_at
-                # exclude_fields :lock_version
+                field :updated_at
             end
             show do
                 exclude_fields :id
-                # exclude_fields :lock_version
             end
-            # create do
-            #     field :lock_version, :hidden do
-            #         visible true
-            #     end
-            #     # include UserRailsAdminCreateConcern
-            # end
-            # edit do
-            #     field :lock_version, :hidden do
-            #         visible true
-            #     end
-            # end
         end
     end
 end

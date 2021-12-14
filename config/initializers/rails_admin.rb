@@ -2,6 +2,9 @@ require 'rails_admin'
 require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
+  # Freeze more or fewer columns (col 1 = checkboxes, 2 = links/actions) for horizontal scrolling:
+  config.sidescroll = {num_frozen_columns: 2}
+
   config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
   # Link for background Job
   (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV["BACKEND_URL"].presence || "http://localhost:3000"}/sidekiq"

@@ -9,4 +9,9 @@ Rails.application.routes.draw do
     devise_scope :user do
         root to: "devise/sessions#new"
     end
+
+    # Allow any authenticated User with admin capability
+    authenticate :user, lambda { |u| u.admin? } do
+        mount Blazer::Engine, at: "blazer"
+    end
 end

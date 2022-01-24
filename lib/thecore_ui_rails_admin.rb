@@ -21,6 +21,8 @@ require 'concerns/thecore_ui_rails_admin_permission'
 require 'concerns/thecore_rails_admin_export_concern'
 require 'concerns/thecore_rails_admin_bulk_delete_concern'
 
+require 'blazer'
+
 require "thecore_ui_rails_admin/engine"
 
 module ThecoreUiRailsAdmin
@@ -28,3 +30,7 @@ module ThecoreUiRailsAdmin
   SafeYAML::OPTIONS[:default_mode] = :safe
   SafeYAML::OPTIONS[:deserialize_symbols] = false
 end
+
+puts "Loading Root Monitor Libraries"
+require 'iframes/sidekiq_monitor'
+require 'iframes/blazer_bi'

@@ -1,3 +1,0 @@
--# %ul.sidebar-nav
-- actions(:root).each do |action|
-  %li= link_to wording_for(:menu, action), { action: action.action_name, controller: 'rails_admin/main' }, class: action.pjax? ? "pjax" : "", style: "padding-left: 0px;text-indent:20px"

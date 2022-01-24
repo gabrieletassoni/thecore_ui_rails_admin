@@ -7,9 +7,25 @@ RailsAdmin.config do |config|
 
   config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
   # Link for background Job
-  (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV["BACKEND_URL"].presence || "http://localhost:3000"}/sidekiq"
+  # (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV["BACKEND_URL"].presence || "http://localhost:3000"}/sidekiq"
 
   ### Popular gems integration
+  config.model "Blazer::Audit" do
+    visible false
+  end
+  config.model "Blazer::Check" do
+    visible false
+  end
+  config.model "Blazer::Dashboard" do
+    visible false
+  end
+  config.model "Blazer::DashboardQuery" do
+    visible false
+  end
+  config.model "Blazer::Query" do
+    visible false
+  end
+
   config.model "RoleUser" do
     visible false
   end

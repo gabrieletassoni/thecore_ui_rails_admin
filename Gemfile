@@ -19,17 +19,18 @@ gemspec
 # gem 'thecore_ui_commons', path: '../thecore_ui_commons'
 # gem 'rails_admin_selectize', path: '../rails_admin_selectize'
 # Bootstrap 3: https://github.com/twbs/bootstrap-sass
-gem 'bootstrap-sass'
-gem 'sassc-rails'
-# Rails Admin
-gem 'rails_admin_rollincode'
-gem "safe_yaml", "~> 1.0"
-gem 'rails_admin'
-gem 'rails_admin-i18n'
-gem 'rails_admin_toggleable'
-# Rails Admin Buildups
-# gem 'jquery-ui-rails'
-gem 'coffee-rails'
-
-
 gem 'sqlite3'
+
+gem "thecore_ui_commons", "~> 2.1"
+  # Bootstrap 3: https://github.com/twbs/bootstrap-sass
+gem 'bootstrap-sass', '~> 3.4'
+  # spec.add_dependency 'sassc-rails', '~> 2.0'
+gem 'coffee-rails', '~> 5.0'
+  # Rails Admin
+  # spec.add_dependency 'rails_admin_rollincode', '~> 1.3'
+gem 'rails_admin', '~> 2.0'
+gem 'rails_admin-i18n', "~> 1.12"
+gem 'rails_admin_toggleable', "~> 0.7"
+gem "safe_yaml", "~> 1.0"
+gem "rails_admin_selectize", "~> 2.0"
+gem "blazer"

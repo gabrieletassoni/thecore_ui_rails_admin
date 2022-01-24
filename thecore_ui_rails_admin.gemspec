@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_toggleable', "~> 0.7"
   spec.add_dependency "safe_yaml", "~> 1.0"
   spec.add_dependency "rails_admin_selectize", "~> 2.0"
+  spec.add_dependency "blazer"
   # Rails Admin Buildups (Automatic with Rails Admin)
   # spec.add_dependency 'jquery-ui-rails', '~> 6.0'
 end

@@ -1,4 +1,3 @@
-
 RailsAdmin.config do |config|
     config.actions do
         thecore_sidekiq_monitor

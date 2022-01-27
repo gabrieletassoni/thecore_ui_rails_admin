@@ -31,6 +31,6 @@ gem 'coffee-rails', '~> 5.0'
 gem 'rails_admin', '~> 2.0'
 gem 'rails_admin-i18n', "~> 1.12"
 gem 'rails_admin_toggleable', "~> 0.7"
-gem "safe_yaml", "~> 1.0"
+# gem "safe_yaml"
 gem "rails_admin_selectize", "~> 2.0"
 gem "blazer"

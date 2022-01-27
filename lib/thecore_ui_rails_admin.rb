@@ -4,7 +4,7 @@ require 'thecore_ui_commons'
 # require 'rails_admin_rollincode'
 require 'rails_admin'
 require 'rails_admin-i18n'
-require 'safe_yaml'
+# require 'safe_yaml'
 require 'rails_admin_toggleable'
 require 'rails_admin_selectize'
 require 'concerns/rails_admin_requirements'
@@ -27,8 +27,8 @@ require "thecore_ui_rails_admin/engine"
 
 module ThecoreUiRailsAdmin
   # Rails Admin Settings
-  SafeYAML::OPTIONS[:default_mode] = :safe
-  SafeYAML::OPTIONS[:deserialize_symbols] = false
+  # SafeYAML::OPTIONS[:default_mode] = :safe
+  # SafeYAML::OPTIONS[:deserialize_symbols] = false
 end
 
 puts "Loading Root Monitor Libraries"

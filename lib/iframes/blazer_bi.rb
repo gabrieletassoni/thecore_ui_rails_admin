@@ -1,4 +1,4 @@
-puts "Loading Sidekiq Monitor File"
+puts "Loading Blazer BI File"
 require 'rails_admin/config/actions'
 
 module RailsAdmin

@@ -31,6 +31,5 @@ module ThecoreUiRailsAdmin
   # SafeYAML::OPTIONS[:deserialize_symbols] = false
 end
 
-puts "Loading Root Monitor Libraries"
 require 'iframes/sidekiq_monitor'
 require 'iframes/blazer_bi'

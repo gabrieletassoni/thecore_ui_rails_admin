@@ -32,5 +32,6 @@ module ThecoreUiRailsAdmin
 end
 
 require 'iframes/sidekiq_monitor'
+
 ## Business Intelligence (must be tested)
 # require 'iframes/blazer_bi'

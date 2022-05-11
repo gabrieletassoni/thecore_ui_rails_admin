@@ -19,7 +19,7 @@ it:
       object_not_found: "Impossibile trovare il modello %{model} con id '%{id}'"
       successful: "Azione eseguita con successo: %{action} (%{name})"
     actions:
-      thecore_sidekiq_monitor:
+      thecore_active_job_monitor:
         menu: Monitoraggio Attività
         breadcrumb: Monitoraggio Attività
         title: Monitoraggio Attività

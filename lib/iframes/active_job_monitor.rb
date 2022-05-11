@@ -1,10 +1,10 @@
-puts "Loading Sidekiq Monitor File"
+puts "Loading Active Job Monitor File"
 require 'rails_admin/config/actions'
 
 module RailsAdmin
 	module Config
 		module Actions
-			class ThecoreSidekiqMonitor < Base
+			class ThecoreActiveJobMonitor < Base
 				RailsAdmin::Config::Actions.register(self)
 				register_instance_option :object_level do
 					false
@@ -50,7 +50,7 @@ module RailsAdmin
 				register_instance_option :controller do
 					proc do # This is needed because we need that this code is re-evaluated each time is called
 						
-						puts "Loading Sidekiq Monitor Controller"
+						puts "Loading Active Job Monitor Controller"
 					end
 				end
 			end

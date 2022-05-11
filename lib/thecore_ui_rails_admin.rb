@@ -31,7 +31,7 @@ module ThecoreUiRailsAdmin
   # SafeYAML::OPTIONS[:deserialize_symbols] = false
 end
 
-require 'iframes/sidekiq_monitor'
+require 'iframes/active_job_monitor'
 
 ## Business Intelligence (must be tested)
 # require 'iframes/blazer_bi'

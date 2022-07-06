@@ -1,6 +1,8 @@
 require 'thecore_ui_commons'
 # Rails Admin
 # ENV['RAILS_ADMIN_THEME'] ||= 'rollincode'
+# require 'jquery-rails'
+# require 'rails-ujs'
 # require 'rails_admin_rollincode'
 require 'rails_admin'
 require 'rails_admin-i18n'
@@ -12,7 +14,7 @@ require 'concerns/rails_admin_requirements'
 require 'abilities/thecore_ui_rails_admin'
 # Rails Admin Buildups
 # require 'jquery-ui-rails'
-require 'bootstrap-sass'
+# require 'bootstrap-sass'
 
 require 'concerns/thecore_ui_rails_admin_user'
 require 'concerns/thecore_ui_rails_admin_used_token'

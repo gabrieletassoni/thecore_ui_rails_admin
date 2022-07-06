@@ -21,16 +21,17 @@ gemspec
 # Bootstrap 3: https://github.com/twbs/bootstrap-sass
 gem 'sqlite3'
 
-gem "thecore_ui_commons", "~> 2.1"
+gem "thecore_ui_commons", "~> 2.5"
   # Bootstrap 3: https://github.com/twbs/bootstrap-sass
 gem 'bootstrap-sass', '~> 3.4'
   # spec.add_dependency 'sassc-rails', '~> 2.0'
-gem 'coffee-rails', '~> 5.0'
+# gem 'coffee-rails', '~> 5.0'
   # Rails Admin
   # spec.add_dependency 'rails_admin_rollincode', '~> 1.3'
-gem 'rails_admin', '~> 2.0'
+gem 'rails_admin', '~> 3.0'
 gem 'rails_admin-i18n', "~> 1.12"
 gem 'rails_admin_toggleable', "~> 0.7"
 # gem "safe_yaml"
-gem "rails_admin_selectize", "~> 2.0"
+gem "rails_admin_selectize", "~> 3.0"#, path: "../rails_admin_selectize"
 gem "blazer"
+gem 'sassc-rails'

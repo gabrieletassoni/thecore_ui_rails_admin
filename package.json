@@ -1,18 +1,11 @@
 {
-  "name": "demo",
-  "private": true,
-  "dependencies": {
-    "@rails/actioncable": "^6.0.0-alpha",
-    "@rails/actiontext": "^6.0.0",
-    "@rails/activestorage": "^6.0.0-alpha",
-    "@rails/ujs": "^6.0.0-alpha",
-    "@rails/webpacker": "^4.0.7",
-    "jquery": "^3.4.1",
-    "trix": "^1.0.0",
-    "turbolinks": "^5.2.0",
-    "webpack": "4"
-  },
-  "version": "0.1.0",
+  "name": "thecore_ui_rails_admin",
+  "version": "2.0.0",
+  "description": "Transforms plain rails_admin into thecore.",
+  "main": "app/assets/javascripts/rails_admin/custom/ui.js",
+  "repository": "https://github.com/gabrieletassoni/thecore_ui_rails_admin.git",
+  "author": "Gabriele Tassoni",
+  "license": "MIT",
   "devDependencies": {
     "webpack-dev-server": "^3.8.1"
   }

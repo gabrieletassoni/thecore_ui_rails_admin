@@ -2,6 +2,8 @@ require 'rails_admin'
 require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
+  # config.asset_source = :sprockets
+  config.asset_source = :webpacker
   # Freeze more or fewer columns (col 1 = checkboxes, 2 = links/actions) for horizontal scrolling:
   config.sidescroll = {num_frozen_columns: 2}
 

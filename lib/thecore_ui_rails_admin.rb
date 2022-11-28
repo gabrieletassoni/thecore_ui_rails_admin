@@ -8,7 +8,7 @@ require 'rails_admin'
 require 'rails_admin-i18n'
 # require 'safe_yaml'
 require 'rails_admin_toggleable'
-require 'rails_admin_selectize'
+# require 'rails_admin_selectize'
 require 'concerns/rails_admin_requirements'
 # Abilities
 require 'abilities/thecore_ui_rails_admin'
@@ -23,7 +23,7 @@ require 'concerns/thecore_ui_rails_admin_permission'
 require 'concerns/thecore_rails_admin_export_concern'
 require 'concerns/thecore_rails_admin_bulk_delete_concern'
 
-require 'blazer'
+# require 'blazer'
 
 require "thecore_ui_rails_admin/engine"
 

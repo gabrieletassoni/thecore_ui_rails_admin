@@ -3,7 +3,7 @@ require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
   # config.asset_source = :sprockets
-  config.asset_source = :webpacker
+  config.asset_source = :sprockets
   # Freeze more or fewer columns (col 1 = checkboxes, 2 = links/actions) for horizontal scrolling:
   config.sidescroll = {num_frozen_columns: 2}
 
@@ -12,21 +12,6 @@ RailsAdmin.config do |config|
   # (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV["BACKEND_URL"].presence || "http://localhost:3000"}/sidekiq"
 
   ### Popular gems integration
-  config.model "Blazer::Audit" do
-    visible false
-  end
-  config.model "Blazer::Check" do
-    visible false
-  end
-  config.model "Blazer::Dashboard" do
-    visible false
-  end
-  config.model "Blazer::DashboardQuery" do
-    visible false
-  end
-  config.model "Blazer::Query" do
-    visible false
-  end
 
   config.model "RoleUser" do
     visible false

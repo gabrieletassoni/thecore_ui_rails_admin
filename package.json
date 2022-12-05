@@ -7,6 +7,5 @@
   "author": "Gabriele Tassoni",
   "license": "MIT",
   "devDependencies": {
-    "webpack-dev-server": "^3.8.1"
   }
 }

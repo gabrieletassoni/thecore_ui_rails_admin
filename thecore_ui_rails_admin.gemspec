@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "rails-ujs", "~> 0.1.0"
   # spec.add_dependency 'rails_admin_rollincode', '~> 1.3'
   spec.add_dependency 'rails_admin', '~> 3.1'
+  spec.add_dependency "sassc-rails"
   spec.add_dependency 'rails_admin-i18n', "~> 1.12"
   spec.add_dependency 'rails_admin_toggleable', "~> 0.7"
   # spec.add_dependency "safe_yaml", "~> 1.0"

@@ -32,6 +32,6 @@ gem 'rails_admin', '~> 3.0'
 gem 'rails_admin-i18n', "~> 1.12"
 gem 'rails_admin_toggleable', "~> 0.7"
 # gem "safe_yaml"
-gem "rails_admin_selectize", "~> 3.0"#, path: "../rails_admin_selectize"
-gem "blazer"
-gem 'sassc-rails'
+# gem "rails_admin_selectize", "~> 3.0"#, path: "../rails_admin_selectize"
+# gem "blazer"
+# gem 'sassc-rails'

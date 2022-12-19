@@ -1,6 +1,4 @@
 Rails.application.configure do
-    # config.assets.paths << root.join("app", "assets", "stylesheets", "thecore_ui_rails_admin")
-    # config.assets.paths << root.join("app", "assets", "javascripts", "thecore_ui_rails_admin")
     # Login Page and pages not in RailsAdmin
     config.assets.precompile += %w( thecore_ui_rails_admin/thecore.css thecore_ui_rails_admin/thecore.js )
     # Pages under Rails Admin

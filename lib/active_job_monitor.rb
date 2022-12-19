@@ -1,10 +1,11 @@
 puts "Loading Active Job Monitor File"
 require 'rails_admin/config/actions'
+require 'rails_admin/config/actions/base'
 
 module RailsAdmin
 	module Config
 		module Actions
-			class ThecoreActiveJobMonitor < Base
+			class ActiveJobMonitor < RailsAdmin::Config::Actions::Base
 				RailsAdmin::Config::Actions.register(self)
 				register_instance_option :object_level do
 					false
@@ -31,7 +32,7 @@ module RailsAdmin
 				end
 				
 				register_instance_option :link_icon do
-					'fa fa-caret-square-o-right'
+					'fa fa-eye'
 				end
 
 				register_instance_option :show_in_sidebar do

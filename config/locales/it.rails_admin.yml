@@ -1,4 +1,7 @@
 it:
   admin:
+    actions:
+      active_job_monitor:
+        menu: Background Worker
     scopes:
       _all: Tutti

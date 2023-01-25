@@ -1,13 +1,48 @@
-it:
-  yes: Yes
+en:
+  export: Export
+  export_all: Export All
+  export_found: Export Filtered
+  export_selected: Export Selected
+  delete_selected: Delete Selected
+  yes: "yes"
   no: Cancel
   error: Error
   question: Question
-  root_actions: Root Actions
+  root_actions: "Operations"
   admin:
+    misc:
+      root_navigation: Actions
+    flash:
+      error: "Unable to perform the action %{action} (%{name})"
+      model_not_found: Unable to find the Model '%{model}'
+      noaction: Unable to perform the action
+      object_not_found: "Unable to find the Model %{model} con id '%{id}'"
+      successful: "Action performed successfully: %{action} (%{name})"
+    actions:
+      thecore_sidekiq_monitor:
+        menu: Activity Monitoring
+        breadcrumb: Activity Monitoring
+        title: Activity Monitoring
+      thecore_blazer_bi:
+        menu: Business Intelligence
+        breadcrumb: Business Intelligence
+        title: Business Intelligence
+      index:
+        link: Show all elements
+    label: "Configurations"
+    advanced:
+      label: Advanced
+    logging:
+      label: Logging
+    registries:
+      label: Personal data
+    operations:
+      label: Operation
+    master_data_set:
+      label: Data
     js:
-      true: True
-      false: False
+      true: "True"
+      false: "False"
       is_present: Is present
       is_blank: Is blank
       date: Date ...

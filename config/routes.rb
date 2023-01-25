@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-    mount RailsAdmin::Engine => '/app', as: 'rails_admin'
     
     get "home", to: "pages#home", as: "home"
     get "inside", to: "pages#inside", as: "inside"

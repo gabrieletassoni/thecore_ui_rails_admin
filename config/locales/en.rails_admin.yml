@@ -1,8 +1,12 @@
 en:
   admin:
+    actions:
+      active_job_monitor:
+        menu: Background Worker
     misc:
       scopes: Fast Filters
     scopes:
+      _all: Tutti
       all: All
       order_by_name: Order By Name
       order_by_insert_date: Order By Date

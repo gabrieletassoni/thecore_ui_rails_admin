@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ThecoreUiRailsAdminUsedToken
+module ThecoreUiRailsAdminInvisiblesConcern
     extend ActiveSupport::Concern
     
     included do

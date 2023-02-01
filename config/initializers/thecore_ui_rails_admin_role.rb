@@ -1,13 +1,13 @@
 require 'active_support/concern'
 
-module ThecoreUiRailsAdminRole
+module ThecoreUiRailsAdminRoleConcern
     extend ActiveSupport::Concern
     
     included do
         
         rails_admin do
             navigation_label I18n.t("admin.settings.label")
-            navigation_icon 'fa fa-group'
+            navigation_icon 'fas fa-users'
             desc I18n.t("activerecord.descriptions.role")
             
             field :name

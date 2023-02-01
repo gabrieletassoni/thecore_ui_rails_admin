@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ThecoreConcern
+module ThecoreUiRailsAdminConcern
   extend ActiveSupport::Concern
   
   included do
@@ -148,5 +148,5 @@ module ThecoreConcern
   end
   
   # include the extension
-  ActionController::Base.send(:include, ThecoreConcern)
+  ActionController::Base.send(:include, ThecoreUiRailsAdminConcern)
   

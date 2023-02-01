@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ThecoreUiRailsAdminUser
+module ThecoreUiRailsAdminUserConcern
     extend ActiveSupport::Concern
     
     included do
@@ -9,6 +9,7 @@ module ThecoreUiRailsAdminUser
             # rails_admin do
             navigation_label I18n.t("admin.settings.label")
             navigation_icon 'fa fa-user-circle'
+            parent Role
             desc I18n.t("activerecord.descriptions.user")
             
             # Field present Everywhere

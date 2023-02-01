@@ -1,0 +1,85 @@
+/*
+  Customize Sass variables from Twitter-Bootstrap/RailsAdmin theme or add new ones for your own use.
+  Copy this file to your app/assets/rails_admin/custom/variables.scss, leave this one untouched
+  Don't require it in your application.rb
+
+  Available variables to use/override:
+
+  https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
+  https://github.com/railsadminteam/rails_admin/blob/master/src/rails_admin/styles/base/variables.scss
+  Plus the ones from your themes.
+
+  Test me: pink links
+
+  $link-color: #F0F;
+*/
+<%
+@text_color = Settings.ns(:theme).text_color
+@accents_color = Settings.ns(:theme).accents_color
+@background_color = Settings.ns(:theme).background_color
+@main_color = Settings.ns(:theme).main_color
+@shadows_color = Settings.ns(:theme).shadows_color
+
+@neutral_color = Settings.ns(:theme).neutral_color
+@success_color = Settings.ns(:theme).success_color
+@info_color = Settings.ns(:theme).info_color
+@danger_color = Settings.ns(:theme).danger_color
+@warning_color = Settings.ns(:theme).warning_color
+%>
+/* Thecore Variables */
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base:              <%=@neutral_color%> !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+$brand-primary:         darken(<%=@main_color%>, 6.5%) !default; // #337ab7
+$brand-success:         <%=@success_color%> !default;
+$brand-info:            <%=@info_color%> !default;
+$brand-warning:         <%=@warning_color%> !default;
+$brand-danger:          <%=@danger_color%> !default;
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:               #fff !default;
+//** Global text color on `<body>`.
+$text-color:            $gray-dark !default;
+
+//** Global textual link color.
+$link-color:            $brand-primary !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+nav.bg-primary {
+    background-color: $brand-primary !important;
+}
+
+body.rails_admin .sidebar.btn-toggle-nav .btn-toggle-nav > li > a {
+    &:hover, &.active {
+        background-color: $brand-primary !important;
+    }
+}
+
+.btn-primary {
+    background-color: $brand-primary !important;
+    border-color: $brand-primary !important;
+}
+
+.btn-info {
+    color: <%=@text_color%> !important;
+    background-color: <%=@background_color%> !important;
+    border-color: <%=@background_color%> !important;
+}
+
+@import 'thecore/variables';

@@ -1,6 +1,10 @@
 it:
   admin:
+    misc:
+      reset_filters: Rimuovi i Filtri
     actions:
+      index:
+        no_records: Nessun record da mostrare
       active_job_monitor:
         menu: Background Worker
     scopes:

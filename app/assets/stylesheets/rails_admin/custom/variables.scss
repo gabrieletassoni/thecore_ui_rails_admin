@@ -13,36 +13,23 @@
 
   $link-color: #F0F;
 */
-<%
-@text_color = Settings.ns(:theme).text_color
-@accents_color = Settings.ns(:theme).accents_color
-@background_color = Settings.ns(:theme).background_color
-@main_color = Settings.ns(:theme).main_color
-@shadows_color = Settings.ns(:theme).shadows_color
-
-@neutral_color = Settings.ns(:theme).neutral_color
-@success_color = Settings.ns(:theme).success_color
-@info_color = Settings.ns(:theme).info_color
-@danger_color = Settings.ns(:theme).danger_color
-@warning_color = Settings.ns(:theme).warning_color
-%>
 /* Thecore Variables */
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
 
-$gray-base:              <%=@neutral_color%> !default;
+$gray-base:              #999999 !default;
 $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
 $gray-dark:              lighten($gray-base, 20%) !default;   // #333
 $gray:                   lighten($gray-base, 33.5%) !default; // #555
 $gray-light:             lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
-$brand-primary:         darken(<%=@main_color%>, 6.5%) !default; // #337ab7
-$brand-success:         <%=@success_color%> !default;
-$brand-info:            <%=@info_color%> !default;
-$brand-warning:         <%=@warning_color%> !default;
-$brand-danger:          <%=@danger_color%> !default;
+$brand-primary:         darken(#37505C, 6.5%) !default; // #337ab7
+$brand-success:         #37BC9B !default;
+$brand-info:            #CCCCCC !default;
+$brand-warning:         #F6BB42 !default;
+$brand-danger:          #E9573F !default;
 
 
 //== Scaffolding
@@ -77,9 +64,9 @@ body.rails_admin .sidebar.btn-toggle-nav .btn-toggle-nav > li > a {
 }
 
 .btn-info {
-    color: <%=@text_color%> !important;
-    background-color: <%=@background_color%> !important;
-    border-color: <%=@background_color%> !important;
+    color: #FFEAD0 !important;
+    background-color: #96616B !important;
+    border-color: #96616B !important;
 }
 
 @import 'thecore/variables';

@@ -2,7 +2,9 @@ en:
   admin:
     actions:
       active_job_monitor:
-        menu: Background Worker
+        menu: Worker Monitor
+        title: Worker Monitor
+        breadcrumb: Worker Monitor
     misc:
       scopes: Fast Filters
     scopes:

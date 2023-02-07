@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ThecoreUiRailsAdminConcern
+module ThecoreUiRailsAdminActionControllerConcern
   extend ActiveSupport::Concern
   
   included do

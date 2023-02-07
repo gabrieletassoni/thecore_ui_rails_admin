@@ -7,7 +7,7 @@ module ThecoreUiRailsAdminActionControllerConcern
     # Prevent CSRF attacks by raising an exception.
     # For APIs, you may want to use :null_session instead.
     # layout 'thecore'
-    puts "Protecting from Forgery with exception and prepend #{ENV["SECRET_KEY_BASE"]}"
+    puts "Protecting from Forgery with exception and prepend"
     protect_from_forgery with: :exception, prepend: true,  except: :sign_in
     rescue_from CanCan::AccessDenied do |exception| 
       redirect_to main_app.root_url, alert: exception.message 
@@ -17,7 +17,6 @@ module ThecoreUiRailsAdminActionControllerConcern
     before_action :store_user_location!, if: :storable_location?
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :reject_locked!, if: :devise_controller?
-    before_action :debug_csrf
     
     helper_method :reject_locked!
     helper_method :require_admin!
@@ -147,10 +146,5 @@ module ThecoreUiRailsAdminActionControllerConcern
   
   def is_storable?
     true
-  end
-
-  def debug_csrf
-    puts "CSRF: #{params["authenticity_token"]}"
-    puts "Authenticity Token #{ENV["SECRET_KEY_BASE"]}"
   end
 end

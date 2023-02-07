@@ -1,7 +1,7 @@
 Rails.application.configure do
     config.after_initialize do
         # Freeze more or fewer columns (col 1 = checkboxes, 2 = links/actions) for horizontal scrolling:
-        RailsAdmin::Config.sidescroll = {num_frozen_columns: 2}
+        RailsAdmin::Config.sidescroll = { num_frozen_columns: 2 }
 
         RailsAdmin::Config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
         # Link for background Job
@@ -9,9 +9,8 @@ Rails.application.configure do
 
         ### Popular gems integration
         ## == Devise ==
-        RailsAdmin::Config.authenticate_with do
-            warden.authenticate! scope: :user
-        end
+        RailsAdmin::Config.authenticate_with { warden.authenticate! scope: :user }
+        
         RailsAdmin::Config.current_user_method(&:current_user)
 
         ## == Cancan ==

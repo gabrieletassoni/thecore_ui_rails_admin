@@ -21,12 +21,12 @@ module ThecoreUiRailsAdminUserConcern
             end
             field :admin do
                 visible do
-                    bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id
+                    bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id rescue false
                 end
             end
             field :locked do
                 visible do
-                    bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id
+                    bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id rescue false
                 end
             end
             field :roles#, :selectize

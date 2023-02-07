@@ -2,13 +2,15 @@ require 'active_support/concern'
 
 module ThecoreUiRailsAdminActionControllerConcern
   extend ActiveSupport::Concern
-  
+
   included do
     # Prevent CSRF attacks by raising an exception.
     # For APIs, you may want to use :null_session instead.
     # layout 'thecore'
     puts "Protecting from Forgery with exception and prepend"
-    protect_from_forgery with: :exception, prepend: true,  except: :sign_in
+    # protect_from_forgery with: :reset_session
+    skip_forgery_protection
+
     rescue_from CanCan::AccessDenied do |exception| 
       redirect_to main_app.root_url, alert: exception.message 
     end
@@ -105,9 +107,9 @@ module ThecoreUiRailsAdminActionControllerConcern
     
   # Auto-sign out locked users
   def reject_locked!
-    # Rails.logger.info "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB reject_locked"
+    puts "reject_locked #{current_user}"
     if !current_user.blank? && current_user.locked?
-      # Rails.logger.info "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB is locked"
+      puts " - Cleaning session"
       sign_out current_user
       user_session = nil
       current_user = nil
@@ -121,6 +123,7 @@ module ThecoreUiRailsAdminActionControllerConcern
   
   # Only permits admin users
   def require_admin!
+    puts "require_admin! #{current_user}"
     authenticate_user!
     
     if current_user && !current_user.admin?

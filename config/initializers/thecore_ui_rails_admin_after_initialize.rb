@@ -4,17 +4,15 @@ Rails.application.configure do
         RailsAdmin::Config.sidescroll = { num_frozen_columns: 2 }
 
         RailsAdmin::Config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
-        # Link for background Job
-        # (config.navigation_static_links ||= {}).merge! "Background Monitor" => "#{ENV["BACKEND_URL"].presence || "http://localhost:3000"}/sidekiq"
 
-        ### Popular gems integration
-        ## == Devise ==
-        RailsAdmin::Config.authenticate_with { warden.authenticate! scope: :user }
+        # ### Popular gems integration
+        # # ## == Devise ==
+        # RailsAdmin::Config.authenticate_with { warden.authenticate! scope: :user }
         
-        RailsAdmin::Config.current_user_method(&:current_user)
+        # RailsAdmin::Config.current_user_method(&:current_user)
 
-        ## == Cancan ==
-        RailsAdmin::Config.authorize_with :cancancan
+        # # ## == Cancan ==
+        # RailsAdmin::Config.authorize_with :cancancan
 
         ## == PaperTrail ==
         # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0

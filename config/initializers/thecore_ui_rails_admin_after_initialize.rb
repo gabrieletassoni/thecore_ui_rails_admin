@@ -47,7 +47,9 @@ Rails.application.configure do
                 end
             end
         end
+
         # include the extension
+        ApplicationController.send(:include, ThecoreUiRailsAdminConcern)
         RailsAdmin::Config::Actions::Export.send(:include, ExportConcern)
         RailsAdmin::Config::Actions::BulkDelete.send(:include, BulkDeleteConcern)
         Role.send :include, ThecoreUiRailsAdminRoleConcern

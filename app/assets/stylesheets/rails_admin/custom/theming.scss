@@ -14,4 +14,27 @@
 
 /* Thecore Theming */
 
+.alert {
+  position: absolute;
+  bottom: 1em !important;
+  top: auto !important;
+  right: 2.5em !important;
+  width: auto !important;
+  z-index: 9999 !important;
+  border-radius: 2em !important;
+  animation: hideMe 5s 1;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+@keyframes hideMe {
+  0% {
+      opacity: 1;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
 @import 'thecore/theming';

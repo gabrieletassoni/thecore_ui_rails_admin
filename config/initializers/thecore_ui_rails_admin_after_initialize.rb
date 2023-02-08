@@ -5,14 +5,13 @@ Rails.application.configure do
 
         RailsAdmin::Config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
 
-        # ### Popular gems integration
-        # # ## == Devise ==
-        # RailsAdmin::Config.authenticate_with { warden.authenticate! scope: :user }
-        
-        # RailsAdmin::Config.current_user_method(&:current_user)
+        ### Popular gems integration
+        ## == Devise ==
+        RailsAdmin::Config.authenticate_with { warden.authenticate! scope: :user }
+        RailsAdmin::Config.current_user_method(&:current_user)
 
-        # # ## == Cancan ==
-        # RailsAdmin::Config.authorize_with :cancancan
+        ## == Cancan ==
+        RailsAdmin::Config.authorize_with :cancancan
 
         ## == PaperTrail ==
         # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0

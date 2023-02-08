@@ -9,7 +9,7 @@ module ThecoreUiRailsAdminActionControllerConcern
     # layout 'thecore'
     puts "Protecting from Forgery with exception and prepend"
     # protect_from_forgery with: :reset_session
-    skip_forgery_protection
+    skip_forgery_protection # Something has changed from rails 6.1 and ruby 2.7, I cannot login with devise, still investigating, but skipping for now
 
     rescue_from CanCan::AccessDenied do |exception| 
       redirect_to main_app.root_url, alert: exception.message 
@@ -21,10 +21,7 @@ module ThecoreUiRailsAdminActionControllerConcern
     before_action :reject_locked!, if: :devise_controller?
     
     helper_method :reject_locked!
-    helper_method :require_admin!
     helper_method :line_break
-    helper_method :title
-    helper_method :bootstrap_class_for
     
     # Redirects on successful sign in
     def after_sign_in_path_for resource
@@ -55,28 +52,10 @@ module ThecoreUiRailsAdminActionControllerConcern
     end
   end
   
-  def title value = "Thecore"
-    @title = value
-  end
-  
-  def bootstrap_class_for flash_type
-    case flash_type
-    when 'success'
-      'alert-success'
-    when 'error'
-      'alert-danger'
-    when 'alert'
-      'alert-warning'
-    when 'notice'
-      'alert-info'
-    else
-      flash_type.to_s
-    end
-  end
-  
   def line_break s
     s.gsub("\n", "<br/>")
   end
+
   # Devise permitted params
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in) { 
@@ -107,7 +86,6 @@ module ThecoreUiRailsAdminActionControllerConcern
     
   # Auto-sign out locked users
   def reject_locked!
-    puts "reject_locked #{current_user}"
     if !current_user.blank? && current_user.locked?
       puts " - Cleaning session"
       sign_out current_user
@@ -116,18 +94,6 @@ module ThecoreUiRailsAdminActionControllerConcern
       flash[:alert] = "Your account is locked."
       flash[:notice] = nil
       redirect_to root_url
-    end
-    # Rails.logger.info "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB is not locked = ok"
-  end
-  
-  
-  # Only permits admin users
-  def require_admin!
-    puts "require_admin! #{current_user}"
-    authenticate_user!
-    
-    if current_user && !current_user.admin?
-      redirect_to inside_path
     end
   end
   
@@ -139,15 +105,11 @@ module ThecoreUiRailsAdminActionControllerConcern
   # - The request is an Ajax request as this can lead to very unexpected 
   #     behaviour.
   def storable_location?
-    request.get? && is_navigational_format? && !devise_controller? && !request.xhr? && is_storable?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
   
   def store_user_location!
     # :user is the scope we are authenticating
     store_location_for(:user, request.fullpath)
-  end
-  
-  def is_storable?
-    true
   end
 end

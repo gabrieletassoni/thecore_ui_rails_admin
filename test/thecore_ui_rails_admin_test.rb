@@ -1,7 +1,7 @@
-require 'test_helper'
+require "test_helper"
 
-class ThecoreUiRailsAdmin::Test < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, ThecoreUiRailsAdmin
+class ThecoreUiRailsAdminTest < ActiveSupport::TestCase
+  test "it has a version number" do
+    assert ThecoreUiRailsAdmin::VERSION
   end
 end

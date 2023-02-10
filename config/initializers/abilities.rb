@@ -7,6 +7,13 @@ module Abilities
             cannot :create, ThecoreSettings::Setting
             cannot :destroy, ThecoreSettings::Setting
             cannot :show, ThecoreSettings::Setting
+            # Main abilities file for Thecore applications
+            if user.present?
+                # Users' abilities
+                if user.admin?
+                    # Admins' abilities
+                end
+            end
         end
     end
 end

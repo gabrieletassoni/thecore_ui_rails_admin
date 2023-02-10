@@ -8,7 +8,7 @@ How to use my plugin.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'thecore_ui_rails_admin'
+gem "thecore_ui_rails_admin"
 ```
 
 And then execute:

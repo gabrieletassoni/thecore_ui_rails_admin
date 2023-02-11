@@ -1,12 +1,11 @@
 // override this file in your application to add custom behaviour
 
 //= require 'selectize.min'
+//= require 'thecore_ui_commons'
 
-console.log("Thecore UI Rails Admin")
-
-function adjustIframe(obj) {
+const adjustIframe = function(obj) {
     obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-}
+};
 
 // // Re evaluate at each iteration
 // $(document).on('rails_admin.dom_ready', function () {

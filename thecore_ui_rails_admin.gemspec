@@ -26,9 +26,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thecore_ui_commons", "~> 3.0"
   spec.add_dependency "rails_admin", "~> 3.1"
   spec.add_dependency "rails_admin-i18n", "~> 1.18"
-  spec.add_dependency "rails_admin_toggleable", "~> 0.8"
+  # spec.add_dependency "rails_admin_toggleable", "~> 0.8"
   # https://github.com/stephskardal/rails_admin_import
-  spec.add_dependency "rails_admin_import", "~> 3.0"
+  # spec.add_dependency "rails_admin_import", "~> 3.0"
   # https://github.com/dalpo/rails_admin_clone
-  spec.add_dependency "rails_admin_clone", "~> 0.0"
+  # spec.add_dependency "rails_admin_clone", "~> 0.0"
 end

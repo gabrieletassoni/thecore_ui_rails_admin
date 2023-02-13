@@ -15,6 +15,28 @@
 */
 /* Thecore Variables */
 //== Colors
+$primary: #f56907 !default;
+
+$background: #f1f1f1 !default;
+$shadows: #e68c00 !default;
+
+$text: #a02319 !default;
+$text-highlight: #fad23c !default;
+
+$link: $text !default;
+$link-highlight: lighten($link, 10%) !default;
+
+$element: #f1f1f1 !default;
+$element-text: #999999 !default;
+$element-text-highlight: lighten($element-text, 10%) !default;
+$element-border: #999999 !default;
+
+$neutral: #999999 !default;
+$success: #37BC9B !default;
+$info: #999999 !default;
+$danger: #E9573F !default;
+$warning: #F6BB42 !default;
+
 //
 //## Gray and brand colors for use across Bootstrap.
 
@@ -69,4 +91,4 @@ body.rails_admin .sidebar.btn-toggle-nav .btn-toggle-nav > li > a {
     border-color: #96616B !important;
 }
 
-@import 'thecore/variables';
+@import 'rails_admin/custom/thecore/variables';

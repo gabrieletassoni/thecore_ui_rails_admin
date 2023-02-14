@@ -1,0 +1,25 @@
+<% colors = [ :first, :second, :third, :fourth ] %>
+<% index = 0 %>
+<% allowed_models = Settings.models_in_dashboard %>
+<% allowed_models_cleaned = allowed_models.split.join.split(",") %>
+<% @abstract_models.each do |abstract_model| %>
+  <% if allowed_models.blank? || allowed_models_cleaned.include?(abstract_model.model_name) %>
+    <% index_path = index_path(model_name: abstract_model.to_param) %>
+    <% if authorized?(:index, abstract_model) %>
+      <% if index == colors.length %>
+        <% index = 0 %>
+      <% end %>
+      <div class="col-sm-4 dashboard-element">
+        <a class="box pjax <%= colors[index] %>" href="<%= index_path %>">
+          <div class="text-center">
+            <p class="model">
+              <%= abstract_model.config.label_plural %>
+            </p>
+            <i class="icon-block <%= abstract_model.config.navigation_icon.present? ? abstract_model.config.navigation_icon : 'file'  %>"></i>
+          </div>
+        </a>
+      </div>
+      <% index += 1 %>
+    <% end %>
+  <% end %>
+<% end %>

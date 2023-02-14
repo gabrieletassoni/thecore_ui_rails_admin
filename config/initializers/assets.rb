@@ -6,4 +6,6 @@ Rails.application.config.assets.precompile += %w(
     rails_admin/custom/thecore/theming.css
     rails_admin/custom/ui.js
     rails_admin/custom/thecore/ui.js
+    rails_admin/custom/dashboard.css
+    devise/custom/thecore/sessions.scss
 )

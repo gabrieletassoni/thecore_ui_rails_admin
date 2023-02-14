@@ -18,5 +18,54 @@
 @import 'rails_admin/custom/variables';
 @import 'rails_admin/custom/mixins';
 @import 'thecore_ui_commons/alerts';
+@import 'rails_admin/custom/dashboard';
+
+header h1,
+.nav li[class$="_root_link"] {
+    display: none;
+}
+
+header.py-2.m-2.border-bottom {
+    border-bottom: none !important;
+}
+
+.breadcrumb {
+    background-color: $primary;
+    text-transform: uppercase;
+    color: $body-bg !important;
+    border-radius: 2em;
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+
+    .breadcrumb-item {
+
+        a,
+        &.active,
+        &+.breadcrumb-item::before {
+            color: white !important;
+        }
+    }
+}
+
+.card.bg-light {
+    background-color: $body-bg !important;
+    border:none!important;
+}
+
+input, select, textarea {
+    &.form-control, &.form-check-input {
+        background-color: $background!important;
+    }
+}
+
+body > div.container-fluid > div > div.col-sm-3.col-md-2.flex-wrap.p-0,
+body > div.container-fluid > div > div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2 {
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition:    all 1s ease-in-out;
+  -o-transition:      all 1s ease-in-out;
+  -ms-transition:     all 1s ease-in-out;
+  transition:         all 1s ease-in-out;
+}
 
 @import 'rails_admin/custom/thecore/theming';

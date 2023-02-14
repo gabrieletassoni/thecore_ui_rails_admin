@@ -4,7 +4,7 @@
 //= require 'thecore_ui_commons'
 //= require 'rails_admin/custom/thecore/ui'
 
-const adjustIframe = function(obj) {
+const adjustIframe = function (obj) {
     console.log("Resizing");
     obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 };
@@ -27,3 +27,35 @@ $(document).on('turbo:load', function (event) {
     })
     console.log(" - Hash:", currentURL.hash);
 });
+
+const sidepanel = "body > div.container-fluid > div > div.col-sm-3.col-md-2.flex-wrap.p-0"
+const mainpanel = "body > div.container-fluid > div > div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2";
+
+// JavaScript functions to open the sidebar
+function sideOpen() {
+    /* Sidebar takes 25% of the total width
+    of main container in open state */
+    document.querySelector(
+        sidepanel).style.width = "16.66666667%";
+    
+        document.querySelector(
+            mainpanel).style.width = "83.33333333%";
+    document.querySelector(
+        sidepanel).style.display = "block";
+    // document.querySelector(
+    //     "openNav").style.display = "none";
+}
+// JavaScript functions to close the sidebar
+function sideClose() {
+    // Sidebar takes 0% of the total width
+    // of main container in open state
+    document.querySelector(
+        mainpanel).style.marginLeft = "0%";
+    document.querySelector(
+        mainpanel).style.width = "100%";
+    // Visibility is hidden
+    document.querySelector(
+        sidepanel).style.display = "none";
+    // document.querySelector(
+    //     "openNav").style.display = "inline-block";
+}

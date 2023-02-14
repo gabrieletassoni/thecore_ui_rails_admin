@@ -1,0 +1,150 @@
+@import 'thecore_ui_commons/variables';
+
+// Dashboard
+.box {
+    color: inherit;
+}
+
+.box {
+    border-radius: 1em;
+    display: block;
+    padding: 15px;
+    margin-bottom: 30px;
+    border: 1px solid $element-border;
+    position: relative;
+    min-height: 15em;
+    transition: all 0.3s ease;
+    background-color: lighten($element, 25%);
+    color: $element-text;
+    overflow: hidden;
+
+    &:hover,
+    &:focus {
+        border-color: $shadows;
+
+        .icon-bg {
+            transform: scale(1.5) rotate(20deg);
+        }
+    }
+
+    p {
+        min-height: 30px;
+        font-size: 15px;
+        font-weight: 600;
+
+        a.btn {
+            border-radius: 3px;
+            color: rgba($text-highlight, 0.7) !important;
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-color: rgba($shadows, 0.19);
+            border: 1px solid transparent;
+            white-space: nowrap;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
+
+    strong.count {
+        font-size: 10em;
+        font-weight: 600;
+    }
+
+    p.model,
+    strong.count {
+        color: $element-text;
+
+        &:hover {
+            color: $element-text-highlight;
+        }
+    }
+
+    .icon-bg {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 15em;
+        color: $element-text;
+        opacity: 0.20;
+        filter: alpha(opacity=20);
+        transition: all 1s ease;
+    }
+
+    &.bg-info {
+        background-color: $info;
+    }
+
+    &.bg-success {
+        background-color: $success;
+    }
+
+    &.bg-warning {
+        background-color: $warning;
+    }
+
+    &.bg-danger {
+        background-color: $danger;
+    }
+
+    &.bg-clear {
+        background-color: $neutral;
+    }
+}
+
+.box,
+#bulk_form .panel:nth-of-type(1),
+#bulk_form .panel {
+    border: none;
+    border-radius: 2em;
+}
+
+.box:hover .icon-block {
+    transform: scale(1.2) rotate(20deg);
+}
+
+.box.first {
+    color: #fad23c !important;
+}
+
+.box.second {
+    color: #e68c00 !important;
+}
+
+.box.third {
+    color: #c82823 !important;
+}
+
+.box.fourth {
+    color: #a02319 !important;
+}
+
+.box p.model,
+.box strong.count {
+    color: inherit !important;
+}
+
+.box .text-center p.model {
+    text-transform: uppercase;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.box .text-center i.icon-block {
+    font-size: 8em;
+    transition: all .5s ease;
+}
+
+.dashboard-element {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+}

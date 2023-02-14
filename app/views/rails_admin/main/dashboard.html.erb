@@ -1,0 +1,18 @@
+<% # Instruct javascript to skip toolbar or breadcrumb %>
+<span class="hide-toolbar"></span>
+<% # =render partial: 'rails_admin/main/dashboard_analytics' %>
+<% if @abstract_models %>
+  <div class="row">
+    <%= render partial: 'rails_admin/main/dashboard_block' %>
+  </div>
+<% end %>
+<% if @auditing_adapter && authorized?(:history_index) %>
+  <div class="block" id="block-tables">
+    <div class="content">
+      <h2>
+        <%= t("admin.actions.history_index.menu") %>
+      </h2>
+      <%= render partial: 'rails_admin/main/dashboard_history' %>
+    </div>
+  </div>
+<% end %>

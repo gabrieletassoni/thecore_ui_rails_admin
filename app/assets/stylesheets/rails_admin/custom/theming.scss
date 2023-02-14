@@ -68,4 +68,8 @@ body > div.container-fluid > div > div.col-sm-9.col-sm-offset-3.col-md-10.col-md
   transition:         all 1s ease-in-out;
 }
 
+.navbar-brand-logo {
+    height: 1.7em;
+}
+
 @import 'rails_admin/custom/thecore/theming';

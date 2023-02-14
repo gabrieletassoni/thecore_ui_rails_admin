@@ -26,6 +26,10 @@ $(document).on('turbo:load', function (event) {
         console.log(`  - ${k}: ${v}`);
     })
     console.log(" - Hash:", currentURL.hash);
+
+    // Add the customer_logo before the Title
+    const customer_logo_path = "<%= asset_path('customer_logo.png') %>";
+    $(".navbar-brand").prepend(`<img class="navbar-brand-logo" alt="Customer Logo" src="${customer_logo_path}"/>`);
 });
 
 const sidepanel = "body > div.container-fluid > div > div.col-sm-3.col-md-2.flex-wrap.p-0"

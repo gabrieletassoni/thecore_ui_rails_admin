@@ -1,3 +1,4 @@
+puts "Export Concern from ThecoreUiRailsAdmin"
 require 'active_support/concern'
 
 module ExportConcern

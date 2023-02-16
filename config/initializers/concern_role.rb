@@ -1,3 +1,4 @@
+puts "Role Concern from ThecoreUiRailsAdmin"
 require 'active_support/concern'
 
 module ThecoreUiRailsAdminRoleConcern

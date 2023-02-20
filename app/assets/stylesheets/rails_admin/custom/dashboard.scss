@@ -112,20 +112,11 @@
     transform: scale(1.2) rotate(20deg);
 }
 
-.box.first {
-    color: #fad23c !important;
-}
-
-.box.second {
-    color: #e68c00 !important;
-}
-
-.box.third {
-    color: #c82823 !important;
-}
-
+.box.first,
+.box.second,
+.box.third,
 .box.fourth {
-    color: #a02319 !important;
+    color: $info !important;
 }
 
 .box p.model,

@@ -6,8 +6,8 @@ it:
       index:
         no_records: Nessun record da mostrare
       active_job_monitor:
-        menu: Worker Monitor
-        title: Worker Monitor
-        breadcrumb: Worker Monitor
+        menu: Async Worker Monitor
+        title: Async Worker Monitor
+        breadcrumb: Async Worker Monitor
     scopes:
       _all: Tutti

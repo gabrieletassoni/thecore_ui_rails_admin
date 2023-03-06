@@ -2,9 +2,9 @@ en:
   admin:
     actions:
       active_job_monitor:
-        menu: Worker Monitor
-        title: Worker Monitor
-        breadcrumb: Worker Monitor
+        menu: Async Worker Monitor
+        title: Async Worker Monitor
+        breadcrumb: Async Worker Monitor
     misc:
       scopes: Fast Filters
     scopes:

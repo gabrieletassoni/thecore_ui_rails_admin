@@ -13,57 +13,26 @@ module ThecoreUiRailsAdminUserConcern
             parent Role
             desc I18n.t("activerecord.descriptions.user")
             
-            # Field present Everywhere
-            field :email do
-                required true
-            end
-            field :admin do
-                visible do
-                    bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id rescue false
-                end
-            end
-            field :locked do
-                visible do
-                    bindings[:view].current_user.admin? && bindings[:view].current_user.id != bindings[:object].id rescue false
-                end
-            end
-            field :roles#, :selectize
-            
-            # Fields only in lists and forms
-            list do
-                field :created_at
-                exclude_fields :lock_version
-                # include UserRailsAdminListConcern
-            end
-            show do
-                #exclude_fields :id
-                exclude_fields :lock_version
-            end
-            create do
-                field :password do
-                    required true
-                end
-                field :password_confirmation do
-                    required true
-                end
-                # field :lock_version, :hidden do
-                #     visible true
-                # end
-                # include UserRailsAdminCreateConcern
-            end
+            exclude_fields :id, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :lock_version, :role_users
+
+            configure :admin, :boolean
+
             edit do
-                field :password do
+                configure :password do
                     required false
                 end
-                field :password_confirmation do
+                configure :password_confirmation do
                     required false
                 end
-                
-                # field :lock_version, :hidden do
-                #     visible true
-                # end
-                # include UserRailsAdminEditConcern
-                
+            end
+
+            create do
+                configure :password do
+                    required true
+                end
+                configure :password_confirmation do
+                    required true
+                end
             end
         end
     end

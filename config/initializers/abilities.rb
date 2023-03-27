@@ -4,9 +4,9 @@ module Abilities
         def initialize user
             # No one is allowed to add or destroy settings
             # just list or edit existing
-            cannot :create, ThecoreSettings::Setting
-            cannot :destroy, ThecoreSettings::Setting
-            cannot :show, ThecoreSettings::Setting
+            cannot [:create, :destroy, :show], ThecoreSettings::Setting
+
+            cannot [:destroy, :update, :edit, :show], Action
             # Main abilities file for Thecore applications
             if user.present?
                 # Users' abilities

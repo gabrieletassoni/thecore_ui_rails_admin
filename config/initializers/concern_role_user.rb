@@ -1,7 +1,7 @@
 puts "Role Concern from ThecoreUiRailsAdmin"
 require 'active_support/concern'
 
-module ThecoreUiRailsAdminRoleConcern
+module ThecoreUiRailsAdminRoleUserConcern
     extend ActiveSupport::Concern
     
     included do
@@ -11,16 +11,7 @@ module ThecoreUiRailsAdminRoleConcern
             navigation_icon 'fas fa-users'
             desc I18n.t("activerecord.descriptions.role")
             
-            field :name
-            field :permissions
-
-            list do
-                field :created_at
-                field :updated_at
-            end
-            show do
-                exclude_fields :id
-            end
+            visible false
         end
     end
 end

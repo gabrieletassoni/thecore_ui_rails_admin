@@ -4,8 +4,8 @@ it:
   export_found: Esporta i Filtrati
   export_selected: Esporta i Selezionati
   delete_selected: Elimina i Selezionati
-  yes: Si
-  no: Annulla
+  yes: "Si"
+  no: "No"
   error: Errore
   question: Domanda
   root_actions: "Operazioni"

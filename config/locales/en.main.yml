@@ -1,6 +1,6 @@
-it:
-  yes: Yes
-  no: Cancel
+en:
+  yes: "Yes"
+  no: "No"
   error: Error
   question: Question
   root_actions: Root Actions

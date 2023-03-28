@@ -6,16 +6,15 @@ module ThecoreUiRailsAdminUserConcern
     
     included do
 
-        def admin_enum
-            [["✔",true],['✘',false]]
-        end
+        # def admin_enum
+        #     [["✔",true],['✘',false]]
+        # end
 
-        def locked_enum
-            [["✔",true],['✘',false]]
-        end
+        # def locked_enum
+        #     [["✔",true],['✘',false]]
+        # end
         
         rails_admin do
-            # rails_admin do
             navigation_label I18n.t("admin.settings.label")
             navigation_icon 'fa fa-user-circle'
             parent Role

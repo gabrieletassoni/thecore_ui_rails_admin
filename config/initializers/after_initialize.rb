@@ -26,12 +26,6 @@ Rails.application.configure do
         RailsAdmin::Config.excluded_models << ActiveStorage::VariantRecord
         RailsAdmin::Config.excluded_models << ActionMailbox::InboundEmail
         RailsAdmin::Config.excluded_models << UsedToken rescue puts "No UsedToken Model it could be normal: maybe model_driven_api is not installed"
-        # RailsAdmin::Config.excluded_models << RoleUser
-        # RailsAdmin::Config.excluded_models << Predicate
-        # RailsAdmin::Config.excluded_models << Target
-        # RailsAdmin::Config.excluded_models << Action
-        # RailsAdmin::Config.excluded_models << PermissionRole
-        # RailsAdmin::Config.excluded_models << Permission
 
         RailsAdmin::Config::Actions.add_action "active_job_monitor", :base, :root do
             show_in_sidebar true

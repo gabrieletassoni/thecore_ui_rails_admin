@@ -3,6 +3,7 @@
 //= require 'selectize.min'
 //= require 'thecore_ui_commons'
 //= require 'rails_admin/custom/thecore/ui'
+//= require 'channels/index'
 
 const adjustIframe = function (obj) {
     console.log("Resizing");
@@ -30,56 +31,6 @@ $(document).on('turbo:load', function (event) {
     // Add the customer_logo before the Title
     const customer_logo_path = "<%= asset_path('customer_logo.png') %>";
     $(".navbar-brand").prepend(`<img class="navbar-brand-logo" alt="Customer Logo" src="${customer_logo_path}"/>`);
-
-    // Websocket
-    console.log("Websocket")
-    const webSocketUrl = "ws://localhost:3000/cable"
-
-    // Creates the new websocket connection
-    socket = new WebSocket(webSocketUrl);
-        
-    // When the connection is 1st created, this code runs subscribing the clien to a specific chatroom stream in the ChatRoomChannel
-    socket.onopen = function(event) {
-        console.log('WebSocket is connected.');
-        
-        const msg = {
-            command: 'subscribe',
-            identifier: JSON.stringify({
-                channel: 'activity_log'
-            }),
-        };
-        
-        socket.send(JSON.stringify(msg));
-    };
-
-    // When the connection is closed, this code is run
-    socket.onclose = function(event) {
-        console.log('WebSocket is closed.');
-    };
-
-    // When a message is received through the websocket, this code is run
-    socket.onmessage = function(event) {            
-        const response = event.data;
-        const msg = JSON.parse(response);
-        
-        // Ignores pings
-        if (msg.type === "ping") {
-            return;
-        } 
-        
-        console.log("FROM RAILS: ", msg);
-        
-        // Renders any newly created messages onto the page
-        // if (msg.message) {
-        //     renderMessage(msg.message)
-        // }
-        
-    };
-
-    // When an error occurs through the websocket connection, this code is run printing the error message
-    socket.onerror = function(error) {
-        console.log('WebSocket Error: ', error);
-    };
 });
 
 const sidepanel = "body > div.container-fluid > div > div.col-sm-3.col-md-2.flex-wrap.p-0"

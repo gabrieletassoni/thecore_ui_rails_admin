@@ -1,13 +1,30 @@
 en:
+  export: Export
+  export_all: Export All
+  export_found: Export Found
+  export_selected: Export Selected
+  delete_selected: Delete Selected
   yes: "Yes"
   no: "No"
   error: Error
   question: Question
-  root_actions: Root Actions
+  root_actions: "Actions"
   admin:
+    misc:
+      root_navigation: Actions
+    advanced:
+      label: Advanced
+    logging:
+      label: Logging
+    registries:
+      label: Registries
+    operations:
+      label: Operations
+    master_data_set:
+      label: Registries
     js:
-      true: True
-      false: False
+      true: "True"
+      false: "False"
       is_present: Is present
       is_blank: Is blank
       date: Date ...

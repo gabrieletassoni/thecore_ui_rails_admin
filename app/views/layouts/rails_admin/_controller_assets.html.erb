@@ -1,0 +1,6 @@
+<!-- Valid only for Sprockets //-->
+<!-- Loads assets specific to the current action, works also with Turbo //-->
+<%- if RailsAdmin::config.asset_source == :sprockets %>
+    <%= stylesheet_link_tag "#{controller_name}_#{action_name}.css", media: :all, data: {'turbo-track': 'reload'} rescue nil %>
+    <%= javascript_include_tag "#{controller_name}_#{action_name}.js", defer: true, data: {'turbo-track': 'reload'} rescue nil %> 
+<%- end %>

@@ -1,6 +1,23 @@
-<!-- Valid only for Sprockets //-->
-<!-- Loads assets specific to the current action, works also with Turbo //-->
-<%- if RailsAdmin::config.asset_source == :sprockets %>
+<!-- Loads assets specific to the current action, works with Turbo, also //-->
+<% case RailsAdmin::config.asset_source
+    when :webpacker %>
+    <%= stylesheet_pack_tag "#{controller_name}_#{action_name}", data: {'turbo-track': 'reload'} rescue nil %>
+    <%= javascript_pack_tag "#{controller_name}_#{action_name}", defer: true, data: {'turbo-track': 'reload'} rescue nil %>
+<% when :sprockets %>
     <%= stylesheet_link_tag "#{controller_name}_#{action_name}.css", media: :all, data: {'turbo-track': 'reload'} rescue nil %>
     <%= javascript_include_tag "#{controller_name}_#{action_name}.js", defer: true, data: {'turbo-track': 'reload'} rescue nil %> 
-<%- end %>
+<% when :webpack %>
+    <%= stylesheet_link_tag "#{controller_name}_#{action_name}.css", media: :all, data: {'turbo-track': 'reload'} rescue nil %>
+    <%= javascript_include_tag "#{controller_name}_#{action_name}.js", defer: true, data: {'turbo-track': 'reload'} rescue nil %>
+<% when :importmap %>
+    <%= stylesheet_link_tag "rails_admin.css", media: :all, data: {'turbo-track': 'reload'} %>
+    <%= javascript_inline_importmap_tag(RailsAdmin::Engine.importmap.to_json(resolver: self)) %>
+    <%= javascript_importmap_module_preload_tags(RailsAdmin::Engine.importmap) %>
+    <%= javascript_importmap_shim_nonce_configuration_tag %>
+    <%= javascript_importmap_shim_tag %>
+    <%= # Preload jQuery and make it global, unless jQuery UI fails to initialize
+        tag.script "import jQuery from 'jquery'; window.jQuery = jQuery;".html_safe, type: "module" %>
+    <%= javascript_import_module_tag "#{controller_name}_#{action_name}" rescue nil %>
+<% else
+    raise "Unknown asset_source: #{RailsAdmin::config.asset_source}"
+   end %>

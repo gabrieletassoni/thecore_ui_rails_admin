@@ -27,31 +27,6 @@ Rails.application.configure do
         RailsAdmin::Config.excluded_models << ActionMailbox::InboundEmail
         RailsAdmin::Config.excluded_models << UsedToken rescue puts "No UsedToken Model it could be normal: maybe model_driven_api is not installed"
 
-        RailsAdmin::Config::Actions.add_action "active_job_monitor", :base, :root do
-            show_in_sidebar true
-            show_in_navigation false
-            breadcrumb_parent [nil]
-            # This ensures the action only shows up for Users
-            # visible? authorized?
-            # Not a member action
-            member false
-            # Not a colleciton action
-            collection false
-            
-            link_icon 'fas fa-eye'
-            
-            # You may or may not want pjax for your action
-            # pjax? true
-            
-            http_methods [:get]
-            # Adding the controller which is needed to compute calls from the ui
-            controller do
-                proc do # This is needed because we need that this code is re-evaluated each time is called
-                    puts "Loading Active Job Monitor Controller"
-                end
-            end
-        end
-
         RailsAdmin::Config::Actions::Export.send(:include, ExportConcern)
         RailsAdmin::Config::Actions::BulkDelete.send(:include, BulkDeleteConcern)
         Role.send :include, ThecoreUiRailsAdminRoleConcern
@@ -63,5 +38,7 @@ Rails.application.configure do
         Predicate.send :include, ThecoreUiRailsAdminPredicateConcern
         Target.send :include, ThecoreUiRailsAdminTargetConcern
         ThecoreSettings::Setting.send :include, ThecoreUiRailsAdminSettingsConcern
+
+        require 'root_actions/active_job_monitor'
     end
 end

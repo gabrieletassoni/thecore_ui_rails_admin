@@ -1,17 +1,31 @@
 en:
   export: Export
   export_all: Export All
-  export_found: Export Found
+  export_found: Export Filtered
   export_selected: Export Selected
   delete_selected: Delete Selected
   yes: "Yes"
   no: "No"
   error: Error
   question: Question
-  root_actions: "Actions"
+  root_actions: Actions
   admin:
     misc:
       root_navigation: Actions
+    flash:
+      error: "Unable to perform action %{action} (%{name})"
+      model_not_found: Unable to find model '%{model}'
+      noaction: Unable to perform action
+      object_not_found: "Unable to find model %{model} with id '%{id}'"
+      successful: "Action executed successfully: %{action} (%{name})"
+    actions:
+      thecore_blazer_bi:
+        menu: Business Intelligence
+        breadcrumb: Business Intelligence
+        title: Business Intelligence
+      index:
+        link: Show All Items
+    label: Settings
     advanced:
       label: Advanced
     logging:
@@ -21,10 +35,10 @@ en:
     operations:
       label: Operations
     master_data_set:
-      label: Registries
+      label: Data
     js:
-      true: "True"
-      false: "False"
+      true: True
+      false: False
       is_present: Is present
       is_blank: Is blank
       date: Date ...

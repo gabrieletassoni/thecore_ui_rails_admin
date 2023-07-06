@@ -9,5 +9,11 @@ it:
         menu: Async Worker Monitor
         title: Async Worker Monitor
         breadcrumb: Async Worker Monitor
+      change_password:
+        title: Cambia Password
+        breadcrumb: Cambia Password
+        menu: Cambia Password
+        success: La tua password è stata cambiata con successo
+        error: Si è verificato un errore durante il cambio della password
     scopes:
       _all: Tutti

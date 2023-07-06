@@ -40,5 +40,6 @@ Rails.application.configure do
         ThecoreSettings::Setting.send :include, ThecoreUiRailsAdminSettingsConcern
 
         require 'root_actions/active_job_monitor'
+        require 'member_actions/change_password'
     end
 end

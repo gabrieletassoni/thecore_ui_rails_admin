@@ -24,10 +24,10 @@ module ThecoreUiRailsAdminUserConcern
 
             edit do
                 configure :password do
-                    required false
+                    hide
                 end
                 configure :password_confirmation do
-                    required false
+                    hide
                 end
             end
 

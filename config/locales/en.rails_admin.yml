@@ -1,12 +1,19 @@
 en:
   admin:
+    misc:
+      reset_filters: Remove Filters
     actions:
+      index:
+        no_records: No records to show
       active_job_monitor:
         menu: Async Worker Monitor
         title: Async Worker Monitor
         breadcrumb: Async Worker Monitor
-    misc:
-      scopes: Fast Filters
+      change_password:
+        title: Change Password
+        breadcrumb: Change Password
+        menu: Change Password
+        success: Your password has been changed successfully
+        error: An error occurred while changing your password
     scopes:
-      _all: Tutti
-      
+      _all: All

@@ -28,8 +28,8 @@ en:
     label: Settings
     advanced:
       label: Advanced
-    logging:
-      label: Logging
+    logs:
+      label: Logs
     registries:
       label: Registries
     operations:

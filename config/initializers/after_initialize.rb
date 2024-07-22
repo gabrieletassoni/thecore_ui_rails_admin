@@ -1,6 +1,9 @@
 Rails.application.configure do
     config.after_initialize do
+        puts "ThecoreUiRailsAdmin after_initialize"
+
         RailsAdmin::ApplicationController.send(:include, ConcernCommonApplicationController)
+        ApplicationController.send(:include, ConcernRAApplicationController)
         RailsAdmin::ApplicationController.send(:include, ConcernRAApplicationController)
         ## Rails Admin
         ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration

@@ -1,4 +1,4 @@
-puts "Role Concern from ThecoreUiRailsAdmin"
+puts "Predicate Concern from ThecoreUiRailsAdmin"
 require 'active_support/concern'
 
 module ThecoreUiRailsAdminPredicateConcern

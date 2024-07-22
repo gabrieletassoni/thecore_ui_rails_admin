@@ -1,3 +1,4 @@
+puts "BulkDelete Concern from ThecoreUiRailsAdmin"
 require 'active_support/concern'
 
 module BulkDeleteConcern

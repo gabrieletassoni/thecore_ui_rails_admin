@@ -1,4 +1,4 @@
-Rails.logger.debug "ApplicationController Concern from ThecoreUiCommons"
+Rails.logger.debug "ApplicationController Concern from ThecoreUiRailsAdmin"
 require 'active_support/concern'
 
 module ConcernRAApplicationController

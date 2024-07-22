@@ -29,6 +29,8 @@ Rails.application.configure do
 
         RailsAdmin::Config::Actions::Export.send(:include, ExportConcern)
         RailsAdmin::Config::Actions::BulkDelete.send(:include, BulkDeleteConcern)
+        RailsAdmin::ApplicationController.send(:include, ConcernRAApplicationController)
+
         Role.send :include, ThecoreUiRailsAdminRoleConcern
         User.send :include, ThecoreUiRailsAdminUserConcern
         RoleUser.send :include, ThecoreUiRailsAdminRoleUserConcern

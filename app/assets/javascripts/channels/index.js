@@ -3,7 +3,7 @@
 //= require_self
 //= require_tree ../channels
 
-import * as ActionCable from '@rails/actioncable'
+// import * as ActionCable from '@rails/actioncable'
 
 ActionCable.logger.enabled = false;
 

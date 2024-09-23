@@ -16,7 +16,7 @@ Rails.application.configure do
         ## == Cancan ==
         RailsAdmin::Config.authorize_with :cancancan
 
-        RailsAdmin::Config.sidescroll = { num_frozen_columns: 2 }
+        # RailsAdmin::Config.sidescroll = { num_frozen_columns: 2 }
 
         RailsAdmin::Config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
 

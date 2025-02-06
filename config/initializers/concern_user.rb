@@ -13,6 +13,14 @@ module ThecoreUiRailsAdminUserConcern
         # def locked_enum
         #     [["✔",true],['✘',false]]
         # end
+        # 
+        
+        # locale field is a string which can be chosen from the list of available locales: it and en
+        # The default locale is the one set in the I18n.default_locale
+        # The locale is used to set the language of the user
+        def locale_enum
+            [['Italiano', 'it'], ['English', 'en']]
+        end
         
         rails_admin do
             navigation_label I18n.t("admin.settings.label")

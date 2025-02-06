@@ -6,9 +6,9 @@ it:
       index:
         no_records: Nessun record da mostrare
       active_job_monitor:
-        menu: Async Worker Monitor
-        title: Async Worker Monitor
-        breadcrumb: Async Worker Monitor
+        menu: Monitoraggio Servizi
+        title: Monitoraggio Servizi
+        breadcrumb: Monitoraggio Servizi
       change_password:
         title: Cambia Password
         breadcrumb: Cambia Password

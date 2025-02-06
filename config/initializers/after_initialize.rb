@@ -6,6 +6,8 @@ Rails.application.configure do
         ApplicationController.send(:include, ConcernRAApplicationController)
         RailsAdmin::ApplicationController.send(:include, ConcernRAApplicationController)
         ## Rails Admin
+        require 'rails_admin_abstract_controller'
+        RailsAdmin::Config.parent_controller = '::RailsAdminAbstractController'
         ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
         ## == Devise ==
         RailsAdmin::Config.authenticate_with do 
@@ -18,7 +20,7 @@ Rails.application.configure do
 
         # RailsAdmin::Config.sidescroll = { num_frozen_columns: 2 }
 
-        RailsAdmin::Config.main_app_name = Proc.new { |controller| [ ((ENV["APP_NAME"].presence || Settings.app_name.presence) rescue "Thecore"), "" ] }
+        RailsAdmin::Config.main_app_name = Proc.new { |controller| [ ((ThecoreSettings::Setting.where(ns: :main, key: :app_name).pluck(:raw).first.presence || ENV["APP_NAME"]) rescue "Thecore"), "" ] }
 
         RailsAdmin::Config.show_gravatar = false
 

@@ -13,11 +13,12 @@ RailsAdmin::Config::Actions.add_action "change_password", :base, :member do
         proc do
             # if it's a form submission, then update the password
             if request.patch?
-                if ::User.find(@object.id).update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+                u = ::User.find(@object.id)
+                if u.update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
                     flash[:success] = I18n.t("admin.actions.change_password.success")
                 else
                     # Add errors to the object
-                    flash[:error] = I18n.t("admin.actions.change_password.error")
+                    flash[:error] = I18n.t("admin.actions.change_password.error", errors: u.errors.full_messages.join(', '))
                 end
                 # Redirect to the object
                 redirect_to index_path(model_name: @abstract_model.to_param)

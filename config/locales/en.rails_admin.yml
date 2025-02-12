@@ -14,6 +14,6 @@ en:
         breadcrumb: Change Password
         menu: Change Password
         success: Your password has been changed successfully
-        error: An error occurred while changing your password
+        error: Error! %{errors}
     scopes:
       _all: All

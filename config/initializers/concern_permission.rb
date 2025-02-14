@@ -7,9 +7,9 @@ module ThecoreUiRailsAdminPermissionConcern
     included do
         
         rails_admin do
-            navigation_label I18n.t("admin.settings.label")
+            navigation_label Proc.new {I18n.t("admin.settings.label")}
             navigation_icon 'fas fa-users'
-            desc I18n.t("activerecord.descriptions.role")
+            desc -> {I18n.t("activerecord.descriptions.role")}
             
             visible false
 

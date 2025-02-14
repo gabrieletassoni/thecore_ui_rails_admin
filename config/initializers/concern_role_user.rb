@@ -9,7 +9,7 @@ module ThecoreUiRailsAdminRoleUserConcern
         rails_admin do
             navigation_label Proc.new {I18n.t("admin.settings.label")}
             navigation_icon 'fas fa-users'
-            desc Proc.new  {I18n.t("activerecord.descriptions.role")}
+            # desc Proc.new  {I18n.t("activerecord.descriptions.role")}
             
             visible false
         end

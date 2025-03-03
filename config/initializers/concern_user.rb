@@ -28,7 +28,34 @@ module ThecoreUiRailsAdminUserConcern
             parent Role
             # desc Proc.new { I18n.t("activerecord.descriptions.user") }
             
-            exclude_fields :id, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :lock_version, :role_users
+            # Hide fields: :id, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :lock_version, :role_users
+            configure :id do
+                hide
+            end
+            configure :remember_created_at do
+                hide
+            end
+            configure :sign_in_count do
+                hide
+            end
+            configure :current_sign_in_at do
+                hide
+            end
+            configure :last_sign_in_at do
+                hide
+            end
+            configure :current_sign_in_ip do
+                hide
+            end
+            configure :last_sign_in_ip do
+                hide
+            end
+            configure :lock_version do
+                hide
+            end
+            configure :role_users do
+                hide
+            end
 
             edit do
                 configure :password do

@@ -18,8 +18,6 @@ Rails.application.configure do
         ## == Cancan ==
         RailsAdmin::Config.authorize_with :cancancan
 
-        # RailsAdmin::Config.sidescroll = { num_frozen_columns: 2 }
-
         RailsAdmin::Config.main_app_name = Proc.new { |controller| [ ((ThecoreSettings::Setting.where(ns: :main, key: :app_name).pluck(:raw).first.presence || ENV["APP_NAME"]) rescue "Thecore"), "" ] }
 
         RailsAdmin::Config.show_gravatar = false

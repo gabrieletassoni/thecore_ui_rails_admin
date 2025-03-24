@@ -57,7 +57,7 @@ module ThecoreUiRailsAdminUserConcern
                 hide
             end
 
-            edit do
+            update do
                 configure :password do
                     hide
                 end

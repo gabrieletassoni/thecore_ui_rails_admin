@@ -15,5 +15,17 @@ en:
         menu: Change Password
         success: Your password has been changed successfully
         error: Error! %{errors}
+      save_filters:
+        success: Filters saved successfully
+        error: Error saving filters
+        title: Save Filters
+        breadcrumb: Save Filters
+        menu: Save Filters
+      load_filters:
+        success: Filters loaded successfully
+        error: Error loading filters
+        title: Load Filters
+        breadcrumb: Load Filters
+        menu: Load Filters
     scopes:
       _all: All

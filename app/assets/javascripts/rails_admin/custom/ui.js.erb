@@ -28,6 +28,16 @@ $(document).on('turbo:load', function (event) {
     // Add the app_logo before the Title
     const customer_logo_path = "<%= asset_path('app_logo.svg') %>";
     $(".navbar-brand").prepend(`<img class="navbar-brand-logo" alt="Customer Logo" src="${customer_logo_path}"/>`);
+
+    //This presumes the existence of the save_filter collection custom action for rails_admin
+    const saveFilterLinks = document.querySelectorAll("li.nav-item.icon.save_filters_collection_link > a")
+    saveFilterLinks.forEach(link => {
+    const currentQuery = window.location.search;
+        if (currentQuery) {
+            // Remove the existing query string from the link
+            link.href = link.href.split('?')[0] + currentQuery;
+        }
+    });
 });
 
 const sidepanel = "body > div.container-fluid > div > div.col-sm-3.col-md-2.flex-wrap.p-0"

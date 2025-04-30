@@ -5,6 +5,7 @@ module ThecoreUiRailsAdminUserConcern
     extend ActiveSupport::Concern
     
     included do
+        has_many :saved_filters, class_name: 'SavedFilter', foreign_key: :admin_user_id, dependent: :destroy
 
         # def admin_enum
         #     [["✔",true],['✘',false]]

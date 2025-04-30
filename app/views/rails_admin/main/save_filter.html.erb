@@ -1,0 +1,36 @@
+<!-- START app/views/rails_admin/main/save_filter.html.erb -->
+<div class="form-horizontal">
+  <form method="post" action="">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= hidden_field_tag :query_string, @query_string %>
+
+    <% if @query_string.present? %>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="filter_name">Filter Name</label>
+      <div class="col-sm-10">
+        <input type="text" name="filter_name" id="filter_name" class="form-control" required />
+      </div>
+    </div>
+    <% end %>
+
+    <!-- A row to show an urldecoded version of the filter in @query_string -->
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="filter_query">Filter Query</label>
+      <div class="col-sm-10">
+        <%= @query_html %>
+      </div>
+    </div>
+
+    <!-- Allow this button only if @query_string is not empty -->
+    <% if @query_string.present? %>
+    <div class="form-group row">
+      <div class="col-sm-10 offset-sm-2">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save"></i> Save Filter
+        </button>
+      </div>
+    </div>
+    <% end %>
+  </form>
+</div>
+<!-- END app/views/rails_admin/main/save_filter.html.erb -->

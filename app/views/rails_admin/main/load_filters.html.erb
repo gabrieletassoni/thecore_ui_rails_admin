@@ -1,0 +1,22 @@
+<!-- START app/views/rails_admin/main/save_filter.html.erb -->
+<!-- In Rails Admin Bootstrap, show all the filters which are listed in @saved_filters -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Saved Filters</h3>
+    <ul class="list-group">
+      <% @saved_filters.each do |filter| %>
+        <li class="list-group-item">
+          <%= filter.name %>
+          <a href="<%= index_path(model_name: filter.abstract_model_name.underscore) %>?<%= filter.query_string %>" class="float-right">
+            <i class="fas fa-filter"></i> 
+          </a>
+          <a href="<%= load_filters_path %>?id_to_delete=<%= filter.id %>" class="float-right" data-method="delete" data-confirm="Are you sure?">
+            <i class="fas fa-trash"></i>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<!-- END app/views/rails_admin/main/save_filter.html.erb -->

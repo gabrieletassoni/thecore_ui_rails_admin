@@ -15,5 +15,17 @@ it:
         menu: Cambia Password
         success: La tua password è stata cambiata con successo
         error: Attenzione! %{errors}
+      save_filters:
+        success: Filtri salvati con successo
+        error: Errore durante il salvataggio dei filtri
+        title: Salva Filtri
+        breadcrumb: Salva Filtri
+        menu: Salva Filtri
+      load_filters:
+        success: Filtri caricati con successo
+        error: Errore durante il caricamento dei filtri
+        title: Carica Filtri
+        breadcrumb: Carica Filtri
+        menu: Carica Filtri
     scopes:
       _all: Tutti

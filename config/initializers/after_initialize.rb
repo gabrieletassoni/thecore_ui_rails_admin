@@ -47,5 +47,7 @@ Rails.application.configure do
 
         require 'root_actions/active_job_monitor'
         require 'member_actions/change_password'
+        require 'collection_actions/save_filters'
+        require 'collection_actions/load_filters'
     end
 end

@@ -57,6 +57,9 @@ module ThecoreUiRailsAdminUserConcern
             configure :role_users do
                 hide
             end
+            configure :saved_filters do
+              hide
+            end
 
             update do
                 configure :password do

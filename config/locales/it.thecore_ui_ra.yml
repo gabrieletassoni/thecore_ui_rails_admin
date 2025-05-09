@@ -1,0 +1,87 @@
+it:
+  export: Esporta
+  export_all: Esporta Tutti
+  export_found: Esporta i Filtrati
+  export_selected: Esporta i Selezionati
+  delete_selected: Elimina i Selezionati
+  yes: "Si"
+  no: "No"
+  error: Errore
+  question: Domanda
+  root_actions: "Operazioni"
+  admin:
+    rollincode:
+      number: Quantità
+      show: "Mostra gli elementi"
+    misc:
+      root_navigation: Operazioni
+      reset_filters: Rimuovi i Filtri
+    actions:
+      thecore_blazer_bi:
+        menu: Business Intelligence
+        breadcrumb: Business Intelligence
+        title: Business Intelligence
+      index:
+        link: Mostra tutti gli Elementi
+        no_records: Nessun record da mostrare
+      active_job_monitor:
+        menu: Monitoraggio Servizi
+        title: Monitoraggio Servizi
+        breadcrumb: Monitoraggio Servizi
+      change_password:
+        title: Cambia Password
+        breadcrumb: Cambia Password
+        menu: Cambia Password
+        success: La tua password è stata cambiata con successo
+        error: Attenzione! %{errors}
+      save_filters:
+        success: Filtri salvati con successo
+        error: Errore durante il salvataggio dei filtri
+        title: Salva Filtri
+        breadcrumb: Salva Filtri
+        menu: Salva Filtri
+      load_filters:
+        success: Filtri caricati con successo
+        error: Errore durante il caricamento dei filtri
+        title: Carica Filtri
+        breadcrumb: Carica Filtri
+        menu: Carica Filtri
+    scopes:
+      _all: Tutti
+    flash:
+      error: "Impossibile eseguire l'azione %{action} (%{name})"
+      model_not_found: Impossibile trovare il modello '%{model}'
+      noaction: Impossibile eseguire l'azione
+      object_not_found: "Impossibile trovare il modello %{model} con id '%{id}'"
+      successful: "Azione eseguita con successo: %{action} (%{name})"
+    label: "Impostazioni"
+    advanced:
+      label: Avanzate
+    logs:
+      label: Logs
+    registries:
+      label: Anagrafiche
+    operations:
+      label: Operatività
+    master_data_set:
+      label: Dati
+    js:
+      true: Vero
+      false: Falso
+      is_present: Is present
+      is_blank: Is blank
+      date: Date ...
+      between_and_: Between ... and ...
+      today: Today
+      yesterday: Yesterday
+      this_week: This week
+      last_week: Last week
+      number: Number ...
+      contains: Contains
+      is_exactly: Is exactly
+      starts_with: Starts with
+      ends_with: Ends with
+      too_many_objects: "Too many objects, use search box above"
+      no_objects: "No objects found"
+    loading: "Loading..."
+    toggle_navigation: Toggle navigation

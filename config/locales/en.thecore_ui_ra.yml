@@ -17,6 +17,12 @@ en:
       root_navigation: Operations
       reset_filters: Remove Filters
     actions:
+      test_ldap_server:
+        title: Test LDAP Server
+        success: "The LDAP server is reachable"
+        error: "The LDAP server is not reachable"
+        menu: Test LDAP Server
+        breadcrumb: Test LDAP Server
       thecore_blazer_bi:
         menu: Business Intelligence
         breadcrumb: Business Intelligence

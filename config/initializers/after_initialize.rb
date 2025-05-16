@@ -47,6 +47,8 @@ Rails.application.configure do
 
         require 'root_actions/active_job_monitor'
         require 'member_actions/change_password'
+        require 'member_actions/test_ldap_server'
+        require 'member_actions/import_users_from_ldap'
         require 'collection_actions/save_filters'
         require 'collection_actions/load_filters'
     end

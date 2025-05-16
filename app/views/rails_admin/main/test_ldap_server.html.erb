@@ -1,0 +1,10 @@
+<!-- Logic to test LDAP server connection -->
+<% if @ldap_server_test %>
+  <div class="alert alert-success">
+    <%=@message%>
+  </div>
+<% else %>
+  <div class="alert alert-danger">
+    <%=@message%>
+  </div>
+<% end %>

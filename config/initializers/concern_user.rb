@@ -60,6 +60,9 @@ module ThecoreUiRailsAdminUserConcern
             configure :saved_filters do
               hide
             end
+            configure :auth_source do
+              read_only true
+            end
 
             update do
                 configure :password do

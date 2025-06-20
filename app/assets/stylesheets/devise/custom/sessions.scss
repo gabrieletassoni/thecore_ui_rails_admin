@@ -6,9 +6,28 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-form.new_user {
+form.new_user, 
+form.button_to {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+// The buttons with type submit inside a form with class button_to
+form.button_to button[type=submit] {
+    // Make it like the input[type=submit]
+    background-color: $primary;
+    color: white;
+    border: 0;
+    border-radius: 2em;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 0.5em rgba($primary, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 70%;
 }
 
 label {
@@ -29,6 +48,10 @@ label {
     padding: 0px;
     background-color: white !important;
     max-width: 1136px;
+
+    div.logos, div.login-methods {
+        width: 50%;
+    }
 
     .field,
     .actions {
@@ -62,7 +85,7 @@ label {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex-basis: 50%;
+        // flex-basis: 50%;
         flex-grow: 0;
     }
 }

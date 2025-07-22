@@ -46,7 +46,6 @@ Rails.application.configure do
         ThecoreSettings::Setting.send :include, ThecoreUiRailsAdminSettingsConcern
 
         require 'root_actions/active_job_monitor'
-        require 'root_actions/grafana'
         require 'member_actions/change_password'
         require 'member_actions/test_ldap_server'
         require 'member_actions/import_users_from_ldap'

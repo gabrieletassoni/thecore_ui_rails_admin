@@ -45,6 +45,7 @@ Rails.application.configure do
         Target.send :include, ThecoreUiRailsAdminTargetConcern
         ThecoreSettings::Setting.send :include, ThecoreUiRailsAdminSettingsConcern
 
+        require 'root_actions/general_computation'
         require 'root_actions/active_job_monitor'
         require 'member_actions/change_password'
         require 'member_actions/test_ldap_server'

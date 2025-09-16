@@ -13,5 +13,8 @@ module ExportConcern
       # In index, instead, I show it only if there are records in the current view
       bindings[:controller].action_name == "index" ? (authorized? && !bindings[:controller].instance_variable_get("@objects").blank?) : true
     end
+    register_instance_option :bulkable? do
+      true
+    end
   end
 end

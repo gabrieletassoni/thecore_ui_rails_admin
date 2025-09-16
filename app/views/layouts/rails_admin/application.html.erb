@@ -4,6 +4,14 @@
   <head>
     <%= render "layouts/rails_admin/head" %>
     <%= render "layouts/rails_admin/controller_assets" %>
+
+    <!-- meta tags to get current user id and current model name which in rails_admin is not controller_name, since it's always main, but the abstract model one for use in custom javascript -->
+    <meta name="current-user-id" content="<%= current_user.id %>">
+    <%
+=begin%>
+ <meta name="current-model-name" content="<%= @abstract_model.param_key %>"> 
+<%
+=end%>
   </head>
   <body class="rails_admin">
     <div data-i18n-options="<%= I18n.t("admin.js").to_json %>" id="admin-js"></div>

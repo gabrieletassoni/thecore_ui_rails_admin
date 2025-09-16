@@ -6,6 +6,8 @@ module ThecoreUiRailsAdminUserConcern
     
     included do
         has_many :saved_filters, class_name: 'SavedFilter', foreign_key: :admin_user_id, dependent: :destroy
+        has_many :user_preferences, class_name: 'UserPreference', foreign_key: :user_id, dependent: :destroy, inverse_of: :user
+        accepts_nested_attributes_for :user_preferences, allow_destroy: true
 
         # def admin_enum
         #     [["✔",true],['✘',false]]

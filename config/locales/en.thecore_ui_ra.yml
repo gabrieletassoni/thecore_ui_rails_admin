@@ -1,4 +1,5 @@
 en:
+  are_you_sure: Are you sure? This operation, if performed on a wide range of data, can lead to the crash of the server.
   export: Export
   export_all: Export All
   export_found: Export Filtered

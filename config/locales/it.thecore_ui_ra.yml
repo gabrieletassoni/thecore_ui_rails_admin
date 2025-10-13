@@ -1,4 +1,5 @@
 it:
+  are_you_sure: Sei sicuro? Questa operazione, se eseguita su una grande quantitá di dati, puó bloccare il server.
   export: Esporta
   export_all: Esporta Tutti
   export_found: Esporta i Filtrati

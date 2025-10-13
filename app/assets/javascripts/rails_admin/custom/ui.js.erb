@@ -48,6 +48,13 @@ $(document).on('turbo:load', function (event) {
         }
     });
 
+    // The a element found at #list form div div.row div.col-sm-6:nth-child(2) must throw a "Are you sure confirmation This operation can slow down the system." nag, which only if accepted will follow the link.
+    const export_all_element = document.querySelector("#list form div div.row div.col-sm-6:nth-child(2) a")
+    var confirmIt = function (e) {
+        if (!confirm('<%=I18n.t :are_you_sure %>')) e.preventDefault();
+    };
+    if (export_all_element) export_all_element.addEventListener('click', confirmIt, false);
+
     // If URL ends with /bulk_action, uncheck all checkboxes
     if (currentURL.pathname.endsWith('/bulk_action')) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"][name^="schema"]');

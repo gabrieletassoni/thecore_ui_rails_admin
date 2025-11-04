@@ -56,7 +56,7 @@ $(document).on('turbo:load', function (event) {
     if (export_all_element) export_all_element.addEventListener('click', confirmIt, false);
 
     // If URL ends with /bulk_action, uncheck all checkboxes
-    if (currentURL.pathname.endsWith('/bulk_action')) {
+    if (currentURL.pathname.endsWith('/bulk_action') || currentURL.pathname.endsWith('/export')) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"][name^="schema"]');
         checkboxes.forEach(checkbox => {
             checkbox.checked = false;

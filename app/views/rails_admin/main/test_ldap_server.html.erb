@@ -1,10 +1,59 @@
-<!-- Logic to test LDAP server connection -->
-<% if @ldap_server_test %>
-  <div class="alert alert-success">
-    <%=@message%>
+<!-- Show the LDAP server connection status -->
+<div class="p-3 mb-2 bg-<%=@status%> text-white">
+  <%=@message%>
+</div>
+
+<!-- Show an informative and helpful section with the information about the LDAP server configuration -->
+<!-- The LdapServer has these fields: host, port, admin_dn, admin_password, base_dn, ssl_enabled, auth_field -->
+<div class="card">
+  <div class="card-header">
+    <h5>LDAP Server Configuration</h5>
   </div>
-<% else %>
-  <div class="alert alert-danger">
-    <%=@message%>
+  <div class="card-body">
+    <p><strong>Host:</strong> <%= @ldap.host %></p>
+    <p><strong>Port:</strong> <%= @ldap.port %></p>
+    <p><strong>Admin DN:</strong> <%= @ldap.admin_user %></p>
+    <p><strong>Base DN:</strong> <%= @ldap.base_dn %></p>
+    <p><strong>SSL Enabled:</strong> <%= @ldap.use_ssl ? 'Yes' : 'No' %></p>
+    <p><strong>Authentication Field:</strong> <%= @ldap.auth_field %></p>
+  </div>
+</div>
+
+<!-- Form to test LDAP connection with custom credentials -->
+<div class="card mt-4">
+  <div class="card-header">
+    <h5>Test LDAP Connection with Custom Credentials</h5>
+  </div>
+  <div class="card-body">
+    <%= form_with url: rails_admin.test_ldap_server_path, method: :post, local: true do |form| %>
+      <div class="mb-3">
+        <%= form.label :email, 'Email', class: 'form-label' %>
+        <%= form.email_field :email, class: 'form-control', required: true %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :password, 'Password', class: 'form-label' %>
+        <%= form.password_field :password, class: 'form-control', required: true %>
+      </div>
+      <%= form.submit 'Test Connection', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+<!-- In the @ldap_user variable, if present, show the details of the authenticated user -->
+<% if @ldap_user %>
+  <div class="card mt-4">
+    <div class="card-header">
+      <h5>Authenticated LDAP User Details</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>DN:</strong> <%= @ldap_user.dn %></p>
+      <p><strong>Attributes:</strong></p>
+      <ul>
+        <% @ldap_user.each_attribute do |key, values| %>
+          <li><strong><%= key %>:</strong> <%= values.join(', ') %></li>
+        <% end %>
+      </ul>
+
+    </div>
   </div>
 <% end %>

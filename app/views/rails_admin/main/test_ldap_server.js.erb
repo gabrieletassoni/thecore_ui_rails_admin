@@ -1,0 +1,19 @@
+$('#spinner').addClass("visually-hidden");
+
+console.log("LDAP Test: Received response from server.");
+
+// If @ldap_user exists, authentication succeeded, translate the following Ruby code to jQuery
+<% if @ldap_user %>
+    <% @ldap_attributes.each do |key, values| %>
+    $("#ldap-user-attributes").append("<li><strong><%= j key %>:</strong> <%= j values.join(', ') %></li>");
+    <% end %>
+
+    // Remove the visually-hidden class to show the user details section from the #ldap-user-details div
+    $("#ldap-user-details").removeClass("visually-hidden");
+
+    // Set the DN span text to the user's DN
+    $("#ldap-user-dn").text("<%= j @ldap_user.dn %>");
+<% else %>
+    // If no @ldap_user, hide the user details section
+    $("#ldap-user-details").addClass("visually-hidden");
+<% end %>

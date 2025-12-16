@@ -25,7 +25,7 @@
     <h5>Test LDAP Connection with Custom Credentials</h5>
   </div>
   <div class="card-body">
-    <%= form_with url: rails_admin.test_ldap_server_path, method: :post, local: true do |form| %>
+    <%= form_with url: rails_admin.test_ldap_server_path, method: :post, remote: true, local: false do |form| %>
       <div class="mb-3">
         <%= form.label :email, 'Email', class: 'form-label' %>
         <%= form.email_field :email, class: 'form-control', required: true %>
@@ -34,26 +34,35 @@
         <%= form.label :password, 'Password', class: 'form-label' %>
         <%= form.password_field :password, class: 'form-control', required: true %>
       </div>
-      <%= form.submit 'Test Connection', class: 'btn btn-primary' %>
+      <%= form.submit 'Test Connection', class: 'btn btn-primary', id: "test-connection" %>
     <% end %>
   </div>
 </div>
 
-<!-- In the @ldap_user variable, if present, show the details of the authenticated user -->
-<% if @ldap_user %>
-  <div class="card mt-4">
-    <div class="card-header">
-      <h5>Authenticated LDAP User Details</h5>
-    </div>
-    <div class="card-body">
-      <p><strong>DN:</strong> <%= @ldap_user.dn %></p>
-      <p><strong>Attributes:</strong></p>
-      <ul>
-        <% @ldap_user.each_attribute do |key, values| %>
-          <li><strong><%= key %>:</strong> <%= values.join(', ') %></li>
-        <% end %>
-      </ul>
-
-    </div>
+<!-- In the @ldap_user variable, if present, show the details of the authenticated user, I'll fill these via JS -->
+<div class="card mt-4 visually-hidden" id="ldap-user-details">
+  <div class="card-header">
+    <h5>Authenticated LDAP User Details</h5>
   </div>
-<% end %>
+  <div class="card-body">
+    <p><strong>DN:</strong> <span id="ldap-user-dn"></span></p>
+    <p><strong>Attributes:</strong></p>
+    <ul id="ldap-user-attributes">
+    </ul>
+  </div>
+</div>
+
+<span id="spinner" class="spinner-grow spinner-grow-sm visually-hidden" role="status" aria-hidden="true"></span>
+
+<script>
+    // This is the javascript that will update the div with the new token //-->
+    document.addEventListener("turbo:load", function() {
+        $('#test-connection').on('click', function(e, data, status, xhr) {
+            $('#spinner').removeClass("visually-hidden");
+            // Clear the previous user details
+            $("#ldap-user-dn").text("");
+            $("#ldap-user-attributes").empty();
+            $("#ldap-user-details").addClass("visually-hidden");
+        });
+    });
+</script>

@@ -27,23 +27,24 @@ RailsAdmin::Config::Actions.add_action "test_ldap_server", :base, :member do
         @ldap_user = authenticator.auth_on_single_server(@ldap)
         @ldap_attributes = {}
 
-        @ldap_user.each_attribute do |key, values|
-          safe_values = values.map do |v|
-            s = v.to_s
+        if @ldap_user.present?
+          @ldap_user.each_attribute do |key, values|
+            safe_values = values.map do |v|
+              s = v.to_s
 
-            # 1. Declare UTF-8
-            s.force_encoding("UTF-8")
+              # 1. Declare UTF-8
+              s.force_encoding("UTF-8")
 
-            # 2. Replace invalid / undefined bytes
-            s.encode!("UTF-8", invalid: :replace, undef: :replace, replace: "�")
+              # 2. Replace invalid / undefined bytes
+              s.encode!("UTF-8", invalid: :replace, undef: :replace, replace: "�")
 
-            s
+              s
+            end
+
+            @ldap_attributes[key] = safe_values
           end
+          Rails.logger.debug("LDAP Test: Authentication result for user #{params[:email]}: #{@ldap_user.inspect}")
 
-          @ldap_attributes[key] = safe_values
-        end
-        Rails.logger.debug("LDAP Test: Authentication result for user #{params[:email]}: #{@ldap_user.inspect}")
-        if @ldap_user
           @message += " " + I18n.t("admin.actions.test_ldap_server.auth_success", email: params[:email])
         else
           @message += " " + I18n.t("admin.actions.test_ldap_server.auth_failure", email: params[:email])

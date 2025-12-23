@@ -1,4 +1,5 @@
 en:
+  active_record_range_error: "ActiveRecord::RangeError: This may be due to a value being out of range. Please consider using specific filters on attributes to narrow down your query."
   are_you_sure: Are you sure? This operation, if performed on a wide range of data, can lead to the crash of the server.
   export: Export
   export_all: Export All

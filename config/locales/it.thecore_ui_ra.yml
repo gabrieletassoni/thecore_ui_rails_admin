@@ -1,4 +1,5 @@
 it:
+  active_record_range_error: "ActiveRecord::RangeError: Questo potrebbe essere dovuto a un valore fuori intervallo. Si prega di considerare l'uso di filtri specifici sugli attributi per restringere la query."
   are_you_sure: Sei sicuro? Questa operazione, se eseguita su una grande quantitá di dati, puó bloccare il server.
   export: Esporta
   export_all: Esporta Tutti

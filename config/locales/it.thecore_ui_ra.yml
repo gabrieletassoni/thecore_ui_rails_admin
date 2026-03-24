@@ -1,12 +1,12 @@
 it:
-  active_record_range_error: "ActiveRecord::RangeError: Questo potrebbe essere dovuto a un valore fuori intervallo. Si prega di considerare l'uso di filtri specifici sugli attributi per restringere la query."
-  are_you_sure: Sei sicuro? Questa operazione, se eseguita su una grande quantitá di dati, puó bloccare il server.
+  active_record_range_error: "ActiveRecord::RangeError: Questo potrebbe essere dovuto a un valore fuori intervallo. Si prega di usare filtri specifici sugli attributi per restringere la query."
+  are_you_sure: Sei sicuro? Questa operazione, se eseguita su una grande quantità di dati, può bloccare il server.
   export: Esporta
   export_all: Esporta Tutti
   export_found: Esporta i Filtrati
   export_selected: Esporta i Selezionati
   delete_selected: Elimina i Selezionati
-  yes: "Si"
+  yes: "Sì"
   no: "No"
   error: Errore
   question: Domanda
@@ -41,7 +41,7 @@ it:
         breadcrumb: Cambia Password
         menu: Cambia Password
         success: La tua password è stata cambiata con successo
-        error: Attenzione! %{errors}
+        error: "Attenzione! %{errors}"
       save_filters:
         success: Filtri salvati con successo
         error: Errore durante il salvataggio dei filtri
@@ -58,7 +58,7 @@ it:
       _all: Tutti
     flash:
       error: "Impossibile eseguire l'azione %{action} (%{name})"
-      model_not_found: Impossibile trovare il modello '%{model}'
+      model_not_found: "Impossibile trovare il modello '%{model}'"
       noaction: Impossibile eseguire l'azione
       object_not_found: "Impossibile trovare il modello %{model} con id '%{id}'"
       successful: "Azione eseguita con successo: %{action} (%{name})"
@@ -66,7 +66,7 @@ it:
     advanced:
       label: Avanzate
     logs:
-      label: Logs
+      label: Log
     registries:
       label: Anagrafiche
     operations:
@@ -76,20 +76,20 @@ it:
     js:
       true: Vero
       false: Falso
-      is_present: Is present
-      is_blank: Is blank
-      date: Date ...
-      between_and_: Between ... and ...
-      today: Today
-      yesterday: Yesterday
-      this_week: This week
-      last_week: Last week
-      number: Number ...
-      contains: Contains
-      is_exactly: Is exactly
-      starts_with: Starts with
-      ends_with: Ends with
-      too_many_objects: "Too many objects, use search box above"
-      no_objects: "No objects found"
-    loading: "Loading..."
-    toggle_navigation: Toggle navigation
+      is_present: È presente
+      is_blank: È vuoto
+      date: Data...
+      between_and_: Tra... e...
+      today: Oggi
+      yesterday: Ieri
+      this_week: Questa settimana
+      last_week: La settimana scorsa
+      number: Numero...
+      contains: Contiene
+      is_exactly: È esattamente
+      starts_with: Inizia con
+      ends_with: Termina con
+      too_many_objects: "Troppi oggetti, usa il campo di ricerca sopra"
+      no_objects: "Nessun oggetto trovato"
+    loading: "Caricamento..."
+    toggle_navigation: Mostra/Nascondi navigazione

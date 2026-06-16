@@ -54,6 +54,12 @@ it:
         title: Carica Filtri
         breadcrumb: Carica Filtri
         menu: Carica Filtri
+      push_notification_test:
+        menu: Test Notifica Push
+        title: Test Notifica Push
+        breadcrumb: Test Notifica Push
+        success: "Notifica di test inviata a %{count} sottoscrittore/i"
+        error_blank_title: "Il titolo non può essere vuoto"
     scopes:
       _all: Tutti
     flash:

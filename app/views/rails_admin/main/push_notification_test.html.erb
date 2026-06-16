@@ -1,0 +1,76 @@
+<span class="hide-toolbar"></span>
+
+<div class="container mt-4">
+  <h2>Push Notification Test</h2>
+
+  <% if flash[:success].present? %>
+    <div class="alert alert-success"><%= flash[:success] %></div>
+  <% end %>
+  <% if flash[:error].present? %>
+    <div class="alert alert-danger"><%= flash[:error] %></div>
+  <% end %>
+
+  <%= form_with url: push_notification_test_path, method: :post, local: true do |form| %>
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Select Subscribers</h5>
+      </div>
+      <div class="card-body">
+        <% if @subscribers.any? %>
+          <% @subscribers.each do |subscriber| %>
+            <div class="form-check">
+              <%= check_box_tag "subscriber_ids[]",
+                    subscriber.id,
+                    false,
+                    class: "form-check-input",
+                    id: "subscriber_#{subscriber.id}" %>
+              <label class="form-check-label" for="subscriber_<%= subscriber.id %>">
+                <strong><%= subscriber.user&.email || "user ##{subscriber.user_id}" %></strong>
+                &mdash; <code><%= subscriber.endpoint.truncate(80) %></code>
+                <% if subscriber.user_agent.present? %>
+                  <small class="text-muted">(<%= subscriber.user_agent.truncate(50) %>)</small>
+                <% end %>
+              </label>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No active subscribers found.</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Message</h5>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <%= form.label :title, "Title", class: "form-label" %>
+          <%= form.text_field :title, class: "form-control", required: true,
+                placeholder: "Notification title" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :body, "Body", class: "form-label" %>
+          <%= form.text_area :body, class: "form-control", rows: 3, required: true,
+                placeholder: "Notification body text" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :url, "URL (optional)", class: "form-label" %>
+          <%= form.url_field :url, class: "form-control",
+                placeholder: "https://example.com/target-page" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :icon, "Icon URL (optional)", class: "form-label" %>
+          <%= form.url_field :icon, class: "form-control",
+                placeholder: "https://example.com/icon.png" %>
+        </div>
+
+        <%= form.submit "Send Test", class: "btn btn-primary",
+              disabled: @subscribers.empty? %>
+      </div>
+    </div>
+  <% end %>
+</div>

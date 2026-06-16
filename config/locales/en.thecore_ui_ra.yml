@@ -54,6 +54,12 @@ en:
         title: Load Filters
         breadcrumb: Load Filters
         menu: Load Filters
+      push_notification_test:
+        menu: Test Push Notification
+        title: Test Push Notification
+        breadcrumb: Test Push Notification
+        success: "Sent test notification to %{count} subscriber(s)"
+        error_blank_title: "Title can't be blank"
     scopes:
       _all: All
     flash:

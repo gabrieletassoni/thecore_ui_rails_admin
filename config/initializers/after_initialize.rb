@@ -47,6 +47,7 @@ Rails.application.configure do
 
     require "root_actions/general_computation"
     require "root_actions/active_job_monitor"
+    require "root_actions/push_notification_test"
     require "member_actions/change_password"
     require "member_actions/test_ldap_server"
     # require 'member_actions/import_users_from_ldap' # Disabled as it's a bit risky to have it in the UI

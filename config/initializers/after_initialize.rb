@@ -38,6 +38,8 @@ Rails.application.configure do
     Role.send :include, ThecoreUiRailsAdminRoleConcern
     User.send :include, ThecoreUiRailsAdminUserConcern
     RoleUser.send :include, ThecoreUiRailsAdminRoleUserConcern
+    PushSubscriber.send :include, ThecoreUiRailsAdminPushSubscriberConcern
+    PushMessage.send :include, ThecoreUiRailsAdminPushMessageConcern
     Action.send :include, ThecoreUiRailsAdminActionConcern
     PermissionRole.send :include, ThecoreUiRailsAdminPermissionRoleConcern
     Permission.send :include, ThecoreUiRailsAdminPermissionConcern

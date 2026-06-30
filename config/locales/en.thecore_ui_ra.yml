@@ -60,6 +60,22 @@ en:
         breadcrumb: Test Push Notification
         success: "Sent test notification to %{count} subscriber(s)"
         error_blank_title: "Title can't be blank"
+        filter_title: "Filter Subscribers"
+        filter_placeholder: "Search by email..."
+        filter_button: "Search"
+        total_count: "%{count} active subscriber(s)"
+        disclaimer_no_filter: "There are %{count} active subscriber(s) in the system. Start typing an email address in the search field above to filter and select recipients."
+        no_results: "No active subscribers found for this email."
+        select_subscribers: "Select Subscribers"
+        message_title: "Message"
+        title_label: "Title"
+        title_placeholder: "Notification title"
+        body_label: "Body"
+        body_placeholder: "Notification body text"
+        url_label: "URL (optional)"
+        icon_label: "Icon URL (optional)"
+        send_button: "Send Test"
+        large_selection_warning: "You are about to send to %{count} subscriber(s). This may take a while. Do you want to continue?"
     scopes:
       _all: All
     flash:

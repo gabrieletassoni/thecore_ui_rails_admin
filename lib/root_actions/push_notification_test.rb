@@ -1,3 +1,5 @@
+LARGE_SUBSCRIBER_THRESHOLD = 10
+
 RailsAdmin::Config::Actions.add_action "push_notification_test", :base, :root do
   show_in_sidebar true
   show_in_navigation false
@@ -12,7 +14,16 @@ RailsAdmin::Config::Actions.add_action "push_notification_test", :base, :root do
 
   controller do
     proc do
-      @subscribers = PushSubscriber.active.includes(:user)
+      @large_subscriber_threshold = LARGE_SUBSCRIBER_THRESHOLD
+      @total_count = PushSubscriber.active.count
+      @subscriber_emails = User.joins(:push_subscribers).merge(PushSubscriber.active).distinct.pluck(:email)
+
+      filter_query = params[:q].presence
+      @subscribers = if filter_query
+        PushSubscriber.active.includes(:user).joins(:user).where("users.email ILIKE ?", "%#{filter_query}%")
+      else
+        []
+      end
 
       if request.post?
         params.permit!

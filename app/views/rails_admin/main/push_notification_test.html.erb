@@ -1,7 +1,7 @@
 <span class="hide-toolbar"></span>
 
 <div class="container mt-4">
-  <h2>Push Notification Test</h2>
+  <h2><%= t("admin.actions.push_notification_test.title") %></h2>
 
   <% if flash[:success].present? %>
     <div class="alert alert-success"><%= flash[:success] %></div>
@@ -10,10 +10,41 @@
     <div class="alert alert-danger"><%= flash[:error] %></div>
   <% end %>
 
-  <%= form_with url: push_notification_test_path, method: :post, local: true do |form| %>
+  <datalist id="subscriber-email-list">
+    <% @subscriber_emails.each do |email| %>
+      <option value="<%= email %>">
+    <% end %>
+  </datalist>
+
+  <%= form_with url: push_notification_test_path, method: :get, local: true do |f| %>
+    <div class="card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h5 class="mb-0"><%= t("admin.actions.push_notification_test.filter_title") %></h5>
+        <span class="badge bg-secondary">
+          <%= t("admin.actions.push_notification_test.total_count", count: @total_count) %>
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="input-group">
+          <%= f.text_field :q,
+                value: params[:q],
+                class: "form-control",
+                placeholder: t("admin.actions.push_notification_test.filter_placeholder"),
+                list: "subscriber-email-list",
+                autocomplete: "off" %>
+          <%= f.submit t("admin.actions.push_notification_test.filter_button"),
+                class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_with url: push_notification_test_path, method: :post, local: true, id: "send-push-form" do |form| %>
+    <%= hidden_field_tag :q, params[:q] %>
+
     <div class="card mb-4">
       <div class="card-header">
-        <h5 class="mb-0">Select Subscribers</h5>
+        <h5 class="mb-0"><%= t("admin.actions.push_notification_test.select_subscribers") %></h5>
       </div>
       <div class="card-body">
         <% if @subscribers.any? %>
@@ -22,7 +53,7 @@
               <%= check_box_tag "subscriber_ids[]",
                     subscriber.id,
                     false,
-                    class: "form-check-input",
+                    class: "form-check-input subscriber-checkbox",
                     id: "subscriber_#{subscriber.id}" %>
               <label class="form-check-label" for="subscriber_<%= subscriber.id %>">
                 <strong><%= subscriber.user&.email || "user ##{subscriber.user_id}" %></strong>
@@ -33,44 +64,73 @@
               </label>
             </div>
           <% end %>
+        <% elsif params[:q].present? %>
+          <p class="text-muted"><%= t("admin.actions.push_notification_test.no_results") %></p>
         <% else %>
-          <p class="text-muted">No active subscribers found.</p>
+          <p class="text-muted">
+            <%= t("admin.actions.push_notification_test.disclaimer_no_filter", count: @total_count) %>
+          </p>
         <% end %>
       </div>
     </div>
 
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5 class="mb-0">Message</h5>
+    <% if @subscribers.any? %>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0"><%= t("admin.actions.push_notification_test.message_title") %></h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <%= form.label :title, t("admin.actions.push_notification_test.title_label"), class: "form-label" %>
+            <%= form.text_field :title, class: "form-control", required: true,
+                  placeholder: t("admin.actions.push_notification_test.title_placeholder") %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :body, t("admin.actions.push_notification_test.body_label"), class: "form-label" %>
+            <%= form.text_area :body, class: "form-control", rows: 3,
+                  placeholder: t("admin.actions.push_notification_test.body_placeholder") %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :url, t("admin.actions.push_notification_test.url_label"), class: "form-label" %>
+            <%= form.url_field :url, class: "form-control",
+                  placeholder: "https://example.com/target-page" %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :icon, t("admin.actions.push_notification_test.icon_label"), class: "form-label" %>
+            <%= form.url_field :icon, class: "form-control",
+                  placeholder: "https://example.com/icon.png" %>
+          </div>
+
+          <%= form.submit t("admin.actions.push_notification_test.send_button"),
+                class: "btn btn-primary",
+                id: "send-push-btn" %>
+        </div>
       </div>
-      <div class="card-body">
-        <div class="mb-3">
-          <%= form.label :title, "Title", class: "form-label" %>
-          <%= form.text_field :title, class: "form-control", required: true,
-                placeholder: "Notification title" %>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :body, "Body", class: "form-label" %>
-          <%= form.text_area :body, class: "form-control", rows: 3, required: true,
-                placeholder: "Notification body text" %>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :url, "URL (optional)", class: "form-label" %>
-          <%= form.url_field :url, class: "form-control",
-                placeholder: "https://example.com/target-page" %>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :icon, "Icon URL (optional)", class: "form-label" %>
-          <%= form.url_field :icon, class: "form-control",
-                placeholder: "https://example.com/icon.png" %>
-        </div>
-
-        <%= form.submit "Send Test", class: "btn btn-primary",
-              disabled: @subscribers.empty? %>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
+
+<script>
+  (function () {
+    var form = document.getElementById("send-push-form");
+    if (!form) return;
+
+    var threshold = <%= @large_subscriber_threshold %>;
+    var warningTemplate = "<%= j t('admin.actions.push_notification_test.large_selection_warning',
+                                    count: '__N__',
+                                    threshold: @large_subscriber_threshold) %>";
+
+    form.addEventListener("submit", function (e) {
+      var checked = form.querySelectorAll(".subscriber-checkbox:checked").length;
+      if (checked > threshold) {
+        var msg = warningTemplate.replace("__N__", checked);
+        if (!confirm(msg)) {
+          e.preventDefault();
+        }
+      }
+    });
+  })();
+</script>

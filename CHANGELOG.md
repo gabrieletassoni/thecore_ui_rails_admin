@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.7.0] - 2026-06-30
+
+### Changed
+- **`push_notification_test` root action** — improved subscriber load/filter strategy for large datasets:
+  - `@subscriber_emails` populated via `pluck(:email)` (strings only) for a native HTML `<datalist>` autocomplete on the email search input — no full AR objects loaded.
+  - Initial state shows active subscriber count (`PushSubscriber.active.count`) + localized disclaimer instead of loading all subscribers.
+  - Filter via GET (`params[:q]` → `ILIKE` query) — page loads with filtered checkboxes; empty before any search.
+  - Two separate forms: GET for filtering, POST for sending.
+  - JS confirm alert when > 10 subscribers selected (`LARGE_SUBSCRIBER_THRESHOLD = 10`), message localized in en/it.
+  - New i18n keys added under `admin.actions.push_notification_test` in both `en.thecore_ui_ra.yml` and `it.thecore_ui_ra.yml`.
+
 ## [3.5.10] - 2026-06-16
 
 ### Added

@@ -60,6 +60,22 @@ it:
         breadcrumb: Test Notifica Push
         success: "Notifica di test inviata a %{count} sottoscrittore/i"
         error_blank_title: "Il titolo non può essere vuoto"
+        filter_title: "Filtra Subscriber"
+        filter_placeholder: "Cerca per email..."
+        filter_button: "Cerca"
+        total_count: "%{count} subscriber/i attivi"
+        disclaimer_no_filter: "Ci sono %{count} subscriber/i attivi nel sistema. Inizia a digitare un indirizzo email nel campo di ricerca per filtrare e selezionare i destinatari."
+        no_results: "Nessun subscriber attivo trovato per questa email."
+        select_subscribers: "Seleziona Subscriber"
+        message_title: "Messaggio"
+        title_label: "Titolo"
+        title_placeholder: "Titolo della notifica"
+        body_label: "Testo"
+        body_placeholder: "Testo del messaggio"
+        url_label: "URL (opzionale)"
+        icon_label: "URL icona (opzionale)"
+        send_button: "Invia Test"
+        large_selection_warning: "Stai per inviare a %{count} subscriber/i. L'operazione potrebbe richiedere del tempo. Vuoi continuare?"
     scopes:
       _all: Tutti
     flash:

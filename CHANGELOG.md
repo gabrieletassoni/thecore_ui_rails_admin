@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.8.0] - 2026-09-02
+
+### Added
+- **`ThecoreUiRailsAdminDefaultNavigationConcern`** (`config/initializers/concern_default_navigation.rb`) — gives every `ApplicationRecord` subclass a default `navigation_label`/`navigation_icon` in RailsAdmin with no explicit `RailsAdmin::ModelName` concern required, registered into `ThecoreBackendCommons::DefaultModuleRegistry` (requires `thecore_backend_commons ~> 3.5`). Field-level config (`hide`, `sticky`, custom `list`/`edit` blocks) is never defaulted — a model with its own concern is unaffected. See CLAUDE.md for the RailsAdmin deferred-block override mechanics.
+
+### Fixed
+- The dummy test app's boot had never previously completed against a full `Bundler.require` — fixed alongside the above (config.assets stub, ModelDrivenApi.smart_merge stub, preloaded dummy Ability/User models). See CLAUDE.md's Test infrastructure section.
+
 ## [3.7.0] - 2026-06-30
 
 ### Changed

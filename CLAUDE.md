@@ -129,17 +129,10 @@ end
   default set here. A model with its own concern therefore still gets this default module
   `include`d (the registry applies unconditionally), but its own field-level config and any
   `navigation_label`/`navigation_icon` it sets always win.
-- **Temporary dependency note**: this requires `ThecoreBackendCommons::DefaultModuleRegistry`,
-  merged into `thecore_backend_commons`'s `release/3` branch (commit `776a92a`) but not yet
-  published to RubyGems — as of this writing the latest published `thecore_backend_commons`
-  version is `3.4.1`, released *before* that merge, so pinning by version alone would not pick
-  it up. `Gemfile` pins a git source instead
-  (`github: "gabrieletassoni/thecore_backend_commons", branch: "release/3"`) until a real
-  release satisfying the gemspec's `>= 3.4` constraint actually contains the registry. Remove
-  the override once that ships — check
-  `curl -s https://rubygems.org/api/v1/versions/thecore_backend_commons/latest.json` and confirm
-  the published version postdates commit `776a92a`, not just that the version number looks high
-  enough.
+- This requires `ThecoreBackendCommons::DefaultModuleRegistry`, which shipped in
+  `thecore_backend_commons` 3.5.0 — the gemspec's existing `>= 3.4` constraint resolves it
+  normally from RubyGems now, no pin needed (a temporary `git:`-sourced pin lived in `Gemfile`
+  for a while before 3.5.0 was published; it's gone now).
 - Covered by the fixtures/tests appended to `test/thecore_ui_rails_admin_test.rb` (see Test
   infrastructure below): a no-concern model gets the default module, its `navigation_label`
   matches the i18n key convention, its `navigation_icon` is the real default (not RailsAdmin's

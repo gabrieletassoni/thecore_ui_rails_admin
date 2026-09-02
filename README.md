@@ -2,6 +2,41 @@ This is part of [Thecore framework](https://github.com/gabrieletassoni/thecore/t
 
 ---
 
+## Default `navigation_label`/icon for models without a `RailsAdmin::ModelName` concern
+
+Per [ADR 0001](https://github.com/gabrieletassoni/thecore/blob/release/3/docs/adr/0001-application-record-defaults-over-generated-concerns.md)
+(host app), any `ApplicationRecord` subclass that does **not** define its own
+`RailsAdmin::ModelName` concern still gets a sensible `navigation_label` and
+a real default icon (`fa fa-table`) in the RailsAdmin sidebar, instead of
+falling back to RailsAdmin's own unconfigured default (no group / no icon).
+
+This is provided by `ThecoreUiRailsAdminDefaultNavigationConcern`
+(`config/initializers/concern_default_navigation.rb`), registered into
+[`ThecoreBackendCommons::DefaultModuleRegistry`](../thecore_backend_commons/README.md)
+so it is included automatically into every model at class-definition time —
+no generated concern file required.
+
+The default `navigation_label` reuses the exact same i18n key
+(`I18n.t('admin.registries.label')`) that the Thecore VS Code extension's
+`addModel` command already hardcodes into every freshly generated
+`RailsAdmin::ModelName` concern, so a model relying on this default reads
+identically, to an end user, to one whose generated-and-never-customized
+concern was kept around.
+
+**Field-level configuration is never defaulted** — `hide`, `sticky`,
+`configure :field`, custom `list`/`edit` blocks, etc. stay exclusively in
+hand-written `RailsAdmin::ModelName` concerns. A model that already has its
+own concern is unaffected: its own `navigation_label`/`navigation_icon` (if
+set) and all field-level config still win over/apply alongside the default.
+
+> **Temporary dependency note**: this feature requires
+> `ThecoreBackendCommons::DefaultModuleRegistry`, merged into
+> `thecore_backend_commons`'s `release/3` branch but not yet published to
+> RubyGems. The `Gemfile` pins a git source for this
+> (`github: "gabrieletassoni/thecore_backend_commons", branch: "release/3"`)
+> until a real release ships — remove it once `thecore_backend_commons`
+> cuts a version satisfying the gemspec's `>= 3.4` constraint.
+
 ## Push Notification Test (RailsAdmin root action)
 
 A built-in admin UI for sending Web Push test notifications. It lets you pick one or more active subscribers and fire a real notification immediately — useful for verifying the end-to-end VAPID setup without writing any code.

@@ -26,6 +26,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thecore_ui_commons", "~> 3.1"
   spec.add_dependency "rails_admin", "~> 3.1"
   spec.add_dependency "rails_admin-i18n", "~> 1.18"
+  # >= 3.4 is the first version carrying ThecoreBackendCommons::DefaultModuleRegistry
+  # (see Gemfile for a temporary git pin -- not yet released to RubyGems).
+  spec.add_dependency "thecore_backend_commons", ">= 3.4"
   # spec.add_dependency "rails_admin_toggleable", "~> 0.8"
   # https://github.com/stephskardal/rails_admin_import
   # spec.add_dependency "rails_admin_import", "~> 3.0"

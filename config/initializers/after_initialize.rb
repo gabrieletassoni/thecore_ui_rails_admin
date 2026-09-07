@@ -47,6 +47,19 @@ Rails.application.configure do
     Target.send :include, ThecoreUiRailsAdminTargetConcern
     ThecoreSettings::Setting.send :include, ThecoreUiRailsAdminSettingsConcern
 
+    # Force RailsAdmin::Config::Actions to initialize its base action list
+    # (Dashboard, Index, Show, Edit, ...) before any custom action below
+    # registers itself. `RailsAdmin::Config::Actions.add_action`'s
+    # `@@actions ||= []` means whichever caller touches `@@actions` first
+    # decides whether the base actions ever get added at all -- if a custom
+    # `add_action` runs first (as can happen when route drawing is lazy,
+    # e.g. outside a request/eager-loaded boot), the base actions are
+    # silently skipped for the rest of the process, breaking every
+    # `edit_path`/`index_path`/... helper call. Calling `.all` here is a
+    # no-op once already initialized, so this is safe regardless of order
+    # elsewhere.
+    RailsAdmin::Config::Actions.all
+
     require "root_actions/general_computation"
     require "root_actions/active_job_monitor"
     require "root_actions/push_notification_test"

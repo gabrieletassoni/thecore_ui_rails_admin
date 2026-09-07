@@ -42,6 +42,7 @@ en:
         menu: Change Password
         success: Your password was changed successfully
         error: Warning! %{errors}
+        requirements: "Password requirements: at least %{min_length} characters, including at least one uppercase letter, one lowercase letter, one number, and one special character (e.g. ! @ # $ % &). The password and its confirmation must match."
       save_filters:
         success: Filters saved successfully
         error: Error while saving filters

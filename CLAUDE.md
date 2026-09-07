@@ -43,6 +43,15 @@ already be loaded):
   `before_action` that sets `I18n.locale` from `current_user.locale`.
 - Configures Devise (`authenticate_with`/`current_user_method`) and CanCanCan
   (`authorize_with :cancancan`) as RailsAdmin's auth/authz backends.
+- Calls `RailsAdmin::Config::Actions.all` once, before requiring any of this gem's own
+  root/member/collection action files below. `RailsAdmin::Config::Actions.add_action`'s
+  `@@actions ||= []` means whichever caller touches `@@actions` first decides whether the base
+  actions (`Dashboard`, `Index`, `Edit`, ...) ever get registered at all — if a custom
+  `add_action` call ran first (possible whenever route drawing for the `rails_admin` engine
+  mount is lazy relative to this `after_initialize` block, e.g. outside eager-loaded boot), the
+  base actions would be silently skipped for the rest of the process, breaking every
+  `edit_path`/`index_path`/... helper call anywhere in the app. This call is a no-op once
+  `@@actions` is already initialized, so it's safe regardless of the real boot order elsewhere.
 - `RailsAdmin::Config.main_app_name` reads `ThecoreSettings ns: :main, key: :app_name` (falls
   back to `ENV["APP_NAME"]`, then `"Thecore"`).
 - Excludes ActionText/ActiveStorage/ActionMailbox internal models, plus `UsedToken`
@@ -161,7 +170,22 @@ Registered via `RailsAdmin::Config::Actions.add_action "<name>", :base, :root`, 
 
 - **`change_password.rb`** (member) — visible only when `bindings[:object].is_a?(::User)`;
   `PATCH` updates `password`/`password_confirmation` via the standard `User#update` (so Devise's
-  own validations apply), flashing success/error.
+  own validations apply, including any host-app customizations like `thecore_auth_commons`'s
+  complexity regex). On success, flashes `admin.actions.change_password.success` and redirects
+  to the model's `index_path` (unchanged). On failure it does **not** redirect — it sets
+  `flash.now[:error]` (`admin.actions.change_password.error`, listing `@object.errors.full_messages`)
+  and re-renders `change_password` with `status: :not_acceptable`, the same pattern RailsAdmin's
+  own `handle_save_error` uses for `edit`/`new` (see ADR
+  [0001](docs/adr/0001-change-password-error-rendering-is-hand-rolled.md) for why this action
+  hand-rolls the error/field-highlighting markup instead of reusing RailsAdmin's field-generation
+  helpers). The view (`app/views/rails_admin/main/change_password.html.erb`) shows a password
+  requirements disclaimer above the form (`admin.actions.change_password.requirements`,
+  localized in `config/locales/{en,it}.thecore_ui_ra.yml`, interpolating `User.password_length.min`
+  so the stated minimum always matches whatever the host app's `User` model actually configures —
+  this gem never hardcodes or re-derives that value itself) and highlights `password`/
+  `password_confirmation` field errors with the same `error`/`has-error`/`help-inline text-danger`
+  classes `RailsAdmin::FormBuilder` uses on ordinary `edit`/`new` forms. The two password fields
+  are never repopulated with a submitted value, on success or failure, for either field.
 - **`test_ldap_server.rb`** (member) — round-trips an LDAP connection test against a configured
   `auth_source`.
 - **`import_users_from_ldap.rb`** (member) — present but **not required** from
@@ -234,14 +258,41 @@ you're chasing a boot failure while working on this gem's tests. The fix, all in
   already define `Ability` (it deliberately doesn't define one itself); `thecore_backend_commons`
   similarly expects `User`/`ApplicationCable::Connection`; `thecore_ui_commons`'s
   `config/routes.rb` draws `devise_for :users` against `User`. `test/dummy/app/models/ability.rb`
-  and `user.rb` are minimal stand-ins (`Ability` grants `can :manage, :all`; `User` just enables
-  `devise :database_authenticatable` and `has_many :push_subscribers`). `User` specifically is
-  required inside an `ActiveSupport.on_load(:active_record)` callback registered *after*
-  `Bundler.require` (so Devise's own `:active_record` load hook — which extends
-  `Devise::Models` onto `ActiveRecord::Base` — has already fired) rather than eagerly up front;
-  `require "devise/orm/active_record"` is forced first inside that same callback to guarantee
+  and `user.rb` are minimal stand-ins (`Ability`'s own `can :manage, :all` is a fallback only —
+  for any *real* signed-in `User`, `thecore_auth_commons`'s `included do def initialize; ...; end
+  end` redefines `Ability#initialize` outright, so its actual behavior for an authenticated
+  request comes from `Abilities::ThecoreAuthCommons`/`Abilities::ThecoreUiRailsAdmin` plus a real
+  `Permission.joins(roles: :users)` lookup — see `change_password_test.rb` below for what that
+  requires; `User` just enables `devise :database_authenticatable` and `has_many
+  :push_subscribers`). `User` specifically is required inside an
+  `ActiveSupport.on_load(:active_record)` callback registered *after* `Bundler.require` (so
+  Devise's own `:active_record` load hook — which extends `Devise::Models` onto
+  `ActiveRecord::Base` — has already fired) rather than eagerly up front; `require
+  "devise/orm/active_record"` is forced first inside that same callback to guarantee
   `ActiveRecord::Base.devise` exists by the time `User`'s class body calls it, regardless of
   Bundler's own require order.
+- **`test/member_actions/change_password_test.rb`** — the first test in this gem to drive a real
+  authenticated HTTP request through the mounted `rails_admin` engine (every previous test called
+  `RailsAdmin.config(...)` directly, never routing/controller/auth). Getting there required
+  filling in gaps nothing before it had hit:
+  - A `users` table (dummy `User` never had one at all — nothing had ever persisted a `User`
+    before), with `locale` (`set_locale`'s `current_user.locale` needs a real, non-nil default —
+    `I18n.locale = nil` raises) and `admin` (`Abilities::ThecoreAuthCommons` short-circuits to
+    `can :manage, :all` for `user.admin?`, letting the tests skip seeding a working
+    Role/Permission graph). Dummy `User` also gained `has_many :role_users`/`has_many :roles,
+    through: :role_users` (mirroring `thecore_auth_commons`'s real `User`), and the empty
+    `permissions`/`permission_roles`/`roles`/`role_users` tables `Permission.joins(roles: :users)`
+    still needs to join through even when nothing seeds them.
+  - `RailsAdmin::MainController.layout "rails_admin/content"` for the duration of the test class
+    — the dummy app has no working asset pipeline (see the `config.assets` stub above), so
+    `layouts/rails_admin/application`'s `_head` partial raises regardless of `asset_source`
+    (every source RailsAdmin supports needs a real gem/config this dummy bundle doesn't have).
+    `layouts/rails_admin/content` is the inner layout `application` itself renders — it carries
+    the flash box (what a validation-error assertion needs) without touching `_head`.
+  - The `RailsAdmin::Config::Actions.all` ordering fix in `after_initializer.rb` (see above) —
+    without it, `edit_path`/`index_path` are undefined in this dummy app's process, because this
+    gem's own custom action files happen to load before anything else ever calls
+    `RailsAdmin::Config::Actions.all`/`.find`.
 
 `test/thecore_ui_rails_admin_test.rb` carries both the gem's original version-constant smoke
 test and the default-navigation fixtures/tests: two real SQLite tables

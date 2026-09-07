@@ -13,15 +13,16 @@ RailsAdmin::Config::Actions.add_action "change_password", :base, :member do
         proc do
             # if it's a form submission, then update the password
             if request.patch?
-                u = ::User.find(@object.id)
-                if u.update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+                if @object.update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
                     flash[:success] = I18n.t("admin.actions.change_password.success")
+                    redirect_to index_path(model_name: @abstract_model.to_param)
                 else
-                    # Add errors to the object
-                    flash[:error] = I18n.t("admin.actions.change_password.error", errors: u.errors.full_messages.join(', '))
+                    # Stay on the change_password page, highlighting the error the same
+                    # way RailsAdmin's own edit/new forms do on a validation failure --
+                    # @object keeps its errors for the re-rendered form to read.
+                    flash.now[:error] = I18n.t("admin.actions.change_password.error", errors: @object.errors.full_messages.join(', '))
+                    render :change_password, status: :not_acceptable
                 end
-                # Redirect to the object
-                redirect_to index_path(model_name: @abstract_model.to_param)
             end
         end
     end

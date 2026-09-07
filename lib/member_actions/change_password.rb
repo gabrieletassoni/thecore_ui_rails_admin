@@ -19,8 +19,12 @@ RailsAdmin::Config::Actions.add_action "change_password", :base, :member do
                 else
                     # Stay on the change_password page, highlighting the error the same
                     # way RailsAdmin's own edit/new forms do on a validation failure --
-                    # @object keeps its errors for the re-rendered form to read.
-                    flash.now[:error] = I18n.t("admin.actions.change_password.error", errors: @object.errors.full_messages.join(', '))
+                    # @object keeps its errors for the re-rendered form to read. The flash
+                    # is deliberately generic (no error list): the view already renders
+                    # each field's own errors inline, right next to that field -- listing
+                    # the same @object.errors.full_messages again up here would just show
+                    # every message twice on a two-field form.
+                    flash.now[:error] = I18n.t("admin.actions.change_password.error")
                     render :change_password, status: :not_acceptable
                 end
             end

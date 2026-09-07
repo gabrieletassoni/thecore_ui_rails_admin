@@ -173,12 +173,16 @@ Registered via `RailsAdmin::Config::Actions.add_action "<name>", :base, :root`, 
   own validations apply, including any host-app customizations like `thecore_auth_commons`'s
   complexity regex). On success, flashes `admin.actions.change_password.success` and redirects
   to the model's `index_path` (unchanged). On failure it does **not** redirect — it sets
-  `flash.now[:error]` (`admin.actions.change_password.error`, listing `@object.errors.full_messages`)
-  and re-renders `change_password` with `status: :not_acceptable`, the same pattern RailsAdmin's
-  own `handle_save_error` uses for `edit`/`new` (see ADR
+  `flash.now[:error]` and re-renders `change_password` with `status: :not_acceptable`, the same
+  render-in-place pattern RailsAdmin's own `handle_save_error` uses for `edit`/`new` (see ADR
   [0001](docs/adr/0001-change-password-error-rendering-is-hand-rolled.md) for why this action
   hand-rolls the error/field-highlighting markup instead of reusing RailsAdmin's field-generation
-  helpers). The view (`app/views/rails_admin/main/change_password.html.erb`) shows a password
+  helpers). Unlike `handle_save_error`, `admin.actions.change_password.error` is a **fixed,
+  generic** message ("Warning! Please correct the highlighted field(s) below.") rather than a
+  list of `@object.errors.full_messages` — this form only ever has the two password fields, both
+  already showing their own errors inline (below), so repeating the exact same message a second
+  time in the flash banner produced a visibly duplicated error on screen; a bug reported after
+  the first release of this feature. The view (`app/views/rails_admin/main/change_password.html.erb`) shows a password
   requirements disclaimer above the form (`admin.actions.change_password.requirements`,
   localized in `config/locales/{en,it}.thecore_ui_ra.yml`, interpolating `User.password_length.min`
   so the stated minimum always matches whatever the host app's `User` model actually configures —

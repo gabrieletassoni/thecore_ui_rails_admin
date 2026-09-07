@@ -41,7 +41,7 @@ it:
         breadcrumb: Cambia Password
         menu: Cambia Password
         success: La tua password è stata cambiata con successo
-        error: "Attenzione! %{errors}"
+        error: "Attenzione! Controlla i campi evidenziati qui sotto."
         requirements: "Requisiti password: almeno %{min_length} caratteri, con almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale (es. ! @ # $ % &). Password e conferma devono coincidere."
       save_filters:
         success: Filtri salvati con successo

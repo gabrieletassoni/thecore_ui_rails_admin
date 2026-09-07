@@ -68,6 +68,18 @@ class ChangePasswordActionTest < ActionDispatch::IntegrationTest
     assert_select ".help-inline.text-danger"
   end
 
+  test "PATCH failure does not repeat a field's specific error text in both the flash banner and inline" do
+    patch rails_admin.change_password_path(model_name: "user", id: @user.id),
+          params: { user: { password: "Vali3d$Pass", password_confirmation: "Different1$" } }
+
+    assert_response :not_acceptable
+    flash_banner = css_select("div.alert-danger").first.text
+    inline_error = css_select(".help-inline.text-danger").first.text
+
+    assert_includes inline_error, "match Password"
+    refute_includes flash_banner, "match Password"
+  end
+
   test "PATCH failure never re-populates the password fields with the submitted values" do
     patch rails_admin.change_password_path(model_name: "user", id: @user.id),
           params: { user: { password: "Vali3d$Pass", password_confirmation: "Different1$" } }

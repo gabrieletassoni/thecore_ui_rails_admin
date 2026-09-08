@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.8.3] - 2026-09-08
+
+### Fixed
+- Pinned `json < 3.0` in the dev `Gemfile` — json 3.0+ turns ActiveSupport's `quirks_mode:` `JSON.generate` option into a hard `ArgumentError` under Rails 7.2 (test/dev tooling only, does not affect the published gem).
+
 ## [3.8.0] - 2026-09-02
 
 ### Added

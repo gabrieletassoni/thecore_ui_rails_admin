@@ -1,0 +1,16 @@
+// Companion SCSS for the load_filters collection action. No custom styling is needed today --
+// this file is deliberately minimal rather than a copy of the thecore:collection_action
+// generator's own spinner/loader starter styles, which target elements this action's real view
+// doesn't render. Kept as a real file, not skipped, so this action still satisfies the
+// generator's own companion-file convention (see thecore_ui_rails_admin#9). The @keyframes
+// below is the one piece of the starter template preserved verbatim, unused today, purely so a
+// future page that does add a loader can reuse the generator's own standard animation name.
+@keyframes sk-bounce {
+    0%,
+    100% {
+        transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+    }
+}

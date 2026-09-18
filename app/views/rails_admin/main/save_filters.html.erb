@@ -1,4 +1,5 @@
-<!-- START app/views/rails_admin/main/save_filter.html.erb -->
+<%= stylesheet_link_tag 'rails_admin/actions/save_filters' %>
+<!-- START app/views/rails_admin/main/save_filters.html.erb -->
 <div class="form-horizontal">
   <form method="post" action="">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -33,4 +34,5 @@
     <% end %>
   </form>
 </div>
-<!-- END app/views/rails_admin/main/save_filter.html.erb -->
+<!-- END app/views/rails_admin/main/save_filters.html.erb -->
+<%= javascript_include_tag "rails_admin/actions/save_filters" %>

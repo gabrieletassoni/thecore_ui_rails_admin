@@ -66,7 +66,7 @@ Rails.application.configure do
     require "member_actions/change_password"
     require "member_actions/test_ldap_server"
     # require 'member_actions/import_users_from_ldap' # Disabled as it's a bit risky to have it in the UI
-    require "collection_actions/save_filters"
-    require "collection_actions/load_filters"
+    require 'collection_actions/save_filters'
+    require 'collection_actions/load_filters'
   end
 end

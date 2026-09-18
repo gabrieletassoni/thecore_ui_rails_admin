@@ -24,7 +24,7 @@ RailsAdmin::Config::Actions.add_action "save_filters", :base, :collection do
                 @query_string = request.referer.split('?')[1] # Get filters from referrer
                 @query_html = RailsAdminFilterControllerHelper.filters_html_list(@query_string, @abstract_model).html_safe
                 @model_name = @abstract_model
-                render :save_filter
+                render :save_filters
             end
         end
     end

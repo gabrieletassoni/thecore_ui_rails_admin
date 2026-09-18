@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.8.4] - 2026-09-18
+
+### Fixed
+- `save_filters`/`load_filters` collection actions retrofitted to match `thecore:collection_action`'s companion-file conventions (`thecore_generators` >= 3.9.0), so `rails thecore:check_practices` reports them as conformant. Fixes a real bug found in the process: `save_filters.rb`'s controller called `render :save_filter` (singular), targeting a view now correctly renamed to `save_filters.html.erb` to match the action name.
+
 ## [3.8.3] - 2026-09-08
 
 ### Fixed

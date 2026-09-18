@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.8.5] - 2026-09-18
+
+### Fixed
+- The remaining six hand-written Actions (`active_job_monitor`, `general_computation`, `push_notification_test`, `change_password`, `test_ldap_server`, `import_users_from_ldap`) retrofitted to match `thecore:root_action`/`thecore:member_action`'s companion-file conventions, same shape as `save_filters`/`load_filters` in 3.8.4. `rails thecore:check_practices` now reports 0 violations for the whole gem. No behavioral change to any action's actual functionality.
+
 ## [3.8.4] - 2026-09-18
 
 ### Fixed

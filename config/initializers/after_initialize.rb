@@ -61,7 +61,7 @@ Rails.application.configure do
     RailsAdmin::Config::Actions.all
 
     require "root_actions/general_computation"
-    require "root_actions/active_job_monitor"
+    require 'root_actions/active_job_monitor'
     require "root_actions/push_notification_test"
     require "member_actions/change_password"
     require "member_actions/test_ldap_server"

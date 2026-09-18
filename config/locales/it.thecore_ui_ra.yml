@@ -77,6 +77,14 @@ it:
         icon_label: "URL icona (opzionale)"
         send_button: "Invia Test"
         large_selection_warning: "Stai per inviare a %{count} subscriber/i. L'operazione potrebbe richiedere del tempo. Vuoi continuare?"
+      general_computation:
+        title: Calcolo Generale
+        breadcrumb: Calcolo Generale
+        menu: Calcolo Generale
+      import_users_from_ldap:
+        title: Importa Utenti da LDAP
+        breadcrumb: Importa Utenti da LDAP
+        menu: Importa Utenti da LDAP
     scopes:
       _all: Tutti
     flash:

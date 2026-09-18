@@ -77,6 +77,14 @@ en:
         icon_label: "Icon URL (optional)"
         send_button: "Send Test"
         large_selection_warning: "You are about to send to %{count} subscriber(s). This may take a while. Do you want to continue?"
+      general_computation:
+        title: General Computation
+        breadcrumb: General Computation
+        menu: General Computation
+      import_users_from_ldap:
+        title: Import Users from LDAP
+        breadcrumb: Import Users from LDAP
+        menu: Import Users from LDAP
     scopes:
       _all: All
     flash:

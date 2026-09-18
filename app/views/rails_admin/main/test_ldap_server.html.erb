@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'rails_admin/actions/test_ldap_server' %>
 <!-- Show the LDAP server connection status -->
 <div class="p-3 mb-2 bg-<%=@status%> text-white">
   <%=@message%>
@@ -66,3 +67,4 @@
         });
     });
 </script>
+<%= javascript_include_tag "rails_admin/actions/test_ldap_server" %>

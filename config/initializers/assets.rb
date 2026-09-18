@@ -10,3 +10,4 @@ Rails.application.config.assets.precompile += %w( rails_admin/actions/active_job
 Rails.application.config.assets.precompile += %w( rails_admin/actions/push_notification_test.js rails_admin/actions/push_notification_test.css )
 Rails.application.config.assets.precompile += %w( rails_admin/actions/change_password.js rails_admin/actions/change_password.css )
 Rails.application.config.assets.precompile += %w( rails_admin/actions/test_ldap_server.js rails_admin/actions/test_ldap_server.css )
+Rails.application.config.assets.precompile += %w( rails_admin/actions/import_users_from_ldap.js rails_admin/actions/import_users_from_ldap.css )

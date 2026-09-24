@@ -12,7 +12,7 @@ module Api::UserPreference
     # - methods: include the result of some method defined in the model
     # - include: include associated models, it's an object {} which also accepts the keys described here
     cattr_accessor :json_attrs
-    self.json_attrs = ::ModelDrivenApi.smart_merge (json_attrs || {}), {}
+    self.json_attrs = ::ThecoreBackendCommons.smart_merge (json_attrs || {}), {}
 
     # Custom action callable by the API must be defined in /app/models/concerns/endpoints/
   end

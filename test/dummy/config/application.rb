@@ -22,19 +22,6 @@ Rails::Application::Configuration.prepend(Module.new do
   define_method(:assets) { @_stub_assets ||= stub_class.new }
 end)
 
-# Stub ModelDrivenApi.smart_merge -- model_driven_api is not in this gem's
-# bundle. thecore_backend_commons's BaseApplicationRecordConcern calls
-# ::ModelDrivenApi.smart_merge in its `included do` block, and (via its own
-# legacy `ApplicationRecord.subclasses.each { |d| d.include(...) }` scan in
-# config.after_initialize, not the new DefaultModuleRegistry) may reach
-# real engine models (User, Role, ...) autoloaded during this dummy app's
-# boot -- particularly under eager loading (CI=true, see test.rb).
-module ModelDrivenApi
-  def self.smart_merge(base, additions)
-    base.merge(additions) { |_, a, b| a.is_a?(Array) && b.is_a?(Array) ? (a + b).uniq : b }
-  end
-end
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

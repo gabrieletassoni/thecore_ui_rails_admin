@@ -278,9 +278,13 @@ you're chasing a boot failure while working on this gem's tests. The fix, all in
   transitive dependency) unconditionally sets `config.assets.prefix` at boot. A `method_missing`-based
   stub class is prepended onto `Rails::Application::Configuration#assets` (mirrors the identical
   stub in `thecore_backend_commons`'s own dummy app).
-- **Stubs `ModelDrivenApi.smart_merge`** — `model_driven_api` is not in this gem's bundle, but
-  `thecore_backend_commons`'s `BaseApplicationRecordConcern` calls it in an `included do` block
-  and can reach real engine models (`User`, `Role`, ...) during eager loading (`CI=true`).
+- **No `ModelDrivenApi` stub any more** (3.8.6) — `model_driven_api` is not a dependency of this
+  gem, so nothing here may reference it: `Api::UserPreference` uses
+  `ThecoreBackendCommons.smart_merge` (thecore_backend_commons >= 3.8, which also stopped calling
+  `::ModelDrivenApi`), and the empty scaffolded `Endpoints::UserPreference < NonCrudEndpoints`
+  (a `NameError` under eager loading, `CI=true`) was removed — verified in a host app that the
+  API/OpenAPI output for user_preferences is unchanged. `test/user_preference_json_attrs_test.rb`
+  loads `UserPreference` with no `ModelDrivenApi` defined.
 - **Preloads dummy `Ability`/`User`/`ApplicationCable::Connection` models** —
   `thecore_auth_commons`'s own `after_initialize.rb` does
   `Ability.send(:include, ThecoreAuthCommonsCanCanCanConcern)` expecting the *host app* to

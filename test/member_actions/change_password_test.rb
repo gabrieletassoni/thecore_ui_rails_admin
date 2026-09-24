@@ -29,6 +29,22 @@ end
   end
 end
 
+# `RailsAdmin::Config.main_app_name` (config/initializers/after_initialize.rb)
+# queries `ThecoreSettings::Setting` on every rendered rails_admin layout. Its
+# `rescue` covers a missing table, but on Postgres the failed statement still
+# aborts the test's surrounding transaction, so every later query raises
+# PG::InFailedSqlTransaction -- the table must exist (columns mirror
+# thecore_settings' own CreateThecoreSettings migration).
+ActiveRecord::Base.connection.create_table(:thecore_settings, force: true) do |t|
+  t.boolean :enabled, default: true
+  t.string :kind, null: false, default: "string"
+  t.string :ns, default: "main"
+  t.string :key, null: false
+  t.text :raw
+  t.string :label
+  t.timestamps
+end
+
 class ChangePasswordActionTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 

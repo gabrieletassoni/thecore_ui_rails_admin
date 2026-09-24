@@ -10,7 +10,8 @@ gemspec
 # until Rails 8 ships a compatible activesupport release.
 gem 'json', '< 3.0'
 
-gem "sqlite3"
+# Postgres is the only DB target of every Thecore gem and host app (see test/dummy/config/database.yml).
+gem "pg", "~> 1.1"
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"

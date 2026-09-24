@@ -10,15 +10,21 @@ doesn't bring its own concern. It lives as a git submodule inside a parent Theco
 ## Commands
 
 ```bash
-# Run tests (from inside the submodule directory)
-env -u DATABASE_URL BUNDLE_GEMFILE=Gemfile RAILS_ENV=test bundle exec ruby -Itest test/thecore_ui_rails_admin_test.rb
+# One-time: create the Postgres test database (from test/dummy)
+(cd test/dummy && RAILS_ENV=test bin/rails db:create)
+
+# Run the whole suite (from inside the submodule directory)
+BUNDLE_GEMFILE=Gemfile RAILS_ENV=test bundle exec ruby -Itest -e 'Dir["test/**/*_test.rb"].each { |f| require File.expand_path(f) }'
+
+# Run one file
+BUNDLE_GEMFILE=Gemfile RAILS_ENV=test bundle exec ruby -Itest test/thecore_ui_rails_admin_test.rb
 
 # Bundle install
 BUNDLE_GEMFILE=Gemfile bundle install
 ```
 
-**Important**: always unset `DATABASE_URL` — the devcontainer environment sets it to a
-PostgreSQL URL that overrides the test SQLite3 config in `test/dummy`.
+Tests run on PostgreSQL only (never SQLite) and are safe with the devcontainer's `DATABASE_URL`
+set — no need to unset it; see Test infrastructure below.
 
 ## Architecture
 
@@ -243,7 +249,26 @@ neither gem depends on the other beyond the shared `thecore_backend_commons` reg
 
 ## Test infrastructure
 
-The dummy app (`test/dummy/`) uses SQLite3. **Its boot had never previously completed against a
+The dummy app (`test/dummy/`) runs on **PostgreSQL only** — the only DB target of every Thecore
+gem and host app (they use Postgres-specific SQL SQLite cannot exercise); there is no SQLite
+config, gem, or database file anymore. `test/dummy/config/database.yml` points at
+`thecore_ui_rails_admin_{development,test,production}` (host/port/user/password from
+`PGHOST`/`PGPORT`/`PGUSER`/`PGPASSWORD`, defaulting to `db`/`5432`/`postgres`/`postgres`).
+Because `DATABASE_URL` overrides `database.yml` and the devcontainer points it at the host app's
+own dev database, `test/dummy/config/boot.rb` rewrites any `postgres*` `DATABASE_URL` to keep its
+server/credentials but swap the database name for `thecore_ui_rails_admin_<RAILS_ENV>` — in
+boot.rb rather than the test helper so every entry point (`bin/rails db:*`, `db:test:prepare`
+subprocesses) is covered. The test database must be created once
+(`cd test/dummy && RAILS_ENV=test bin/rails db:create`); tables are created by the test files
+themselves (`create_table ..., force: true`), there is no dummy `schema.rb`.
+
+Postgres gotcha: a failed statement aborts the surrounding transactional-test transaction even
+when Ruby code `rescue`s it, so every later query raises `PG::InFailedSqlTransaction` (SQLite
+silently tolerated this). Any table touched on a request path — even behind a `rescue` — must
+therefore exist; that's why `change_password_test.rb` creates `thecore_settings` (queried by
+`RailsAdmin::Config.main_app_name` on every rendered layout).
+
+**Its boot had never previously completed against a
 full `Bundler.require`** until the default-navigation feature's PR fixed it — worth knowing if
 you're chasing a boot failure while working on this gem's tests. The fix, all in
 `test/dummy/config/application.rb`:
@@ -299,7 +324,7 @@ you're chasing a boot failure while working on this gem's tests. The fix, all in
     `RailsAdmin::Config::Actions.all`/`.find`.
 
 `test/thecore_ui_rails_admin_test.rb` carries both the gem's original version-constant smoke
-test and the default-navigation fixtures/tests: two real SQLite tables
+test and the default-navigation fixtures/tests: two real Postgres tables
 (`thecore_ui_rails_admin_no_concern_models`, `..._explicit_concern_models`) and two model
 classes (one with no `RailsAdmin::ModelName` concern, one simulating a hand-written concern with
 its own `navigation_label`/`navigation_icon`/`configure :extra_field do hide end`), asserting

@@ -1,25 +1,23 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem "sqlite3"
-#
+# Postgres only: every Thecore gem and host app targets PostgreSQL exclusively, so this dummy app
+# never runs on SQLite. test/dummy/config/boot.rb rewrites DATABASE_URL (when set) to keep its
+# server/credentials but always point at this gem's own thecore_ui_rails_admin_<env> database.
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  host: <%= ENV.fetch("PGHOST", "db") %>
+  port: <%= ENV.fetch("PGPORT", 5432) %>
+  username: <%= ENV.fetch("PGUSER", "postgres") %>
+  password: <%= ENV.fetch("PGPASSWORD", "postgres") %>
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: thecore_ui_rails_admin_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: thecore_ui_rails_admin_test
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: thecore_ui_rails_admin_production

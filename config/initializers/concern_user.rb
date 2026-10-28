@@ -4,6 +4,11 @@ require "active_support/concern"
 module ThecoreUiRailsAdminUserConcern
   extend ActiveSupport::Concern
 
+  def self.password_help
+    length = ::User.password_length
+    "#{I18n.t("admin.form.required")}. #{I18n.t("admin.form.char_length_of").capitalize} #{length.min}-#{length.max}."
+  end
+
   included do
     has_many :saved_filters, class_name: "SavedFilter", foreign_key: :admin_user_id, dependent: :destroy
     has_many :user_preferences, class_name: "UserPreference", foreign_key: :user_id, dependent: :destroy, inverse_of: :user
@@ -81,6 +86,11 @@ module ThecoreUiRailsAdminUserConcern
       create do
         configure :password do
           required true
+          # Devise 5 declares the password length limits as Procs, which
+          # RailsAdmin's generic help compares with Integers: the create form
+          # raised "comparison of Integer with Proc failed". Same text as
+          # before, read from User.password_length on every render.
+          help { ThecoreUiRailsAdminUserConcern.password_help }
         end
         configure :password_confirmation do
           required true

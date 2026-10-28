@@ -80,9 +80,13 @@ with an `included do rails_admin do ... end end` block setting `navigation_label
 `navigation_icon`, `configure :field do hide/read_only/required end` for field-level tweaks, and
 occasionally `parent`/`create`/`update`-scoped overrides (e.g. `concern_user.rb` hides
 Devise-internal columns, requires `password`/`password_confirmation` only on `create`, and hides
-them on `update`). These are hand-written, model-specific concerns — the pattern every ATOM/host
-model in the ecosystem follows for models that need real field-level configuration (see ADR
-0001 in the host app's `vendor/external/thecore/docs/adr/`).
+them on `update`). On `create`, `password` also brings its own `help`
+(`ThecoreUiRailsAdminUserConcern.password_help`, from `User.password_length`): Devise 5
+declares the length limits as Procs, which RailsAdmin's `generic_help` compares with
+Integers, so the default help made the create form answer 500. These are hand-written,
+model-specific concerns — the pattern every ATOM/host model in the ecosystem follows for
+models that need real field-level configuration (see ADR 0001 in the host app's
+`vendor/external/thecore/docs/adr/`).
 
 ### Default `navigation_label`/icon for models with no concern (`ThecoreUiRailsAdminDefaultNavigationConcern`)
 

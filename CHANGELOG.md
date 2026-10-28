@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.8.7] - 2026-10-28
+
+### Fixed
+- Creating a `User` from RailsAdmin answered 500 (`comparison of Integer with Proc failed`) since Devise 5, which declares the password length limits as Procs that RailsAdmin's generic field help compares with Integers. The `create` form's `password` field now brings its own `help`, with the same text as before ("Required. Length of 8-128."), read from `User.password_length` on every render. Editing a user and `change_password` were not affected.
+
+## [3.8.6] - 2026-09-24
+
+### Changed
+- No reference to `model_driven_api` any more: `Api::UserPreference` uses `ThecoreBackendCommons.smart_merge` (thecore_backend_commons >= 3.8), and the empty `Endpoints::UserPreference` was removed.
+
 ## [3.8.5] - 2026-09-18
 
 ### Fixed

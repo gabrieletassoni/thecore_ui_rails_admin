@@ -355,6 +355,10 @@ Configured in the GitHub repository settings, not in files:
   apps' pipelines, whose `Gemfile.lock` resolves every ATOM.
 - Findings never block a release: GitHub notifies the owner. When one needs work, open a GitHub
   issue (see Agent skills).
+- `config/brakeman.ignore` (for a local `brakeman` run) records the High `ForgerySetting` on
+  `RailsAdminAbstractController` as a false positive: `RailsAdmin::ApplicationController`, which
+  inherits from it, calls `protect_from_forgery(RailsAdmin::Config.forgery_protection_settings)`
+  itself (default `with: :exception`). Each entry's `note` says why.
 
 ## Agent skills
 

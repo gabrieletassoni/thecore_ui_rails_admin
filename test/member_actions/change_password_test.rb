@@ -53,7 +53,7 @@ class ChangePasswordActionTest < ActionDispatch::IntegrationTest
     sign_in @user
 
     # The dummy app has no working asset pipeline (see thecore_ui_rails_admin's
-    # own CLAUDE.md: sprockets/propshaft/importmap-rails are all absent from
+    # docs/agents/test-infrastructure.md: sprockets/propshaft/importmap-rails are all absent from
     # this gem's bundle), so `layouts/rails_admin/application`'s `_head`
     # partial blows up on the asset tags regardless of `asset_source`.
     # `layouts/rails_admin/content` is the inner layout application.html.erb

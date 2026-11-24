@@ -15,3 +15,6 @@ gem "pg", "~> 1.1"
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
+
+# JUnit XML report in CI (test/support/junit_report.rb, only when JUNIT_REPORT_DIR is set).
+gem "minitest-reporters", "~> 1.8"

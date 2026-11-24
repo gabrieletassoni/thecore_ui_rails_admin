@@ -14,13 +14,27 @@ This is where most of the gem's runtime behavior actually attaches, inside a sin
 `config.after_initialize` block (so host-app models/`ApplicationController` are guaranteed to
 already be loaded):
 
-- Includes `ConcernCommonApplicationController`/`ConcernRAApplicationController` into
-  `ApplicationController` and `RailsAdmin::ApplicationController`.
 - Points `RailsAdmin::Config.parent_controller` at `RailsAdminAbstractController`
   (`lib/rails_admin_abstract_controller.rb`) — a plain `ActionController::Base` subclass with
   `rescue_from` handlers for `ActiveRecord::StatementInvalid`/`RecordInvalid`/`RangeError`
   (flashes a friendly message and redirects back to the dashboard instead of a 500 page), plus a
   `before_action` that sets `I18n.locale` from `current_user.locale`.
+- Then includes `ConcernCommonApplicationController`/`ConcernRAApplicationController` into
+  `ApplicationController` and `RailsAdmin::ApplicationController`. The order matters: when
+  RailsAdmin's controllers are already loaded, `parent_controller=` removes and reloads
+  `RailsAdmin::ApplicationController`/`MainController`, dropping anything included before it. That
+  is how the concern's `rescue_from CanCan::AccessDenied` was lost and every forbidden RailsAdmin
+  URL answered 500.
+- Then registers `RailsAdminAbstractController#handle_access_denied` for `CanCan::AccessDenied` on
+  `RailsAdmin::ApplicationController`, after the concerns so it wins over
+  `ConcernCommonApplicationController`'s redirect to the main-app root (the sign-in page, where Devise
+  bounces a signed-in user and replaces the message with "already signed in"). A forbidden action
+  redirects back to the referring page, or to the dashboard (always readable, see
+  `Abilities::ThecoreUiRailsAdmin`), with the denial as flash alert (`test/access_denied_test.rb`).
+- Known limitation, development only: on a code reload RailsAdmin's `Config.reload!` resets the
+  config (including `parent_controller` and `authenticate_with`) and re-runs only the host's
+  `config/initializers/rails_admin.rb`, not this `after_initialize`, so the wiring above is not
+  re-applied to reloaded RailsAdmin controllers. Production (no reloading) is unaffected.
 - Configures Devise (`authenticate_with`/`current_user_method`) and CanCanCan
   (`authorize_with :cancancan`) as RailsAdmin's auth/authz backends.
 - Calls `RailsAdmin::Config::Actions.all` once, before requiring any of this gem's own

@@ -2,12 +2,15 @@ Rails.application.configure do
   config.after_initialize do
     puts "ThecoreUiRailsAdmin after_initialize"
 
+    ## Rails Admin
+    # parent_controller= first: when RailsAdmin's controllers are already loaded it removes and
+    # reloads them, throwing away anything included or registered before.
+    require "rails_admin_abstract_controller"
+    RailsAdmin::Config.parent_controller = "::RailsAdminAbstractController"
     RailsAdmin::ApplicationController.send(:include, ConcernCommonApplicationController)
     ApplicationController.send(:include, ConcernRAApplicationController)
     RailsAdmin::ApplicationController.send(:include, ConcernRAApplicationController)
-    ## Rails Admin
-    require "rails_admin_abstract_controller"
-    RailsAdmin::Config.parent_controller = "::RailsAdminAbstractController"
+    RailsAdmin::ApplicationController.rescue_from CanCan::AccessDenied, with: :handle_access_denied
     ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
     ## == Devise ==
     RailsAdmin::Config.authenticate_with do

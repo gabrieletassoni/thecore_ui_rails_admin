@@ -36,6 +36,15 @@ class RailsAdminAbstractController < ActionController::Base
     # end
   end
 
+  # Back to the page the user came from (the dashboard, always readable, when there is none) with the
+  # denial message. Registered on RailsAdmin::ApplicationController after the controller concerns,
+  # so it wins over ConcernCommonApplicationController's redirect to the main-app root, which is the
+  # sign-in page: Devise would bounce a signed-in user on and replace the message with "already
+  # signed in".
+  def handle_access_denied(exception)
+    redirect_back(fallback_location: rails_admin.dashboard_path, alert: exception.message)
+  end
+
   def set_locale
     I18n.locale = current_user.locale if current_user
   end

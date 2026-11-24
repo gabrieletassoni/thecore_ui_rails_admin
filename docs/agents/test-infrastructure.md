@@ -18,8 +18,8 @@ themselves (`create_table ..., force: true`), there is no dummy `schema.rb`.
 Postgres gotcha: a failed statement aborts the surrounding transactional-test transaction even
 when Ruby code `rescue`s it, so every later query raises `PG::InFailedSqlTransaction` (SQLite
 silently tolerated this). Any table touched on a request path — even behind a `rescue` — must
-therefore exist; that's why `change_password_test.rb` creates `thecore_settings` (queried by
-`RailsAdmin::Config.main_app_name` on every rendered layout).
+therefore exist; that's why `test/support/rails_admin_request_tables.rb` creates
+`thecore_settings` (queried by `RailsAdmin::Config.main_app_name` on every rendered layout).
 
 **Its boot had never previously completed against a
 full `Bundler.require`** until the default-navigation feature's PR fixed it — worth knowing if
@@ -60,7 +60,9 @@ you're chasing a boot failure while working on this gem's tests. The fix, all in
 - **`test/member_actions/change_password_test.rb`** — the first test in this gem to drive a real
   authenticated HTTP request through the mounted `rails_admin` engine (every previous test called
   `RailsAdmin.config(...)` directly, never routing/controller/auth). Getting there required
-  filling in gaps nothing before it had hit:
+  filling in gaps nothing before it had hit (the tables below now live in
+  `test/support/rails_admin_request_tables.rb`, required by every request test, e.g. also
+  `test/access_denied_test.rb`):
   - A `users` table (dummy `User` never had one at all — nothing had ever persisted a `User`
     before), with `locale` (`set_locale`'s `current_user.locale` needs a real, non-nil default —
     `I18n.locale = nil` raises) and `admin` (`Abilities::ThecoreAuthCommons` short-circuits to
@@ -75,7 +77,7 @@ you're chasing a boot failure while working on this gem's tests. The fix, all in
     (every source RailsAdmin supports needs a real gem/config this dummy bundle doesn't have).
     `layouts/rails_admin/content` is the inner layout `application` itself renders — it carries
     the flash box (what a validation-error assertion needs) without touching `_head`.
-  - The `RailsAdmin::Config::Actions.all` ordering fix in `after_initializer.rb` (see `docs/agents/architecture.md`) —
+  - The `RailsAdmin::Config::Actions.all` ordering fix in `after_initialize.rb` (see `docs/agents/architecture.md`) —
     without it, `edit_path`/`index_path` are undefined in this dummy app's process, because this
     gem's own custom action files happen to load before anything else ever calls
     `RailsAdmin::Config::Actions.all`/`.find`.

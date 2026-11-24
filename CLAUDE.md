@@ -36,8 +36,9 @@ docs/adr/  docs/agents/
 # One-time: create the Postgres test database (from test/dummy)
 (cd test/dummy && RAILS_ENV=test bin/rails db:create)
 
-# Run the whole suite (from inside the submodule directory)
-BUNDLE_GEMFILE=Gemfile RAILS_ENV=test bundle exec ruby -Itest -e 'Dir["test/**/*_test.rb"].each { |f| require File.expand_path(f) }'
+# Run the whole suite (from inside the submodule directory), as CI does;
+# JUNIT_REPORT_DIR=tmp/junit also writes the JUnit XML
+bin/test
 
 # Run one file
 BUNDLE_GEMFILE=Gemfile RAILS_ENV=test bundle exec ruby -Itest test/thecore_ui_rails_admin_test.rb
@@ -62,8 +63,7 @@ set — no need to unset it; see `docs/agents/test-infrastructure.md`.
   statement aborts the Postgres transactional-test transaction.
 - Secret scanning push protection: if it fires on a real secret, remove it from the commit and
   rotate the secret; never bypass it.
-- Publishing happens from `.github/workflows/gempush.yml` on every push to `release/3`, only when
-  the version in `lib/*/version.rb` isn't tagged yet: never bump it unless a release is intended.
+- Publishing: `.github/workflows/gempush.yml` runs the test suite (PostgreSQL 15, Ruby 3.3, JUnit report kept as the `junit` artifact) on every push and pull request on `release/3`; on a push its `publish` job runs only when the tests are green, and only for a version in `lib/*/version.rb` with no tag yet: it tags it, creates the GitHub release with the JUnit report attached, and pushes the gem to RubyGems. A red test never publishes. Never bump the version unless a release is intended.
 - Keep this file, or the `docs/agents/` file it points to, accurate whenever the behaviour it
   describes changes.
 

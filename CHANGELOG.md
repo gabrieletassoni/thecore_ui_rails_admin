@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.8.10] - 2026-11-24
+
+### Fixed
+- `save_filters` answered 500 when the request had no Referer header (bare URL, new tab, privacy settings): it reads the filters from the Referer's query string. Without a Referer, with a malformed one, or with one that carries no filters, GET and POST now redirect back to the list with a notice ("There are no filters to save") and create nothing. With a filtered Referer the behaviour is unchanged (MyTask Odoo #6256).
+
 ## [3.8.7] - 2026-10-28
 
 ### Fixed

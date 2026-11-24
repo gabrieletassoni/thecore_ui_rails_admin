@@ -126,7 +126,10 @@ Registered via `RailsAdmin::Config::Actions.add_action "<name>", :base, :root`, 
   `after_initialize.rb` (commented out) — "a bit risky to have it in the UI" per the comment
   there; re-enable deliberately if needed.
 - **`save_filters.rb`/`load_filters.rb`** (collection) — persist/restore a RailsAdmin index
-  filter set per user/model (`SavedFilter`).
+  filter set per user/model (`SavedFilter`). `save_filters` takes the filters from the Referer's
+  query string; without one (no Referer, a malformed one, or a list with no filters) GET and POST
+  both redirect back to the list with the `admin.actions.save_filters.nothing_to_save` notice
+  (MyTask Odoo #6256, `test/collection_actions/save_filters_test.rb`).
 
 ## Controller concerns
 

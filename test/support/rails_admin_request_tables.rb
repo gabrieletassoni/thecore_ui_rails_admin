@@ -45,3 +45,13 @@ ActiveRecord::Base.connection.create_table(:thecore_settings, force: true) do |t
   t.string :label
   t.timestamps
 end
+
+# save_filters (lib/collection_actions/save_filters.rb) creates a SavedFilter; columns mirror
+# db/migrate (CreateSavedFilters + the model_name -> abstract_model_name rename).
+ActiveRecord::Base.connection.create_table(:saved_filters, force: true) do |t|
+  t.string :abstract_model_name
+  t.string :name
+  t.text :query_string
+  t.integer :admin_user_id
+  t.timestamps
+end

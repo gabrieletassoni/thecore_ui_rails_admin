@@ -44,6 +44,7 @@ it:
         error: "Attenzione! Controlla i campi evidenziati qui sotto."
         requirements: "Requisiti password: almeno %{min_length} caratteri, con almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale (es. ! @ # $ % &). Password e conferma devono coincidere."
       save_filters:
+        nothing_to_save: "Non ci sono filtri da salvare: applica prima dei filtri alla lista."
         success: Filtri salvati con successo
         error: Errore durante il salvataggio dei filtri
         title: Salva Filtri

@@ -62,7 +62,8 @@ you're chasing a boot failure while working on this gem's tests. The fix, all in
   `RailsAdmin.config(...)` directly, never routing/controller/auth). Getting there required
   filling in gaps nothing before it had hit (the tables below now live in
   `test/support/rails_admin_request_tables.rb`, required by every request test, e.g. also
-  `test/access_denied_test.rb` and `test/csrf_test.rb`):
+  `test/access_denied_test.rb`, `test/csrf_test.rb` and `test/collection_actions/save_filters_test.rb`,
+  which also needs its `saved_filters` table):
   - A `users` table (dummy `User` never had one at all — nothing had ever persisted a `User`
     before), with `locale` (`set_locale`'s `current_user.locale` needs a real, non-nil default —
     `I18n.locale = nil` raises) and `admin` (`Abilities::ThecoreAuthCommons` short-circuits to

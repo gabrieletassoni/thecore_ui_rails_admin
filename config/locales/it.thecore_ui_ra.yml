@@ -22,7 +22,7 @@ it:
       test_ldap_server:
         title: Testa il Server LDAP
         success: "Il server LDAP è raggiungibile"
-        error: "Il server LDAP non è raggiungibile"
+        error: "Test del server LDAP fallito: %{error}"
         menu: Testa il Server LDAP
         breadcrumb: Testa il Server LDAP
       thecore_blazer_bi:

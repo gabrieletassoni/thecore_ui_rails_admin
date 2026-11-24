@@ -11,50 +11,57 @@ RailsAdmin::Config::Actions.add_action "test_ldap_server", :base, :member do
   controller do
     proc do
       @ldap = ::LdapServer.find(@object.id)
-      # begin
-      @ldap.test_connection
-      @status = "success"
+      connection = @ldap.test_connection
 
-      @message = I18n.t("admin.actions.test_ldap_server.success")
+      if connection.success?
+        @status = "success"
+        @message = I18n.t("admin.actions.test_ldap_server.success")
 
-      # From the UI the user can test if the ldap server is reachable and receive a response
-      if request.xhr? && request.post? && params[:email].present? && params[:password].present?
-        Rails.logger.debug("LDAP Test: Attempting to authenticate user #{params[:email]}")
-        authenticator = Ldap::Authenticator.new(
-          email: params[:email],
-          password: params[:password],
-        )
-        @ldap_user = authenticator.auth_on_single_server(@ldap)
-        @ldap_attributes = {}
+        # From the UI the user can test a user's credentials too, and see the LDAP answer: only
+        # against a server whose own test succeeded.
+        if request.xhr? && request.post? && params[:email].present? && params[:password].present?
+          begin
+            Rails.logger.debug("LDAP Test: Attempting to authenticate user #{params[:email]}")
+            authenticator = Ldap::Authenticator.new(
+              email: params[:email],
+              password: params[:password],
+            )
+            @ldap_user = authenticator.auth_on_single_server(@ldap)
+            @ldap_attributes = {}
 
-        if @ldap_user.present?
-          @ldap_user.each_attribute do |key, values|
-            safe_values = values.map do |v|
-              s = v.to_s
+            if @ldap_user.present?
+              @ldap_user.each_attribute do |key, values|
+                safe_values = values.map do |v|
+                  s = v.to_s
 
-              # 1. Declare UTF-8
-              s.force_encoding("UTF-8")
+                  # 1. Declare UTF-8
+                  s.force_encoding("UTF-8")
 
-              # 2. Replace invalid / undefined bytes
-              s.encode!("UTF-8", invalid: :replace, undef: :replace, replace: "�")
+                  # 2. Replace invalid / undefined bytes
+                  s.encode!("UTF-8", invalid: :replace, undef: :replace, replace: "�")
 
-              s
+                  s
+                end
+
+                @ldap_attributes[key] = safe_values
+              end
+              Rails.logger.debug("LDAP Test: Authentication result for user #{params[:email]}: #{@ldap_user.inspect}")
+
+              @message += " " + I18n.t("admin.actions.test_ldap_server.auth_success", email: params[:email])
+            else
+              @message += " " + I18n.t("admin.actions.test_ldap_server.auth_failure", email: params[:email])
+              @status = "warning"
             end
-
-            @ldap_attributes[key] = safe_values
+          # Only Net::LDAP errors are the server's answer; anything else is a real bug.
+          rescue Net::LDAP::Error => e
+            @status = "danger"
+            @message = I18n.t("admin.actions.test_ldap_server.error", error: e.message)
           end
-          Rails.logger.debug("LDAP Test: Authentication result for user #{params[:email]}: #{@ldap_user.inspect}")
-
-          @message += " " + I18n.t("admin.actions.test_ldap_server.auth_success", email: params[:email])
-        else
-          @message += " " + I18n.t("admin.actions.test_ldap_server.auth_failure", email: params[:email])
-          @status = "warning"
         end
-        # else
-        # rescue => e
-        #   @message = I18n.t("admin.actions.test_ldap_server.error", error: e.message)
-        #   @status = "danger"
-        # end
+      else
+        # A refused bind, no admin credentials, an unreachable host (LdapServer#test_connection).
+        @status = "danger"
+        @message = I18n.t("admin.actions.test_ldap_server.error", error: connection.message)
       end
     end
   end

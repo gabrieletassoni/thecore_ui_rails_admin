@@ -120,8 +120,12 @@ Registered via `RailsAdmin::Config::Actions.add_action "<name>", :base, :root`, 
   `password_confirmation` field errors with the same `error`/`has-error`/`help-inline text-danger`
   classes `RailsAdmin::FormBuilder` uses on ordinary `edit`/`new` forms. The two password fields
   are never repopulated with a submitted value, on success or failure, for either field.
-- **`test_ldap_server.rb`** (member) — round-trips an LDAP connection test against a configured
-  `auth_source`.
+- **`test_ldap_server.rb`** (member) — shows the outcome of `LdapServer#test_connection`
+  (thecore_auth_commons >= 3.6.4): success only when the admin bind worked, otherwise danger with
+  `admin.actions.test_ldap_server.error` and the reason (no admin credentials, refused bind,
+  unreachable host). The optional user check (XHR POST with email/password) runs only after a
+  successful server test; a `Net::LDAP::Error` there is rescued, anything else is not
+  (thecore_ui_rails_admin#17, `test/member_actions/test_ldap_server_test.rb`).
 - **`import_users_from_ldap.rb`** (member) — present but **not required** from
   `after_initialize.rb` (commented out) — "a bit risky to have it in the UI" per the comment
   there; re-enable deliberately if needed.

@@ -55,3 +55,21 @@ ActiveRecord::Base.connection.create_table(:saved_filters, force: true) do |t|
   t.integer :admin_user_id
   t.timestamps
 end
+
+# test_ldap_server (lib/member_actions/test_ldap_server.rb) loads an LdapServer; columns mirror
+# thecore_auth_commons' ldap_servers migrations.
+ActiveRecord::Base.connection.create_table(:ldap_servers, force: true) do |t|
+  t.string :host, null: false
+  t.integer :port, default: 389
+  t.string :base_dn, null: false
+  t.string :admin_user
+  t.string :admin_password
+  t.integer :priority, default: 1
+  t.boolean :use_ssl, default: false
+  t.string :auth_field, default: "userPrincipalName"
+  t.string :name
+  t.string :surname
+  t.string :phone
+  t.string :code
+  t.timestamps
+end

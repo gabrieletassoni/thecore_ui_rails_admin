@@ -22,7 +22,7 @@ en:
       test_ldap_server:
         title: Test LDAP Server
         success: "The LDAP server is reachable"
-        error: "The LDAP server is not reachable"
+        error: "The LDAP server test failed: %{error}"
         menu: Test LDAP Server
         breadcrumb: Test LDAP Server
       thecore_blazer_bi:

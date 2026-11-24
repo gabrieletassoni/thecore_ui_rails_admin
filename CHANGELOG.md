@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.8.11] - 2026-11-24
+
+### Fixed
+- **`test_ldap_server` reports the real outcome** (#17). It answered 500 for a server without admin credentials or with an unreachable host, and showed success for a wrong admin password. It now shows success only when the admin bind worked, otherwise a danger status with the reason ("The LDAP server test failed: …", en + it). The user check (XHR POST) runs only after a successful server test, and a `Net::LDAP::Error` during it is rescued. Requires thecore_auth_commons >= 3.6.4 (`LdapServer#test_connection` result).
+
 ## [3.8.10] - 2026-11-24
 
 ### Fixed

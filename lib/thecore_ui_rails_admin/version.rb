@@ -1,3 +1,3 @@
 module ThecoreUiRailsAdmin
-  VERSION = "3.8.7".freeze
+  VERSION = "3.8.8".freeze
 end

@@ -19,18 +19,20 @@ already be loaded):
   `rescue_from` handlers for `ActiveRecord::StatementInvalid`/`RecordInvalid`/`RangeError`
   (flashes a friendly message and redirects back to the dashboard instead of a 500 page), plus a
   `before_action` that sets `I18n.locale` from `current_user.locale`.
-- Then includes `ConcernCommonApplicationController`/`ConcernRAApplicationController` into
+- Then includes `ConcernRAApplicationController` (`after_sign_in_path_for`) into
   `ApplicationController` and `RailsAdmin::ApplicationController`. The order matters: when
   RailsAdmin's controllers are already loaded, `parent_controller=` removes and reloads
-  `RailsAdmin::ApplicationController`/`MainController`, dropping anything included before it. That
-  is how the concern's `rescue_from CanCan::AccessDenied` was lost and every forbidden RailsAdmin
-  URL answered 500.
+  `RailsAdmin::ApplicationController`/`MainController`, dropping anything included or registered
+  before it. `ConcernCommonApplicationController` (thecore_ui_commons) goes into the host's
+  `ApplicationController` only, never into RailsAdmin's: its `protect_from_forgery prepend: true`
+  (default `:null_session`) would replace RailsAdmin's own `with: :exception` (`test/csrf_test.rb`),
+  and its `CanCan::AccessDenied` redirect goes to the main-app root, the sign-in page, where Devise
+  bounces a signed-in user on and replaces the message with "already signed in". (Before 3.8.8 the
+  include sat before `parent_controller=`, so it never took effect.)
 - Then registers `RailsAdminAbstractController#handle_access_denied` for `CanCan::AccessDenied` on
-  `RailsAdmin::ApplicationController`, after the concerns so it wins over
-  `ConcernCommonApplicationController`'s redirect to the main-app root (the sign-in page, where Devise
-  bounces a signed-in user and replaces the message with "already signed in"). A forbidden action
-  redirects back to the referring page, or to the dashboard (always readable, see
-  `Abilities::ThecoreUiRailsAdmin`), with the denial as flash alert (`test/access_denied_test.rb`).
+  `RailsAdmin::ApplicationController`: a forbidden action redirects back to the referring page, or
+  to the dashboard (always readable, see `Abilities::ThecoreUiRailsAdmin`), with the denial as flash
+  alert (`test/access_denied_test.rb`). Without it, every forbidden RailsAdmin URL answered 500.
 - Known limitation, development only: on a code reload RailsAdmin's `Config.reload!` resets the
   config (including `parent_controller` and `authenticate_with`) and re-runs only the host's
   `config/initializers/rails_admin.rb`, not this `after_initialize`, so the wiring above is not

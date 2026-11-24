@@ -10,6 +10,11 @@ RailsAdmin::Config::Actions.add_action "test_ldap_server", :base, :member do
   # Adding the controller which is needed to compute calls from the ui
   controller do
     proc do
+      failed = ->(reason) do
+        @status = "danger"
+        @message = I18n.t("admin.actions.test_ldap_server.error", error: reason)
+      end
+
       @ldap = ::LdapServer.find(@object.id)
       connection = @ldap.test_connection
 
@@ -52,16 +57,15 @@ RailsAdmin::Config::Actions.add_action "test_ldap_server", :base, :member do
               @message += " " + I18n.t("admin.actions.test_ldap_server.auth_failure", email: params[:email])
               @status = "warning"
             end
-          # Only Net::LDAP errors are the server's answer; anything else is a real bug.
-          rescue Net::LDAP::Error => e
-            @status = "danger"
-            @message = I18n.t("admin.actions.test_ldap_server.error", error: e.message)
+          # Only connection errors are the server's answer (net-ldap raises the bare Errno for a
+          # single host it cannot reach); anything else is a real bug.
+          rescue Net::LDAP::Error, SystemCallError => e
+            failed.call(e.message)
           end
         end
       else
         # A refused bind, no admin credentials, an unreachable host (LdapServer#test_connection).
-        @status = "danger"
-        @message = I18n.t("admin.actions.test_ldap_server.error", error: connection.message)
+        failed.call(connection.message)
       end
     end
   end

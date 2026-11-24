@@ -24,8 +24,10 @@ class TestLdapServerActionTest < ActionDispatch::IntegrationTest
 
   teardown { RailsAdmin::MainController.layout @original_layout }
 
+  def server_test_path = rails_admin.test_ldap_server_path(model_name: "ldap_server", id: @server.id)
+
   def open_test_page
-    get rails_admin.test_ldap_server_path(model_name: "ldap_server", id: @server.id)
+    get server_test_path
   end
 
   test "a server without admin credentials shows the failure and why" do
@@ -37,13 +39,13 @@ class TestLdapServerActionTest < ActionDispatch::IntegrationTest
     assert_select "div.bg-danger", text: "The LDAP server test failed: No admin user and password are configured for this server"
   end
 
-  test "an unresolvable host shows the failure and the connection error" do
-    @server.update!(host: "no-such-host.invalid")
+  test "a host refusing the connection shows the failure and the connection error" do
+    @server.update!(host: "127.0.0.1", port: 1)
 
     open_test_page
 
     assert_response :success
-    assert_select "div.bg-danger", text: /\AThe LDAP server test failed: .*getaddrinfo/
+    assert_select "div.bg-danger", text: /\AThe LDAP server test failed: Connection refused/
   end
 
   test "a wrong admin password shows the failure, not success" do
@@ -64,8 +66,7 @@ class TestLdapServerActionTest < ActionDispatch::IntegrationTest
   test "a user is not authenticated against a server that failed its test" do
     Ldap::Authenticator.stub(:new, ->(**) { flunk "no user authentication expected" }) do
       Net::LDAP.stub(:new, FakeLdap.new(bind: false, reason: "Invalid Credentials")) do
-        post rails_admin.test_ldap_server_path(model_name: "ldap_server", id: @server.id),
-             params: { email: "someone@example.com", password: "whatever" }, xhr: true
+        post server_test_path, params: { email: "someone@example.com", password: "whatever" }, xhr: true
       end
     end
 
@@ -80,8 +81,7 @@ class TestLdapServerActionTest < ActionDispatch::IntegrationTest
 
     Ldap::Authenticator.stub(:new, failing) do
       Net::LDAP.stub(:new, FakeLdap.new(bind: true)) do
-        post rails_admin.test_ldap_server_path(model_name: "ldap_server", id: @server.id),
-             params: { email: "someone@example.com", password: "whatever" }, xhr: true
+        post server_test_path, params: { email: "someone@example.com", password: "whatever" }, xhr: true
       end
     end
 
